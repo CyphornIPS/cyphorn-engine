@@ -3,10 +3,14 @@ Copyright (c) 2026 CyphornIPS. All rights reserved.
 
 1. Ownership
 
-CyphornIPS and all associated source code, software components,
-documentation, rules, configurations, datasets, and other materials
-contained in this repository are proprietary intellectual property of
-CyphornIPS, except where explicitly stated otherwise.
+CyphornIPS and the original source code, software components,
+documentation, rules, configurations, datasets, and other original
+materials created by CyphornIPS and contained in this repository are
+proprietary intellectual property of CyphornIPS, except where
+explicitly stated otherwise.
+
+Third-party components and materials are not claimed as CyphornIPS
+property and remain subject to their respective licenses.
 
 No ownership or intellectual property rights in CyphornIPS are
 transferred by this license.
@@ -46,8 +50,10 @@ The rights granted by this license do not permit you to:
 - redistribute CyphornIPS source code as a standalone product;
 - sell, sublicense, or license CyphornIPS itself as a standalone
   software product;
-- create or distribute a standalone competing distribution whose
-  primary purpose is to provide CyphornIPS as a replacement product;
+- create, distribute, sell, or license a standalone product whose
+  primary purpose is to provide CyphornIPS or a substantially
+  equivalent rebranded distribution of CyphornIPS as an independent
+  software product;
 - remove or alter CyphornIPS copyright, ownership, or license notices;
 - represent CyphornIPS as your own software or intellectual property;
 - use the CyphornIPS name, trademarks, logos, or branding in a manner
@@ -94,18 +100,24 @@ special, consequential, or other damages arising from the use of,
 inability to use, modification of, integration of, or reliance upon
 CyphornIPS.
 
-9. Commercial Licensing
+9. Commercial Use
 
-The rights expressly granted in this license include the integration
-and commercial use of CyphornIPS as a component of another product,
-service, appliance, or solution.
+Commercial use of CyphornIPS as a component of another product,
+service, appliance, or solution is expressly permitted under this
+license and does not require a separate commercial license.
 
-A separate commercial license is required only for uses that are not
-expressly permitted by this license, including standalone commercial
-distribution or licensing of CyphornIPS itself.
+You may develop, modify, integrate, deploy, distribute, and sell
+products or services that include CyphornIPS as a component, subject
+to all other terms and restrictions of this license.
 
-For commercial licensing inquiries involving uses outside the scope of
-this license, contact CyphornIPS through the official project channels.
+A separate written commercial license is required only for uses that
+are outside the permissions expressly granted by this license,
+including standalone commercial distribution, standalone licensing,
+or redistribution of CyphornIPS itself as a software product.
+
+For commercial licensing inquiries involving uses outside the scope
+of this license, contact CyphornIPS through the official project
+channels.
 
 10. Reservation of Rights
 

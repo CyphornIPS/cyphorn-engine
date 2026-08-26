@@ -496,6 +496,14 @@ For full legal and operational details, see **[Section 22.1: Disclaimer & Operat
 
 ---
 
+
 ## License
 
-CyphornIPS is open-source software licensed under the [Apache License 2.0 / MIT Dual License](LICENSE).
+CyphornIPS is proprietary software.
+
+The source code, binaries, rules, documentation, and other materials in this repository are provided for evaluation and demonstration purposes only.
+
+No permission is granted to copy, modify, distribute, sublicense, sell, or use this software commercially except as expressly authorized by CyphornIPS.
+
+All rights reserved.
+

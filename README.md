@@ -15,6 +15,46 @@
 [**CyphornIPS Full Technical Documentation**](https://cyphornips.github.io/cyphorn-engine/cyphornips-documentation.html)
 ---
 
+
+## 📦 Download CyphornIPS
+
+The latest prebuilt release is available from the official GitHub Releases page.
+
+👉 **[⬇️ Download CyphornIPS](https://github.com/CyphornIPS/cyphorn-engine/releases)**
+
+For Debian / Ubuntu on x86_64 (amd64), download:
+
+**`cyphornips_1.1.0_amd64.deb`**
+
+After downloading, verify the package integrity using the provided
+`SHA256SUMS` file, then follow the installation instructions included
+in the release notes.
+
+## 📦 Download CyphornIPS
+
+Download the latest prebuilt Debian package:
+
+👉 [⬇️ Download CyphornIPS v1.1.0 (.deb)](https://github.com/CyphornIPS/cyphorn-engine/releases/download/v1.1.0/cyphornips_1.1.0_amd64.deb)
+
+**Supported platform:**
+
+- 🐧 Debian / Ubuntu
+- 💻 x86_64 / amd64
+
+For installation instructions, see the
+[CyphornIPS v1.1.0 Release](https://github.com/CyphornIPS/cyphorn-engine/releases/tag/v1.1.0).
+
+**The release includes:**
+
+- 📦 Prebuilt Debian package
+- 🔐 SHA-256 checksum
+- 📥 Installation instructions
+- 🗑️ Uninstallation instructions
+- 🔄 Update instructions
+
+
+
+
 ## Table of Contents
 
 1. [Overview & Highlights](#overview--highlights)

@@ -22,6 +22,18 @@ The latest prebuilt release is available from the official GitHub Releases page.
 
 👉 **[⬇️ Download CyphornIPS](https://github.com/CyphornIPS/cyphorn-engine/releases)**
 
+
+
+## 📥 Install from Linux Terminal
+
+Download and install CyphornIPS v1.1.0 directly from GitHub:
+
+```bash
+curl -LO https://github.com/CyphornIPS/cyphorn-engine/releases/download/v1.1.0/cyphornips_1.1.0_amd64.deb
+sudo apt install ./cyphornips_1.1.0_amd64.deb
+```
+
+
 For Debian / Ubuntu on x86_64 (amd64), download:
 
 **`cyphornips_1.1.0_amd64.deb`**

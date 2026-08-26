@@ -11,7 +11,7 @@
 **CyphornIPS** is a transparent, inline Intrusion Prevention System (IPS) and Network Security Monitoring engine designed for modern Linux gateways and edge firewalls. Written in standard C17 with native eBPF/TC kernel-bypass acceleration, CyphornIPS bridges dedicated network interfaces to deliver high-throughput deep packet inspection (DPI), stateful TCP stream reassembly, in-memory file extraction, cryptographic exact-hash threat intelligence matching, and atomic zero-downtime hot reload.
 
 > 📖 **Looking for the complete technical reference?**  
-> Explore the standalone [**CyphornIPS Full Technical Documentation (`cyphornips-documentation.html`)**](cyphornips-documentation.html) and the [**Modular Documentation Suite (`docs/`)**](docs/README.md).
+> Explore the standalone [**CyphornIPS Full Technical Documentation**](https://cyphornips.github.io/cyphorn-engine/cyphornips-documentation.html).
 
 ---
 

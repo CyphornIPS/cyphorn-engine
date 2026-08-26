@@ -1,0 +1,113 @@
+CyphornIPS Proprietary License
+Copyright (c) 2026 CyphornIPS. All rights reserved.
+
+1. Ownership
+
+CyphornIPS and all associated source code, software components,
+documentation, rules, configurations, datasets, and other materials
+contained in this repository are proprietary intellectual property of
+CyphornIPS, except where explicitly stated otherwise.
+
+No ownership or intellectual property rights in CyphornIPS are
+transferred by this license.
+
+2. License Grant
+
+Subject to the terms and conditions of this license, CyphornIPS grants
+you a non-exclusive, worldwide, royalty-free license to use, modify,
+and integrate CyphornIPS into your own software, hardware, products,
+applications, appliances, infrastructure, or services.
+
+This permission includes commercial and non-commercial use.
+
+3. Permitted Product Integration
+
+You may use CyphornIPS as a component of your own products,
+applications, appliances, services, or network security solutions,
+including commercial products.
+
+You may:
+
+- use CyphornIPS as part of a commercial product;
+- integrate CyphornIPS into routers, firewalls, security gateways,
+  network appliances, servers, or other products;
+- deploy CyphornIPS as part of a managed or hosted service;
+- modify CyphornIPS for integration into your own product or
+  infrastructure;
+- distribute and sell your own products or services that include
+  CyphornIPS as a component;
+- make and distribute modifications to CyphornIPS when those
+  modifications are part of your own product or service.
+
+4. Restrictions
+
+The rights granted by this license do not permit you to:
+
+- redistribute CyphornIPS source code as a standalone product;
+- sell, sublicense, or license CyphornIPS itself as a standalone
+  software product;
+- create or distribute a standalone competing distribution whose
+  primary purpose is to provide CyphornIPS as a replacement product;
+- remove or alter CyphornIPS copyright, ownership, or license notices;
+- represent CyphornIPS as your own software or intellectual property;
+- use the CyphornIPS name, trademarks, logos, or branding in a manner
+  that implies ownership, endorsement, or official affiliation without
+  written permission.
+
+Integration of CyphornIPS into a larger product does not by itself
+constitute a violation of the restrictions above.
+
+5. Rules and Threat Intelligence
+
+CyphornIPS rules, threat intelligence datasets, signatures,
+file-intelligence data, and related security content may be subject to
+additional restrictions and are not automatically licensed under the
+same terms as the CyphornIPS engine source code.
+
+Unless explicitly stated otherwise, the permissions granted for the
+CyphornIPS engine do not automatically grant redistribution rights for
+official CyphornIPS rules or threat-intelligence datasets.
+
+6. Third-Party Components
+
+Third-party components included with or required by CyphornIPS remain
+subject to their respective licenses.
+
+Nothing in this license overrides or replaces the license terms of
+third-party software.
+
+7. No Warranty
+
+CyphornIPS is currently provided as a Developer Preview / Alpha release
+and is provided "AS IS", without warranties of any kind, express or
+implied.
+
+CyphornIPS does not warrant that the software will detect, prevent,
+identify, or mitigate all security threats, attacks, vulnerabilities,
+malware, or malicious activity.
+
+8. Limitation of Liability
+
+To the maximum extent permitted by applicable law, CyphornIPS and its
+authors shall not be liable for any direct, indirect, incidental,
+special, consequential, or other damages arising from the use of,
+inability to use, modification of, integration of, or reliance upon
+CyphornIPS.
+
+9. Commercial Licensing
+
+The rights expressly granted in this license include the integration
+and commercial use of CyphornIPS as a component of another product,
+service, appliance, or solution.
+
+A separate commercial license is required only for uses that are not
+expressly permitted by this license, including standalone commercial
+distribution or licensing of CyphornIPS itself.
+
+For commercial licensing inquiries involving uses outside the scope of
+this license, contact CyphornIPS through the official project channels.
+
+10. Reservation of Rights
+
+All rights not expressly granted by this license are reserved by
+CyphornIPS.

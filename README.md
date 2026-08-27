@@ -70,6 +70,16 @@ sudo cyphorn-engine
 CyphornIPS: Interface configuration: WAN=enp0s3 LAN=enp0s9
 CyphornIPS: loaded 3203 rules
 ```
+
+## If CyphornIPS is already running as a systemd service, stop the service before launching the dashboard manually:
+```bash
+sudo systemctl stop cyphornips
+sudo cyphorn-engine
+```
+## To run CyphornIPS again as a systemd service:
+```bash
+sudo systemctl start cyphornips
+```
 ---
 
 **Supported platform:**

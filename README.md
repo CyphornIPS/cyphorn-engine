@@ -48,6 +48,30 @@ Download the latest prebuilt Debian package:
 
 👉 [⬇️ Download CyphornIPS v1.1.0 (.deb)](https://github.com/CyphornIPS/cyphorn-engine/releases/download/v1.1.0/cyphornips_1.1.0_amd64.deb)
 
+
+---
+## 📊 Runtime Dashboard
+
+CyphornIPS includes an interactive Ncurses runtime dashboard.
+
+To launch the dashboard manually:
+
+```bash
+sudo cyphorn-engine
+```
+
+## CyphornIPS reads the configured WAN and LAN interfaces from:
+```bash
+/etc/cyphornips/cyphornips.conf
+```
+
+## Example:
+```bash
+CyphornIPS: Interface configuration: WAN=enp0s3 LAN=enp0s9
+CyphornIPS: loaded 3203 rules
+```
+---
+
 **Supported platform:**
 
 - 🐧 Debian / Ubuntu
@@ -65,7 +89,7 @@ For installation instructions, see the
 - 🔄 Update instructions
 
 
-
+---
 
 ## Table of Contents
 

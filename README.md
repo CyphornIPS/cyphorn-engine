@@ -290,6 +290,40 @@ CyphornIPS detects the fingerprint divergence, treats them as independent rules,
   Matches extracted file payloads against cryptographic threat-intelligence
   datasets using exact hash lookups.
 
+---
+## 🧠 File Intelligence
+
+## File Intelligence is included in CyphornIPS but must be explicitly enabled in the configuration.
+
+### Edit the configuration file:
+
+```bash
+sudo nano /etc/cyphornips/cyphornips.conf
+```
+
+### Add:
+```bash
+file_intelligence.enabled = true
+file_intelligence.dataset = /etc/cyphornips/rules/cyphorn-file-intelligence.json
+```
+
+### Restart CyphornIPS:
+```bash
+sudo systemctl restart cyphornips
+```
+
+### Verify the status:
+```bash
+cyphornctl status
+```
+
+### The File Intelligence subsystem should show for example:
+```bash
+Status:          Enabled
+Loaded Records:  101
+```
+---
+
 - **Dataset File:** `/etc/cyphornips/rules/cyphorn-file-intelligence.json`
 - **Supported Hash Algorithms:** MD5, SHA-1, SHA-256, SHA3-384
 - **Dedicated Alert SID:** **`9100000`**

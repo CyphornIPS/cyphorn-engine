@@ -5,7 +5,7 @@
 [![Platform: Linux](https://img.shields.io/badge/Platform-Linux%20Kernel%205.8%2B-FCC624.svg?logo=linux&logoColor=black)](https://kernel.org)
 [![eBPF / TC](https://img.shields.io/badge/Kernel-eBPF%20%2F%20TC%20Filter-red.svg)](https://ebpf.io/)
 [![Zero-Downtime Hot Reload](https://img.shields.io/badge/Engine-Zero--Downtime%20Hot%20Reload-brightgreen.svg)]()
-[![Status: Alpha](https://img.shields.io/badge/Status-Developer%20Preview%20v0.1.0-orange.svg)]()
+[![Status: Alpha](https://img.shields.io/badge/Status-Developer%20Preview%20v1.1.0-orange.svg)]()
 
 
 

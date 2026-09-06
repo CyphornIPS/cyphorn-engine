@@ -3,6 +3,16 @@
 ---
 Developer Preview
 
+
+# High-Performance Inline Network Intrusion Prevention System
+
+[![Language: C17](https://img.shields.io/badge/Language-C17-00599C.svg)](https://en.wikipedia.org/wiki/C17_(C_standard_revision))
+[![Platform: Linux](https://img.shields.io/badge/Platform-Linux%20Kernel%205.8%2B-FCC624.svg?logo=linux&logoColor=black)](https://kernel.org)
+[![eBPF / TC](https://img.shields.io/badge/Kernel-eBPF%20%2F%20TC%20Filter-red.svg)](https://ebpf.io/)
+[![Zero-Downtime Hot Reload](https://img.shields.io/badge/Engine-Zero--Downtime%20Hot%20Reload-brightgreen.svg)]()
+[![Status: Alpha](https://img.shields.io/badge/Status-Developer%20Preview%20v1.5.0-orange.svg)]()
+
+
 **CyphornIPS** is a transparent, inline Intrusion Prevention System (IPS) and Network Security Monitoring engine for Linux gateways and edge firewalls. Written in C17 with native eBPF/TC kernel acceleration, it bridges two dedicated network interfaces and performs deep packet inspection, stateful TCP stream reassembly, in‑memory file extraction, cryptographic exact‑hash threat‑intel matching, domain/country policy enforcement, and atomic zero‑downtime hot reload — all inline, at wire speed.
 
 This release brings **per‑client policy attribution across NAT**, an interactive **"why was this blocked?" explain engine**, **SMTP/email inspection**, **threat‑feed datasets**, **flowbits**, **JA3 TLS fingerprinting**, **IPv6 enforcement**, and a long list of correctness fixes uncovered while hardening all of the above. Nothing below has been trimmed — every subsystem currently shipping in the engine is documented.

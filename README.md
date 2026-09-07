@@ -570,6 +570,14 @@ This also matches `/assets/js/admin-tools.min.js`, `/portal/readmission/status`,
 
 ---
 
-## License
+## ☕ Support CyphornIPS 
 
-CyphornIPS Proprietary License, Copyright (c) 2026 CyphornIPS. All rights reserved.
+CyphornIPS is independently developed network security software.
+
+If you find CyphornIPS useful and would like to support its continued development, you can support the project here:
+
+[☕ Support Cyphorn Development](https://www.buymeacoffee.com/malhummada)
+
+
+---
+

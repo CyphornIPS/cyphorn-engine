@@ -619,26 +619,13 @@ For full legal and operational details, see **[Section 22.1: Disclaimer & Operat
 
 ---
 
+## ☕ Support CyphornIPS 
 
-## 🔐 License
+CyphornIPS is independently developed network security software.
 
-CyphornIPS is proprietary software.
+If you find CyphornIPS useful and would like to support its continued development, you can support the project here:
 
-The CyphornIPS source code and original materials in this repository
-are provided under the [CyphornIPS Proprietary License](LICENSE).
+[☕ Support Cyphorn Development](https://www.buymeacoffee.com/malhummada)
 
-The license permits commercial and non-commercial use, modification,
-and integration of CyphornIPS into software, hardware, products,
-network appliances, services, and other solutions.
 
-Products and services that include CyphornIPS as a component may be
-distributed and sold, subject to the terms and restrictions of the
-license.
-
-Redistribution, licensing, or sale of CyphornIPS itself as a standalone
-software product is not permitted without separate written
-authorization from CyphornIPS.
-
-Third-party components remain subject to their respective licenses.
-
-See [LICENSE](LICENSE) for the complete terms.
+---

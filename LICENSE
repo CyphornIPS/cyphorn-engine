@@ -1,5 +1,3 @@
-CyphornIPS License Copyright (c) 2026 CyphornIPS. All rights reserved.
-
 This repository and its release artifacts (including but not limited to the compiled Debian package, the compiled eBPF object file, configuration templates, documentation, and any other binary or non-source distribution files) are proprietary software of CyphornIPS ("the Software", "we", "us"). No source code is distributed under this license; only pre-compiled, installable artifacts are provided ("the Distribution").
 
 GRANT OF LICENSE — PERSONAL AND EVALUATION USE (FREE)
@@ -67,3 +65,8 @@ This license and any commercial agreement entered under it are governed by the l
 ACCEPTANCE
 
 By downloading, installing, or using the Software, you agree to be bound by the terms of this license. If you do not agree, do not install or use the Software. If you intend commercial use, contact CyphornIPS for a license agreement before proceeding.
+
+
+CyphornIPS License Copyright (c) 2026 CyphornIPS. All rights reserved.
+
+

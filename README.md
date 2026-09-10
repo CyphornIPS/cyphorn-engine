@@ -15,7 +15,15 @@ Developer Preview
 
 **CyphornIPS** is a transparent, inline Intrusion Prevention System (IPS) and Network Security Monitoring engine for Linux gateways and edge firewalls. Written in C17 with native eBPF/TC kernel acceleration, it bridges two dedicated network interfaces and performs deep packet inspection, stateful TCP stream reassembly, in‑memory file extraction, cryptographic exact‑hash threat‑intel matching, domain/country policy enforcement, and atomic zero‑downtime hot reload — all inline, at wire speed.
 
-This release brings **per‑client policy attribution across NAT**, an interactive **"why was this blocked?" explain engine**, **SMTP/email inspection**, **threat‑feed datasets**, **flowbits**, **JA3 TLS fingerprinting**, **IPv6 enforcement**, and a long list of correctness fixes uncovered while hardening all of the above. Nothing below has been trimmed — every subsystem currently shipping in the engine is documented.
+This release brings **per‑client policy attribution across NAT**, an interactive **"why was this blocked?" explain engine**,  **threat‑feed datasets**, **flowbits**, **JA3 TLS fingerprinting**, **IPv6 enforcement**, and a long list of correctness fixes uncovered while hardening all of the above. Nothing below has been trimmed — every subsystem currently shipping in the engine is documented.
+
+---
+> 📖 **Looking for the complete technical reference?**  
+[**CyphornIPS Full Technical Documentation**](https://cyphornips.github.io/cyphorn-engine)
+---
+
+
+
 
 > [!WARNING]
 > **Developer Preview / Alpha Release.** CyphornIPS v1.5.0 is provided for evaluation, security research, lab validation, and community testing. It is **not** certified as a sole, unmonitored security perimeter for mission‑critical production environments. See [Disclaimer & Operational Notice](#️-disclaimer--operational-notice-إخلاء-المسؤولية) below before deploying inline blocking.

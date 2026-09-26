@@ -402,25 +402,6 @@ sudo apt-get install -y \
   pkg-config
 ```
 
-### Compiling CyphornIPS
-
-```bash
-# Clone repository
-git clone https://github.com/CyphornIPS/cyphorn-engine.git
-cd cyphorn-engine
-
-# Compile engine binary, eBPF TC objects, and cyphornctl CLI
-make clean && make -j$(nproc)
-
-# Install binaries to system PATH
-sudo cp cyphorn-engine /usr/local/bin/cyphorn-engine
-sudo cp bin/cyphornctl /usr/local/bin/cyphornctl
-
-# Create default directories
-sudo mkdir -p /etc/cyphornips/rules/managed /etc/cyphornips/rules/local
-sudo mkdir -p /var/log/cyphornips /var/lib/cyphornips/updates
-```
-
 ---
 
 ## Configuration

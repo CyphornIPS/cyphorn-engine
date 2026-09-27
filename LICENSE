@@ -1,76 +1,176 @@
-This repository and its release artifacts (including but not limited to the compiled Debian package, the compiled eBPF object file, configuration templates, documentation, and any other binary or non-source distribution files) are proprietary software of CyphornIPS ("the Software", "we", "us"). No source code is distributed under this license; only pre-compiled, installable artifacts are provided ("the Distribution").
+# CyphornIPS License
 
-GRANT OF LICENSE — PERSONAL AND EVALUATION USE (FREE)
+Copyright (c) 2026 CyphornIPS. All rights reserved.
 
-Subject to the terms of this license, CyphornIPS grants you a worldwide, royalty-free, non-exclusive, non-transferable, revocable license to install and run the Software for:
+This repository and its release artifacts (including but not limited to the
+compiled Debian package, the compiled eBPF object file, configuration
+templates, documentation, and any other binary or non-source distribution
+files) are proprietary software of CyphornIPS ("the Software", "we", "us").
+No source code is distributed under this license; only pre-compiled,
+installable artifacts are provided ("the Distribution").
 
-a. Personal, non-commercial use. b. Evaluation, testing, security research, and lab validation, whether by an individual or an organization, provided the deployment is not used to generate revenue, protect revenue-generating infrastructure, or otherwise support a commercial operation in production.
+## 1. GRANT OF LICENSE — PERSONAL AND EVALUATION USE (FREE)
 
-There is no limit on the number of devices or installations under this free grant, as long as the use remains within the scope defined above.
+Subject to the terms of this license, CyphornIPS grants you a worldwide,
+royalty-free, non-exclusive, non-transferable, revocable license to install
+and run the Software for:
 
-COMMERCIAL USE REQUIRES WRITTEN PERMISSION
+a. Personal, non-commercial use.
 
-Any use of the Software that is commercial in nature requires a separate, signed written agreement with CyphornIPS before that use begins. Commercial use includes, without limitation:
+b. Evaluation, testing, security research, and lab validation, whether by an
+   individual or an organization, provided the deployment is not used to
+   generate revenue, protect revenue-generating infrastructure, or otherwise
+   support a commercial operation in production.
 
-a. Deploying the Software in production to protect, monitor, or filter traffic for a business, government body, or any revenue-generating operation, including your own employer's infrastructure. b. Offering the Software, or any service built on top of it, to third parties for a fee, subscription, or as part of a paid product (including managed security services). c. Bundling or embedding the Software into another product that is sold or licensed commercially. d. Using the Software on behalf of a client in a paid engagement.
+There is no limit on the number of devices or installations under this free
+grant, as long as the use remains within the scope defined above.
 
-If you are unsure whether your intended use qualifies as commercial, contact CyphornIPS before deploying. Beginning commercial use without a signed agreement is a breach of this license and immediately terminates any rights granted under Section 1.
+## 2. COMMERCIAL USE REQUIRES WRITTEN PERMISSION
 
-RESTRICTIONS (apply to both free and commercial use unless the commercial agreement states otherwise)
+Any use of the Software that is commercial in nature requires a separate,
+signed written agreement with CyphornIPS before that use begins. Commercial
+use includes, without limitation:
 
-You may NOT:
+a. Deploying the Software in production to protect, monitor, or filter
+   traffic for a business, government body, or any revenue-generating
+   operation, including your own employer's infrastructure.
 
-a. Reverse engineer, decompile, disassemble, or otherwise attempt to derive the source code, algorithms, detection logic, or internal structure of the Software, in whole or in part, except and only to the extent such restriction is expressly prohibited by applicable law notwithstanding this limitation. b. Modify, patch, or create derivative works of the compiled binaries, the eBPF object file, or any other distributed artifact. c. Redistribute, resell, sublicense, rent, lease, mirror, or otherwise make the Distribution available to third parties, whether modified or unmodified, without prior written permission from CyphornIPS. d. Remove, obscure, or alter any copyright, trademark, or attribution notice contained in or displayed by the Software, including the GeoIP/ASN attribution notice described in Section 7. e. Use CyphornIPS's name, logo, or any claim associated with the project (including authorship or origin claims) to imply endorsement of your own product or service without permission. f. Use the Software in violation of applicable export control, telecommunications, or data protection law. g. Use the Software to build a competing intrusion prevention or network security product by way of studying its binary behavior in place of independent development.
+b. Offering the Software, or any service built on top of it, to third parties
+   for a fee, subscription, or as part of a paid product (including managed
+   security services).
 
-OWNERSHIP
+c. Bundling or embedding the Software into another product that is sold or
+   licensed commercially.
 
-The Software is licensed, not sold. CyphornIPS retains all right, title, and interest in and to the Software, including all copyrights, trade secrets, and any patent rights that may arise from it. This license does not transfer any intellectual property rights to you. Nothing in this license grants you rights to the CyphornIPS name, trademarks, or logos.
+d. Using the Software on behalf of a client in a paid engagement.
 
-FEEDBACK
+If you are unsure whether your intended use qualifies as commercial, or if you
+wish to request permission for commercial use, contact CyphornIPS before
+deploying. Beginning commercial use without a signed agreement is a breach of
+this license and immediately terminates any rights granted under Section 1.
 
-If you submit bug reports, feature requests, or other feedback to CyphornIPS, you grant CyphornIPS a perpetual, irrevocable, royalty-free license to use that feedback for any purpose, without obligation to you.
+**For commercial licensing inquiries and written permission:**
 
-AUDIT AND VERIFICATION
+    Email: info@cyphorn.com
 
-CyphornIPS may request reasonable evidence that your use of the Software falls within the scope of Section 1, if there is a good-faith reason to believe it does not. This does not entitle CyphornIPS to access your network or systems; providing a written description of the deployment is sufficient.
+Asking costs nothing and is answered. Deploying first and asking later is the
+one path this section forecloses.
 
-THIRD-PARTY DATA
+## 3. RESTRICTIONS
 
-The bundled GeoIP/ASN databases are provided by DB-IP.com under their own license terms and are not relicensed by this document. The attribution notice at /etc/cyphornips/geoip/ATTRIBUTION.txt must remain intact and unmodified.
+These apply to both free and commercial use unless the commercial agreement
+states otherwise. You may NOT:
 
-NO WARRANTY
+a. Reverse engineer, decompile, disassemble, or otherwise attempt to derive
+   the source code, algorithms, detection logic, or internal structure of the
+   Software, in whole or in part, except and only to the extent such
+   restriction is expressly prohibited by applicable law notwithstanding this
+   limitation.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. CYPHORNIPS DOES NOT WARRANT THAT THE SOFTWARE WILL DETECT OR PREVENT ALL SECURITY THREATS, OR THAT IT WILL BE ERROR-FREE OR UNINTERRUPTED. See the Disclaimer & Operational Notice in the release notes for deployment-specific warnings.
+b. Modify, patch, or create derivative works of the compiled binaries, the
+   eBPF object file, or any other distributed artifact.
 
-LIMITATION OF LIABILITY
+c. Redistribute, resell, sublicense, rent, lease, mirror, or otherwise make
+   the Distribution available to third parties, whether modified or
+   unmodified, without prior written permission from CyphornIPS.
 
-TO THE MAXIMUM EXTENT PERMITTED BY LAW, CYPHORNIPS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR USE, ARISING OUT OF OR IN CONNECTION WITH THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT SHALL CYPHORNIPS'S TOTAL LIABILITY UNDER THIS LICENSE OR ANY COMMERCIAL AGREEMENT EXCEED THE AMOUNT YOU PAID FOR THE SOFTWARE IN THE TWELVE MONTHS PRECEDING THE CLAIM, OR ZERO IF YOU PAID NOTHING.
+d. Remove, obscure, or alter any copyright, trademark, or attribution notice
+   contained in or displayed by the Software, including the GeoIP/ASN
+   attribution notice described in Section 7.
 
-INDEMNIFICATION
+e. Use CyphornIPS's name, logo, or any claim associated with the project
+   (including authorship or origin claims) to imply endorsement of your own
+   product or service without permission.
 
-You agree to indemnify and hold CyphornIPS harmless from any claims, damages, or expenses (including reasonable legal fees) arising from your misuse of the Software, your violation of this license, or your deployment of the Software in a manner that causes harm to a third party's network or systems.
+f. Use the Software in violation of applicable export control,
+   telecommunications, or data protection law.
 
-TERMINATION
+g. Use the Software to build a competing intrusion prevention or network
+   security product by way of studying its binary behavior in place of
+   independent development.
 
-This license terminates automatically and immediately if you breach any of its terms, including beginning commercial use without a signed agreement. Upon termination you must cease all use of the Software and destroy all copies in your possession. Sections 4, 5, 8, 9, 10, and 13 survive termination.
+## 4. OWNERSHIP
 
-VERSIONING
+The Software is licensed, not sold. CyphornIPS retains all right, title, and
+interest in and to the Software, including all copyrights, trade secrets, and
+any patent rights that may arise from it. This license does not transfer any
+intellectual property rights to you. Nothing in this license grants you rights
+to the CyphornIPS name, trademarks, or logos.
 
-This license applies to the version of the Software with which it is distributed. Future versions may be released under different terms; continued use of a specific version already installed remains governed by the license distributed with that version, unless a commercial agreement states otherwise.
+## 5. FEEDBACK
 
-GOVERNING LAW
+If you submit bug reports, feature requests, or other feedback to CyphornIPS,
+you grant CyphornIPS a perpetual, irrevocable, royalty-free license to use
+that feedback for any purpose, without obligation to you.
 
-This license and any commercial agreement entered under it are governed by the laws of Italy, without regard to its conflict-of-laws principles. Any dispute shall be subject to the exclusive jurisdiction of the courts of Bergamo, Italy.
+## 6. AUDIT AND VERIFICATION
 
-ACCEPTANCE
+CyphornIPS may request reasonable evidence that your use of the Software falls
+within the scope of Section 1, if there is a good-faith reason to believe it
+does not. This does not entitle CyphornIPS to access your network or systems;
+providing a written description of the deployment is sufficient.
 
-By downloading, installing, or using the Software, you agree to be bound by the terms of this license. If you do not agree, do not install or use the Software. If you intend commercial use, contact CyphornIPS for a license agreement before proceeding.
+## 7. THIRD-PARTY DATA
 
-------------------------------------------------
-For inquiries, commercial licensing requests, or written permission, please contact us at:
-Email:cyphorntech@gmail.com
-------------------------------------------------
+The bundled GeoIP/ASN databases are provided by DB-IP.com under their own
+license terms and are not relicensed by this document. The attribution notice
+at /etc/cyphornips/geoip/ATTRIBUTION.txt must remain intact and unmodified.
 
-CyphornIPS License Copyright (c) 2026 CyphornIPS. All rights reserved.
+## 8. NO WARRANTY
 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. CYPHORNIPS DOES NOT
+WARRANT THAT THE SOFTWARE WILL DETECT OR PREVENT ALL SECURITY THREATS, OR
+THAT IT WILL BE ERROR-FREE OR UNINTERRUPTED. See the Disclaimer & Operational
+Notice in the release notes for deployment-specific warnings.
 
+## 9. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, CYPHORNIPS SHALL NOT BE LIABLE FOR
+ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY
+LOSS OF PROFITS, REVENUE, DATA, OR USE, ARISING OUT OF OR IN CONNECTION WITH
+THE USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES. IN NO EVENT SHALL CYPHORNIPS'S TOTAL LIABILITY
+UNDER THIS LICENSE OR ANY COMMERCIAL AGREEMENT EXCEED THE AMOUNT YOU PAID FOR
+THE SOFTWARE IN THE TWELVE MONTHS PRECEDING THE CLAIM, OR ZERO IF YOU PAID
+NOTHING.
+
+## 10. INDEMNIFICATION
+
+You agree to indemnify and hold CyphornIPS harmless from any claims, damages,
+or expenses (including reasonable legal fees) arising from your misuse of the
+Software, your violation of this license, or your deployment of the Software
+in a manner that causes harm to a third party's network or systems.
+
+## 11. TERMINATION
+
+This license terminates automatically and immediately if you breach any of its
+terms, including beginning commercial use without a signed agreement. Upon
+termination you must cease all use of the Software and destroy all copies in
+your possession. Sections 4, 5, 8, 9, 10, and 13 survive termination.
+
+## 12. VERSIONING
+
+This license applies to the version of the Software with which it is
+distributed. Future versions may be released under different terms; continued
+use of a specific version already installed remains governed by the license
+distributed with that version, unless a commercial agreement states otherwise.
+
+## 13. GOVERNING LAW
+
+This license and any commercial agreement entered under it are governed by the
+laws of Italy, without regard to its conflict-of-laws principles. Any dispute
+shall be subject to the exclusive jurisdiction of the courts of Bergamo,
+Italy.
+
+## 14. ACCEPTANCE
+
+By downloading, installing, or using the Software, you agree to be bound by
+the terms of this license. If you do not agree, do not install or use the
+Software. If you intend commercial use, contact CyphornIPS for a license
+agreement before proceeding.
+
+---
+
+Contact: info@cyphorn.com

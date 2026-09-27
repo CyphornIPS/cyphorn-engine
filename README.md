@@ -119,15 +119,16 @@ three things that start and are silently wrong.
 
 ## Documentation
 
-**[📘 Read the manual](https://cyphornips.github.io/cyphorn-engine/)** — every
-configuration key the engine accepts, every command, every rule keyword, in
-English and Arabic.
+The full manual — every configuration key, every command, every rule keyword, in
+English and Arabic — ships with the release as **`cyphornips-documentation.html`**.
 
-It is also attached to each release as `cyphornips-documentation.html`: one
-self-contained file, no external script, stylesheet or font, so it opens on an
-appliance with no route to the internet.
+Download it and open it in any browser. It is one self-contained file: no
+external script, stylesheet or font, so it works on an appliance with no route to
+the internet.
 
----
+```bash
+curl -LO https://github.com/CyphornIPS/cyphorn-engine/releases/download/v1.8.0/cyphornips-documentation.html
+```
 
 ## Upgrading from 1.5.0
 

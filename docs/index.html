@@ -3616,10 +3616,7 @@ policy social_networks 192.168.1.50 ALLOW 100</code></pre>
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;23&lt;/span&gt; سياسة الدول (السياج الجغرافي)"><span class="num">23</span> Country Policy (Geo-Fencing)</h2>
         <p data-ar="سياسة الدول تحجب حسب &lt;em&gt;أين سُجّل عنوان الحزمة&lt;/em&gt; لا حسب اسم النطاق — فهي تعمل مباشرةً على ترويسات IPv4/IPv6 وحالة اتصال Netfilter، فتغطّي أيضًا حركةً لا تُحلّ عبر DNS إطلاقًا.">Country policy blocks by <em>where a packet's IP is registered</em>, not by domain name — it acts directly on IPv4/IPv6 headers and Netfilter connection state, so it also covers traffic that never resolves through DNS.</p>
 
-        <div class="callout callout-warning">
-          <div class="callout-title" data-ar="يخصّ كل من يرقّي من 1.5.0 — وهي النسخة الوحيدة المنشورة قبل هذه">This applies to everyone upgrading from 1.5.0 — the only release published before this one</div>
-          <p data-ar="سياسة الدول تقرأ قاعدة بيانات GeoIP، وحتى هذه النسخة كان المسار الافتراضي المُترجَم يشير إلى مجلّد عمل لا تثبّته الحزمة — فلم تُحمَّل القاعدة قطّ على أي جهاز مثبَّت، و&lt;strong&gt;كل قاعدة دول كتبتَها كانت خاملة&lt;/strong&gt;. وبعد الترقية تبدأ بالعمل. راجع ما كتبتَه قبل إعادة التشغيل: مرورٌ كنتَ تحمله سيبدأ بالسقوط. وللتحقّق مما هو محمَّل: &lt;code&gt;grep GEOIP /var/log/cyphornips/cyphornips.log | tail -1&lt;/code&gt;">Country policy reads the GeoIP database, and until this release the compiled default path pointed at a working directory the package does not install — so the database was never loaded on an installed appliance and <strong>every country rule you wrote was inert</strong>. After upgrading they take effect. Review what you wrote before restarting: traffic you have been carrying will start being dropped. To check what is loaded: <code>grep GEOIP /var/log/cyphornips/cyphornips.log | tail -1</code></p>
-        </div>
+
 
         <div class="code-container">
           <div class="code-header"><span data-ar="الصيغة">Syntax</span></div>

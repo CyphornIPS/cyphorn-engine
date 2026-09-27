@@ -1151,8 +1151,9 @@ after    one long flow     399 us      a hundred short flows  694 us     0.57x</
         <h3 class="sub-heading" id="install-deb" data-ar="حزمة دبيان / أوبنتو &lt;span style=&quot;color:var(--text-muted);font-weight:400&quot;&gt;(arm64 أو amd64)&lt;/span&gt;">Debian / Ubuntu package <span style="color:var(--text-muted);font-weight:400">(arm64 or amd64)</span></h3>
         <p data-ar="وهذه أيضًا طريقة &lt;strong&gt;ترقية&lt;/strong&gt; تثبيت قائم. ولا شيء تحت &lt;code&gt;/etc/cyphornips/&lt;/code&gt; يُدهس إن كان موجودًا.">This is also how you <strong>upgrade</strong> an existing install. Nothing under <code>/etc/cyphornips/</code> is ever overwritten if it already exists.</p>
         <div class="code-container">
-          <div class="code-header"><span data-ar="bash — تثبيت أو ترقية">bash — install or upgrade</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-          <pre><code>curl -LO https://github.com/CyphornIPS/cyphorn-engine/releases/download/v1.8.0/cyphornips_1.8.0_arm64.deb
+          <div class="code-header"><span data-ar="bash —  arm64 تثبيت أو ترقية">bash — install or upgrade arm64</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><code># arm64
+curl -LO https://github.com/CyphornIPS/cyphorn-engine/releases/download/v1.8.0/cyphornips_1.8.0_arm64.deb
 
 # Preferred: apt resolves any new library dependencies automatically
 sudo apt install ./cyphornips_1.8.0_arm64.deb
@@ -1164,6 +1165,29 @@ sudo apt-get install -f -y   # only needed if dpkg reports missing dependencies
 cyphorn-engine --version
 cyphornctl --version</code></pre>
         </div>
+
+
+
+
+        <div class="code-container">
+          <div class="code-header"><span data-ar="bash —amd64 تثبيت أو ترقية">bash — install or upgrade amd64</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><code># amd64
+curl -LO https://github.com/CyphornIPS/cyphorn-engine/releases/download/v1.8.0/cyphornips_1.8.0_amd64.deb
+
+# Preferred: apt resolves any new library dependencies automatically
+sudo apt install ./cyphornips_1.8.0_amd64.deb
+
+# Equivalent with plain dpkg
+sudo dpkg -i cyphornips_1.8.0_amd64.deb
+sudo apt-get install -f -y   # only needed if dpkg reports missing dependencies
+
+cyphorn-engine --version
+cyphornctl --version</code></pre>
+        </div>
+
+
+
+
         <p data-ar="يجب أن يطبع كلاهما &lt;code&gt;1.8.0&lt;/code&gt;. فإن طبع &lt;code&gt;cyphornctl&lt;/code&gt; نسخة أقدم بعد تثبيت ناجح، فابحث عن نسخة قديمة أسبق في &lt;code&gt;PATH&lt;/code&gt;:">Both should print <code>1.8.0</code>. If <code>cyphornctl</code> prints an older version after a successful install, check for a stale copy earlier in your <code>PATH</code>:</p>
         <div class="code-container">
           <div class="code-header"><span>bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>

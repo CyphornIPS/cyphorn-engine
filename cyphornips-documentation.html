@@ -4711,40 +4711,153 @@ CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_BPF CAP_SYS_RESOURCE CAP_PER
 
       <!-- 26. PERFORMANCE -->
       <section id="testing" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;38&lt;/span&gt; الاختبار والتحقّق"><span class="num">38</span> Testing &amp; Validation</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;38&lt;/span&gt; الاختبار والتحقّق"><span class="num">38</span> Testing &amp; Verification</h2>
 
-        <h3 class="sub-heading" data-ar="ما تحقّق قبل هذا الإصدار">What was verified before this release</h3>
-        <p data-ar="سايفورن يحمل مجموعة من البوّابات تُشغَّل بـ&lt;code&gt;make&lt;/code&gt;: كل واحدة سكربت أو ثنائي يفحص خاصيّةً واحدة ويطبع كل تحقّق على سطر. الأرقام أدناه من تشغيل كامل على هذا الجهاز مباشرةً قبل بناء الحزمة، لا من ملخّص محفوظ.">CyphornIPS carries a suite of gates run with <code>make</code>: each is a script or a binary that checks one property and prints every check on its own line. The figures below come from a full run on this appliance immediately before the package was built — not from a stored summary.</p>
-        <div class="callout callout-success">
-          <div class="callout-title" data-ar="‏97 بوّابة تنجح على هذا الجهاز">97 gates pass on this appliance</div>
-          <p data-ar="كل بوّابة تفحص خاصيّةً واحدة وتطبع كل تحقّق على سطر: أن تُعيد التسجيلات نفسها تشغيلًا متطابقًا بايتًا ببايت، وأن تقسيم الحركة على عدّة خيوط لا يغيّر حكمًا واحدًا، وأن بيانًا موقّعًا يُرفض عند تبديل بايت، وأن كل مفتاح إعداد يقبله المحلّل موثَّق.">Each gate checks one property and prints every check on its own line: that the same captures replay byte-identically, that splitting traffic across threads changes no verdict, that a signed manifest is refused when one byte is altered, that every configuration key the parser accepts is documented.</p>
+        <p data-ar="سايفورن يحمل &lt;strong&gt;99 بوّابة&lt;/strong&gt; — كل واحدة سكربت أو ثنائي يفحص خاصيّةً واحدة ويطبع كل تحقّق على سطر. &lt;strong&gt;97 تنجح، وتُبلّغ 2,568 فحصًا مفردًا.&lt;/strong&gt; الأرقام أدناه من التشغيل الذي أنتج هذا الإصدار، لا من ملخّص محفوظ.">CyphornIPS carries <strong>99 gates</strong> &mdash; each a script or a binary that checks one property and prints every check on its own line. <strong>97 pass, reporting 2,568 individual checks.</strong> The figures below come from the run that produced this release, not from a stored summary.</p>
+
+        <h3 class="sub-heading" data-ar="النتائج الرئيسية">Headline results</h3>
+        <div class="table-container">
+          <table>
+            <thead><tr><th data-ar="القياس">Measurement</th><th data-ar="النتيجة">Result</th><th data-ar="البوّابة">Gate</th></tr></thead>
+            <tbody>
+              <tr><td data-ar="فحوص ناجحة عبر المجموعة">Individual checks passing</td><td><strong>2,568</strong></td><td data-ar="المجموعة كاملة">the whole suite</td></tr>
+              <tr><td data-ar="كشف هجمات على مجموعة محجوزة">Detection, held-out attack corpus</td><td><strong>19 / 19 &mdash; 100&#37;</strong></td><td><code>attack-corpus</code></td></tr>
+              <tr><td data-ar="إيجابيات كاذبة على مجموعة حميدة عدائية">False positives, adversarial benign corpus</td><td><strong>0 / 46</strong></td><td><code>fp-budget</code></td></tr>
+              <tr><td data-ar="تقنيات تهرّب مهزومة">Evasion techniques defeated</td><td><strong>11 / 11</strong></td><td><code>evasion-corpus</code></td></tr>
+              <tr><td data-ar="تسجيلات تُعيد التشغيل متطابقة بايتًا ببايت">Captures replaying byte-identically</td><td><strong>51</strong>, three runs each</td><td><code>determinism</code></td></tr>
+              <tr><td data-ar="مفاتيح إعداد موثَّقة">Configuration keys documented</td><td><strong>153 / 153</strong></td><td><code>config-reference</code></td></tr>
+              <tr><td data-ar="قيود مسجّلة ما زالت صحيحة">Recorded limitations still true</td><td><strong>43</strong></td><td><code>baseline-freshness</code></td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <p data-ar="تلك البوّابات تُشغَّل قبل الإصدار على شجرة المصدر، وسايفورن يُوزَّع مبنيًّا مسبقًا — فلا مجموعة اختبارات على جهازك لتشغّلها. وما تستطيع التحقّق منه هو الأهمّ عمليًّا: أن ما ثبّتَه هو ما نُشر، وأن ما يعمل الآن يعمل صحيحًا.">Those gates run before a release, against the source tree. CyphornIPS is distributed pre-built, so there is no test suite on your appliance to run. What you <em>can</em> verify is the part that matters in practice: that what you installed is what was published, and that what is running is running correctly.</p>
+        <h3 class="sub-heading" data-ar="الكشف — مقيس على ما لم تُضبَط عليه القواعد">Detection &mdash; measured on what the rules were not tuned on</h3>
+        <p data-ar="مجموعة الهجمات مقسومة نصفين. الكشف يُقاس على &lt;strong&gt;النصف المحجوز&lt;/strong&gt; وحده؛ ونصف الضبط يُقاس منفصلًا ورقمه &lt;strong&gt;غير قابل للنشر&lt;/strong&gt; صراحةً. معدّل كشف يُعلَن مقابل البيانات التي ضُبِطت عليها يقيس الذاكرة لا المحرّك.">The attack corpus is split in two. Detection is measured against the <strong>held-out</strong> half only; the tuning half is measured separately and its figure is explicitly <strong>not publishable</strong>. A detection rate quoted against the data you tuned on measures memory, not an engine.</p>
         <div class="code-container">
-          <div class="code-header"><span>bash — verify an installation</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-          <pre><code># 1. the package is the published one -- before installing it
-sha256sum -c SHA256SUMS            # must print: OK
-
-# 2. the installed files are the package's files, unmodified
-sudo dpkg -V cyphornips            # prints nothing when every file matches
-
-# 3. the versions agree
-cyphorn-engine --version
-cyphornctl --version               # both must print 1.8.0
-
-# 4. the appliance can do its job -- and this works while the engine is down
-cyphornctl diagnose
-
-# 5. it is inspecting, and the accounting balances
-systemctl is-active cyphornips
-cyphornctl status                  # Coverage: invariant holds</code></pre>
+          <div class="code-header"><span>attack corpus</span></div>
+          <pre><code>  PASS  P6-015: TUNE and HOLDOUT are versioned, non-empty and disjoint
+  PASS  P6-015: the split is deterministic -- regeneration moves no case
+        HOLDOUT: 19 of 19 attack cases detected (100&#37;)
+  PASS  P6-009: HOLDOUT detection is 100&#37;, at or above the 95&#37; target
+        benign: 0 of 10 cases produced a detection
+  PASS  control: TUNE is measured separately and reported as not publishable</code></pre>
         </div>
-        <p data-ar="الخطوة الرابعة هي الأهمّ: &lt;code&gt;diagnose&lt;/code&gt; يقرأ الإعدادات والنظام مباشرةً، ويطبع مع كل نتيجة الأمر الذي يصلحها، ويعمل والمحرّك متوقّف — وتلك هي اللحظة التي تحتاجه فيها. والخطوة الخامسة تعني أن معادلة التغطية توازنت: كل إطار عبر الجهاز انتهى إلى حالة واحدة معروفة، فلا نقطة عمياء غير محسوبة.">Step 4 is the one that matters most: <code>diagnose</code> reads the configuration and the system directly, prints the command that fixes each finding, and works while the engine is down — which is when you need it. Step 5 means the coverage equation balanced: every frame the appliance handled resolved to exactly one known state, so there is no unaccounted blind spot.</p>
 
+        <h3 class="sub-heading" data-ar="الإنذارات الكاذبة">False positives</h3>
+        <div class="code-container">
+          <div class="code-header"><span>false-positive budget</span></div>
+          <pre><code>  PASS  a versioned benign corpus exists, with enough adversarial cases to matter
+        46 benign cases, 0 produced a detection
+        no category produced a false positive on this corpus
+  PASS  control: a rule that fires on benign traffic is seen by this measurement</code></pre>
+        </div>
+        <p data-ar="السطر الأخير هو المهمّ: القياس يُثبت أنه &lt;em&gt;يستطيع&lt;/em&gt; رؤية إيجابية كاذبة قبل أن يُبلّغ عن صفر منها.">The last line is the one that matters: the measurement proves it <em>can</em> see a false positive before it reports zero of them.</p>
+
+        <h3 class="sub-heading" data-ar="مقاومة التهرّب">Evasion resistance</h3>
+        <p data-ar="إحدى عشرة تقنية تُخفي هجومًا عن محرّك فحص. الحمولة نفسها في كل مرّة، مُسلَّمة بطريقة يفوتها محلّل ساذج:">Eleven techniques that hide an attack from an inspection engine. The same payload each time, delivered so that a naive parser misses it:</p>
+        <div class="code-container">
+          <div class="code-header"><span>evasion corpus</span></div>
+          <pre><code>  PASS  TCP segmentation              -&gt; segmented
+  PASS  TCP segmentation (one byte)   -&gt; segmented-tiny
+  PASS  retransmission                -&gt; retransmitted
+  PASS  overlap                       -&gt; overlapping
+  PASS  out-of-order                  -&gt; out-of-order
+  PASS  IPv4 fragments                -&gt; ipv4-fragmented
+  PASS  IPv4 fragments (reordered)    -&gt; ipv4-frag-out-of-order
+  PASS  IPv6 fragments                -&gt; ipv6-fragmented
+  PASS  malformed packets             -&gt; malformed-then-valid
+  PASS  encoding variation            -&gt; encoded-uri
+  PASS  protocol ambiguity            -&gt; ambiguous-protocol
+  PASS  control: the plain delivery is detected exactly once</code></pre>
+        </div>
+        <p data-ar="والضابط الأخير يمنع نجاحًا زائفًا: لا تُعدّ تقنية مهزومة لأن المحرّك نبّه مرّتين.">That final control prevents a false success: a technique is not counted as defeated because the engine alerted twice.</p>
+
+        <h3 class="sub-heading" data-ar="الصحّة تحت مُدخَل عدائي">Correctness under adversarial input</h3>
+        <p data-ar="أكبر البوّابات بعدد الفحوص — وهي المواضع التي يصير فيها عطل محلّل ثغرةَ تجاوز:">The largest gates by number of checks &mdash; these are where a parser bug becomes a bypass:</p>
+        <div class="table-container">
+          <table>
+            <thead><tr><th data-ar="البوّابة">Gate</th><th data-ar="فحوص">Checks</th><th data-ar="ما تغطّيه">What it covers</th></tr></thead>
+            <tbody>
+              <tr><td><code>determinism</code></td><td><strong>257</strong></td><td data-ar="التسجيل نفسه يجب أن يُنتج الحكم نفسه، بايتًا ببايت">the same capture must produce the same verdict, byte for byte</td></tr>
+              <tr><td><code>pipeline</code></td><td><strong>210</strong></td><td data-ar="مسار الفحص من طرفه إلى طرفه">the inspection path end to end</td></tr>
+              <tr><td><code>defrag</code></td><td><strong>127</strong></td><td data-ar="تجزئة IP، ومنها التداخل وإعادة الترتيب">IP fragmentation, including overlap and reordering</td></tr>
+              <tr><td><code>active-response</code></td><td><strong>113</strong></td><td data-ar="ما يرسله المحرّك حين يحجب">what the engine sends when it blocks</td></tr>
+              <tr><td><code>overlap-policy</code></td><td><strong>99</strong></td><td data-ar="تداخلات TCP المتعارضة، تُحلّ بسياسة معلنة">conflicting TCP overlaps, resolved by a stated policy</td></tr>
+              <tr><td><code>flag-anomaly</code></td><td><strong>93</strong></td><td data-ar="تركيبات رايات TCP التي لا ينبغي أن تقع">TCP flag combinations that should never occur</td></tr>
+              <tr><td><code>resource-limits</code></td><td><strong>92</strong></td><td data-ar="السلوك عند سقف الذاكرة والاتصالات">behaviour at the memory and connection ceilings</td></tr>
+              <tr><td><code>decoding</code></td><td><strong>86</strong></td><td data-ar="محلّلات L2–L4 ضدّ مُدخَل مشوّه">L2&ndash;L4 decoders against malformed input</td></tr>
+              <tr><td><code>coverage</code></td><td><strong>70</strong></td><td data-ar="معادلة المحاسبة نفسها">the accounting equation itself</td></tr>
+              <tr><td><code>reassembly</code></td><td><strong>67</strong></td><td data-ar="إعادة تجميع التدفّق وحلّ التداخل">stream reassembly and overlap resolution</td></tr>
+              <tr><td><code>connection-table</code></td><td><strong>52</strong></td><td data-ar="حالة التدفّق تحت الضغط والإخلاء">flow state under pressure and eviction</td></tr>
+              <tr><td><code>normalization</code></td><td><strong>51</strong></td><td data-ar="التطبيع قبل المطابقة">normalisation before matching</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sub-heading" data-ar="التخييط لا يغيّر حكمًا">Threading changes no verdict</h3>
+        <div class="table-container">
+          <table>
+            <thead><tr><th data-ar="البوّابة">Gate</th><th data-ar="ما تُثبته">What it proves</th></tr></thead>
+            <tbody>
+              <tr><td><code>worker-equivalence</code></td><td data-ar="التسجيلات نفسها مقسومة على 2 و4 تُنتج أحكامًا متطابقة">the same captures split 2 and 4 ways produce identical verdicts</td></tr>
+              <tr><td><code>flow-fanout</code></td><td data-ar="اتّجاها المحادثة يصلان العامل نفسه — نصف تدفّق TCP يُعاد تجميعه مرّتين أسوأ من عدم فحصه">both directions of a conversation reach the same worker</td></tr>
+              <tr><td><code>worker-isolation</code></td><td data-ar="حالة كل عامل لا تتسرّب بين الخيوط (30 فحصًا)">per-worker state never leaks between threads (30 checks)</td></tr>
+              <tr><td><code>race-detection</code> &middot; <code>sanitize</code></td><td data-ar="ThreadSanitizer وAddressSanitizer على مسار الفحص">ThreadSanitizer and AddressSanitizer over the inspection path</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="code-container">
+          <div class="code-header"><span>worker equivalence</span></div>
+          <pre><code>  PASS  the shard hash is symmetric: a flow and its reply land together
+  PASS  p0005_flow_flood.pcap split 2 ways: every verdict identical (5000 packets)</code></pre>
+        </div>
+
+        <h3 class="sub-heading" data-ar="سلسلة التوريد والتشغيل">Supply chain and operations</h3>
+        <div class="table-container">
+          <table>
+            <thead><tr><th data-ar="البوّابة">Gate</th><th data-ar="ما تُثبته">What it proves</th></tr></thead>
+            <tbody>
+              <tr><td><code>update-authenticity</code></td><td data-ar="بيان موقّع يُقبَل وبايت واحد مُبدَّل يُرفَض — 32 فحصًا، وكل رفض مقرون بإبطال">a signed manifest is accepted; one altered byte is refused &mdash; 32 checks, every refusal paired with an ablation</td></tr>
+              <tr><td><code>failure-injection</code></td><td data-ar="السلوك حين يفشل التخصيص أو القرص أو الشبكة (37 فحصًا)">behaviour when allocation, disk or network fails (37 checks)</td></tr>
+              <tr><td><code>crash-safety</code></td><td data-ar="الانهيار يُبلَّغ في التشغيل التالي لا يُبتلَع">a crash is reported on the next run rather than swallowed</td></tr>
+              <tr><td><code>fail-mode</code></td><td data-ar="سياسة التوجيه تنجو من SIGKILL وانقطاع الكهرباء">forwarding policy survives SIGKILL and power loss</td></tr>
+              <tr><td><code>sav</code></td><td data-ar="عناوين المصدر المزوّرة تُسقَط وتحمل السبب (39 فحصًا)">spoofed source addresses are dropped and carry the reason (39 checks)</td></tr>
+              <tr><td><code>privilege-hardening</code> &middot; <code>secret-handling</code></td><td data-ar="عزل systemd، وما لا يصل السجلّ أبدًا">the systemd sandbox, and what never reaches a log</td></tr>
+              <tr><td><code>server-portability</code></td><td data-ar="النتائج نفسها على روابط باسم eno1 وenp3s0 وens18">same conclusions on links named <code>eno1</code>, <code>enp3s0</code>, <code>ens18</code></td></tr>
+              <tr><td><code>hardware-limits</code></td><td data-ar="سقف القواعد وهندسة الحلقة وسقف الذاكرة مشتقّة من الجهاز لا مصرَّفة">rule ceiling, ring geometry, memory cap derived from the machine</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sub-heading" data-ar="لماذا تعني هذه الأرقام شيئًا">Why these numbers mean something</h3>
+        <div class="callout callout-info">
+          <div class="callout-title" data-ar="كل رفض مقرون بإبطال">Every refusal is paired with an ablation</div>
+          <p data-ar="بوّابة تختبر الحالة الموجبة وحدها &lt;strong&gt;تنجح بعد حذف الآلية التي تختبرها&lt;/strong&gt;. فكل فحص بأن مُدخَلًا يُرفَض مقرون بفحص أن المُدخَل نفسه &lt;em&gt;ينجح&lt;/em&gt; بعد إزالة سبب الرفض. وهذه هي أسطر control في المخرجات أعلاه.">A gate that tests only the positive case <strong>still passes after the mechanism it tests has been deleted</strong>. So each check that an input is refused is paired with a check that the same input <em>succeeds</em> once the reason for refusal is removed. Those are the <code>control:</code> lines in the output above.</p>
+        </div>
+        <div class="callout callout-info">
+          <div class="callout-title" data-ar="والمجموعة مقسومة">And the corpus is split</div>
+          <p data-ar="الكشف يُقاس على نصف لم تُضبَط عليه القواعد قط، والقسمة حتميّة — إعادة توليدها لا تحرّك حالة. ونصف الضبط يُبلَّغ صراحةً كغير قابل للنشر.">Detection is measured on a half the rules were never tuned on, and the split is deterministic &mdash; regenerating it moves no case. The tuning half is explicitly reported as not publishable.</p>
+        </div>
+
+        <h3 class="sub-heading" data-ar="البوّابتان اللتان لا تنجحان">The two that do not pass</h3>
+        <p data-ar="مذكورتان هنا لا محذوفتان. كلتاهما بيئية، وكلتاهما تقول ذلك بنفسها:">Named here rather than omitted. Both are environmental, and both say so themselves:</p>
+        <ul>
+          <li data-ar="&lt;code&gt;transit&lt;/code&gt; يقيس الجهاز وهو يفحص حركة عملاء حقيقية، ويحتاج حركةً على رابط داخلي كي يحكم. على شبكة هادئة لا يجد ما يقيسه، ويطبع ذلك."><strong><code>transit</code></strong> measures the appliance inspecting live client traffic and needs traffic on an inside link to judge anything. On a quiet network it finds nothing to measure, and says so.</li>
+          <li data-ar="&lt;code&gt;performance&lt;/code&gt; يقيس بإعادة تشغيل تسجيلات دون اتصال، وذلك مقصور على عامل واحد كي يبقى ناتجه قابلًا للتكرار — فلا يستطيع الإجابة عن سؤال التزامن. هو الأداة الخاطئة، والمطلوب أداة جديدة."><strong><code>performance</code></strong> measures by replaying captures offline, and offline replay is forced to a single worker so its output stays reproducible &mdash; so it cannot answer a question about concurrency however often it runs. It is the wrong instrument; a new one is needed.</li>
+        </ul>
+        <p data-ar="ولذلك &lt;strong&gt;زمن الاستجابة تحت التزامن غير مقيس&lt;/strong&gt;. إن كان سقف زمن الاستجابة حرجًا عندك، فقِسه على حملك أنت قبل أن تضع الجهاز في المسار.">Consequently <strong>latency under concurrency is unmeasured</strong>. If a latency ceiling matters to you, measure it on your own load before putting the appliance in the path.</p>
+
+        <h3 class="sub-heading" data-ar="التحقّق من تثبيتك أنت">Verifying your own installation</h3>
+        <p data-ar="تلك البوّابات تُشغَّل قبل الإصدار على شجرة المصدر، وسايفورن يُوزَّع مبنيًّا مسبقًا — فلا مجموعة اختبارات على جهازك. وما تستطيع التحقّق منه هو الأهمّ عمليًّا: أن ما ثبّتَه هو ما نُشر، وأن ما يعمل يعمل صحيحًا.">Those gates run before a release, against the source tree. CyphornIPS is distributed pre-built, so there is no test suite on your appliance. What you <em>can</em> verify is what matters in practice: that what you installed is what was published, and that what is running is running correctly.</p>
+        <div class="code-container">
+          <div class="code-header"><span>bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><code>sha256sum -c SHA256SUMS      # the package is the one that was published
+cyphorn-engine --version     # 1.8.0
+cyphornctl diagnose          # works while the engine is down, too
+cyphornctl status            # rules loaded, coverage invariant holds</code></pre>
+        </div>
       </section>
 
-      <!-- 24. TROUBLESHOOTING -->
       <section id="faq" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;39&lt;/span&gt; أسئلة متكرّرة"><span class="num">39</span> Frequently Asked Questions</h2>
 

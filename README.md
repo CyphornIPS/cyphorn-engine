@@ -416,7 +416,34 @@ themselves:
 - **`performance`** measures by replaying captures offline, and offline replay is
   forced to a single worker so its output stays reproducible — so it cannot
   answer a question about concurrency however often it runs. It is the wrong
-  instrument, and a new one is needed. See [Known limitations](#️-known-limitations).
+  instrument for that question; the right one now exists and its figures are
+  below. `performance` still fails, because it still measures what it measures.
+
+### 🔻 Latency under concurrency, measured
+
+Live capture on a dedicated veth pair, the full 12,077-rule set, 4,096 concurrent
+flows, 600 pps offered over 25 s on a four-core arm64 appliance — offered *below*
+capacity, so the figure is a latency and not a service time at saturation:
+
+| workers | avg | p95 | p99 | inspected | loss |
+|---|---|---|---|---|---|
+| 1 | 2,065 µs | 2,792 µs | 3,002 µs | 11,156 | **25.6%** |
+| 3 | 1,906 µs | 2,641 µs | **2,956 µs** | 15,003 | **0.0%** |
+
+**The threads fixed the loss, not the latency.** Three workers take loss from
+25.6% to zero and move p99 by 1.5% — which is what flow-affinity fanout is for:
+parallel capacity, not a shorter path per packet.
+
+**It is over budget.** The internal target is 1,000 µs; the measurement is
+~2,956. With an empty rule set the same harness measures 484 µs at three
+workers, so roughly half the cost is rule evaluation and half is the base path —
+and the base path alone is already above the ceiling.
+
+> [!IMPORTANT]
+> CyphornIPS suits an edge or a site where a few milliseconds are acceptable.
+> If you have a hard latency ceiling — trading, latency-sensitive voice,
+> datacentre interconnect — **measure it on your own load before putting the
+> appliance in the path.**
 
 ### 🔻 Verify your own installation
 
@@ -487,7 +514,7 @@ Stated here rather than discovered later.
 
 | | |
 |---|---|
-| **Latency under concurrency** | unmeasured — the existing benchmark replays offline, which is forced to a single worker, so it cannot produce a figure. **If a latency ceiling matters to you, measure it on your own load before putting the appliance in the path.** |
+| **Inspection latency** | ~2,956 µs p99 with 12,077 rules and three workers, against a 1,000 µs internal target. Threading removes the loss, not the latency. **If a hard latency ceiling matters to you, measure it on your own load before putting the appliance in the path.** |
 | **Capture ring sizing** | per host, not per port |
 | **Independent review** | none; verified on few machines and few topologies |
 | **TLS** | never decrypted. Works from what is unencrypted in the handshake: SNI, JA3, certificate fields, negotiated version |

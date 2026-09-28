@@ -5576,7 +5576,7 @@ CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_BPF CAP_SYS_RESOURCE CAP_PER
           <li data-ar="&lt;code&gt;transit&lt;/code&gt; يقيس الجهاز وهو يفحص حركة عملاء حقيقية، ويحتاج حركةً على رابط داخلي كي يحكم. على شبكة هادئة لا يجد ما يقيسه، ويطبع ذلك."><strong><code>transit</code></strong> measures the appliance inspecting live client traffic and needs traffic on an inside link to judge anything. On a quiet network it finds nothing to measure, and says so.</li>
           <li data-ar="&lt;code&gt;performance&lt;/code&gt; يقيس بإعادة تشغيل تسجيلات دون اتصال، وذلك مقصور على عامل واحد كي يبقى ناتجه قابلًا للتكرار — فلا يستطيع الإجابة عن سؤال التزامن. هو الأداة الخاطئة، والمطلوب أداة جديدة."><strong><code>performance</code></strong> measures by replaying captures offline, and offline replay is forced to a single worker so its output stays reproducible &mdash; so it cannot answer a question about concurrency however often it runs. It is the wrong instrument; a new one is needed.</li>
         </ul>
-        <p data-ar="ولذلك &lt;strong&gt;زمن الاستجابة تحت التزامن غير مقيس&lt;/strong&gt;. إن كان سقف زمن الاستجابة حرجًا عندك، فقِسه على حملك أنت قبل أن تضع الجهاز في المسار.">Consequently <strong>latency under concurrency is unmeasured</strong>. If a latency ceiling matters to you, measure it on your own load before putting the appliance in the path.</p>
+        <p data-ar="ولذلك &lt;strong&gt;لا يستطيع هذا المعيار الإجابة عن سؤال التزامن&lt;/strong&gt; — لكن السؤال لم يعد بلا جواب: بُنيت أداة لقياسه على التقاط حيّ، والنتائج في &lt;a href=&quot;#limitations&quot;&gt;الحدود&lt;/a&gt;. وتبقى &lt;code&gt;performance&lt;/code&gt; راسبة لأنها تقيس ما تقيسه، ولا تُحذف لذلك.">So <strong>this gate cannot answer the concurrency question</strong> — but the question is no longer unanswered: an instrument was built to measure it on live capture, and the figures are under <a href="#limitations">Limitations</a>. <code>performance</code> still fails, because it still measures what it measures, and it is not deleted for that.</p>
 
         <h3 class="sub-heading" data-ar="التحقّق من تثبيتك أنت">Verifying your own installation</h3>
         <p data-ar="تلك البوّابات تُشغَّل قبل الإصدار على شجرة المصدر، وسايفورن يُوزَّع مبنيًّا مسبقًا — فلا مجموعة اختبارات على جهازك. وما تستطيع التحقّق منه هو الأهمّ عمليًّا: أن ما ثبّتَه هو ما نُشر، وأن ما يعمل يعمل صحيحًا.">Those gates run before a release, against the source tree. CyphornIPS is distributed pre-built, so there is no test suite on your appliance. What you <em>can</em> verify is what matters in practice: that what you installed is what was published, and that what is running is running correctly.</p>
@@ -5726,16 +5726,28 @@ sudo systemctl kill -s HUP cyphornips</code></pre>
         <h3 class="sub-heading" data-ar="الطوبولوجيا">Topology</h3>
         <p data-ar="سايفورن جهاز داخل المسار بواجهتين. والتوسّع عبر عدة هياكل مادية يحتاج موزّع حمل في الطبقة الثالثة أعلاه — فلا تجميع عناقيدي مدمج.">CyphornIPS is a dual-interface inline appliance. Scaling across multiple physical chassis requires an upstream Layer 3 load balancer — there's no built-in clustering.</p>
 
-        <h3 class="sub-heading" data-ar="زمن الاستجابة تحت التزامن غير مقيس">Latency under concurrency is unmeasured</h3>
-        <p data-ar="التخييط مقيس بما يفحصه: عامل واحد فحص ٦٥٪ من سيل ٤٠٩٦ تدفّقًا، وثلاثة فحصوا ١٠٠٪. أمّا &lt;em&gt;ما يضيفه&lt;/em&gt; المحرّك إلى زمن الحزمة وعدّة خيوط تعمل، فلا يوجد رقم منشور له. المعيار القائم يقيس بإعادة تشغيل تسجيلات دون اتصال، وذلك مقصور على عامل واحد كي يبقى ناتجه قابلًا للتكرار — فلا يستطيع الإجابة عن سؤال التزامن مهما شغّلته. القياس يحتاج أداة جديدة، وهي غير موجودة بعد. إن كان سقف زمن الاستجابة حرجًا عندك، فقِسه على حملك أنت قبل أن تضع الجهاز في المسار.">The threading is measured by what it inspects: one worker inspected 65% of a
-        4096-flow flood, three inspected 100%. What is <em>not</em> published is
-        the latency the engine adds to a packet with several threads running.
-        The existing benchmark measures by replaying captures offline, and
-        offline replay is forced to a single worker so its output stays
-        reproducible — so it cannot answer the concurrency question however
-        often you run it. Measuring it needs a new instrument, and that does not
-        exist yet. <strong>If a latency ceiling matters to you, measure it on
-        your own load before putting the appliance in the path.</strong></p>
+        <h3 class="sub-heading" data-ar="زمن الاستجابة تحت التزامن، مقيسًا">Latency under concurrency, measured</h3>
+        <p data-ar="قِيس الآن. الأداة &lt;code&gt;tests/test_latency_under_concurrency.sh&lt;/code&gt;: التقاط حيّ على زوج veth خاص بها، بمجموعة القواعد الكاملة (12,077 قاعدة)، و4,096 تدفّقًا متزامنًا، وحمل معروض دون طاقة الجهاز كي يكون الرقم زمن استجابة لا زمن خدمة عند التشبّع.">Measured now. The instrument is <code>tests/test_latency_under_concurrency.sh</code>: live capture on its own veth pair, the full 12,077-rule set, 4,096 concurrent flows, and an offered load kept below the appliance's capacity so the figure is a latency and not a service time at saturation.</p>
+
+        <div class="table-container">
+          <table>
+            <thead><tr><th data-ar="عوامل">workers</th><th>avg</th><th>p95</th><th>p99</th><th data-ar="مفحوص">inspected</th><th data-ar="فقد">loss</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>2,065 us</td><td>2,792 us</td><td>3,002 us</td><td>11,156</td><td><strong>25.6%</strong></td></tr>
+              <tr><td>3</td><td>1,906 us</td><td>2,641 us</td><td><strong>2,956 us</strong></td><td>15,003</td><td><strong>0.0%</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p data-ar="‏600 حزمة/ثانية معروضة على مدى 25 ثانية، على جهاز رباعي النوى بمعمارية arm64." style="color:var(--text-muted);font-size:0.86rem">600 pps offered over 25 s, on a four-core arm64 appliance.</p>
+
+        <p data-ar="الخلاصة بصراحة: &lt;strong&gt;الخيوط عالجت الفقد لا زمن الاستجابة&lt;/strong&gt;. ثلاثة عوامل أنزلت الفقد من ٢٥.٦٪ إلى صفر، وحرّكت الـp99 بنسبة ١.٥٪ فقط. وهذا هو المتوقَّع من توزيع يحافظ على التدفّق: يشتري سعة متوازية، لا مسارًا أقصر للحزمة الواحدة.">Stated plainly: <strong>the threads fixed the loss, not the latency.</strong> Three workers take loss from 25.6% to zero and move p99 by 1.5%. That is what flow-affinity fanout is for — it buys parallel capacity, not a shorter path per packet.</p>
+        <p data-ar="والرقم فوق السقف. تنصّ P2-004 على ١٠٠٠ ميكروثانية، والمقيس ≈٢٩٥٦. ولمعرفة أين تذهب المللي ثانية: بمجموعة قواعد فارغة يقيس المشغّل نفسه ٤٨٤ ميكروثانية عند ثلاثة عوامل — فنصف الكلفة تقييم قواعد والنصف الآخر المسار الأساسي، والمسار الأساسي وحده فوق السقف.">And it is over budget. P2-004 states 1,000 us; the measurement is ~2,956. Where the milliseconds go: with an empty rule set the same harness measures 484 us at three workers — so roughly half the cost is rule evaluation and half is the base path, and the base path alone is already above the ceiling.</p>
+        <p data-ar="ولهذا يقرأ &lt;code&gt;make performance&lt;/code&gt; أرقامًا أعلى (٣.٥–٥.٧ مللي ثانية): فهو يقيس بإعادة تشغيل تسجيل عبر &lt;code&gt;--pcap&lt;/code&gt;، وإعادة التشغيل مقصورة على خيط واحد بالتصميم كي يبقى ناتجها قابلًا للتكرار. فمهما شغّلته، يصف محرّكًا أحادي الخيط عند التشبّع.">This is also why <code>make performance</code> reads higher (3.5&ndash;5.7 ms): it measures through an offline <code>--pcap</code> replay, and a replay is pinned to one thread by design so its output stays reproducible. However often you run it, it describes a single-threaded engine at saturation.</p>
+
+        <div class="callout callout-warning">
+          <div class="callout-title" data-ar="ماذا يعني هذا لك">What this means for you</div>
+          <p data-ar="ماذا يعني هذا لك: سايفورن مناسب لحافة الشبكة وللمواقع التي يقبل فيها بضعة مللي ثانية. أمّا إن كان لديك سقف زمن استجابة صارم — تداول، أو صوت حسّاس، أو ربط مراكز بيانات — &lt;strong&gt;فقِسه على حملك أنت قبل وضع الجهاز في المسار&lt;/strong&gt;، والأداة أعلاه تفعل ذلك.">What this means for you: CyphornIPS suits an edge or a site where a few milliseconds are acceptable. If you have a hard latency ceiling — trading, latency-sensitive voice, datacentre interconnect — <strong>measure it on your own load before putting the appliance in the path</strong>, and the harness above is how.</p>
+        </div>
 
         <h3 class="sub-heading" id="disclaimer" data-ar="إخلاء المسؤولية وإشعار تشغيلي">Disclaimer &amp; Operational Notice (إخلاء المسؤولية)</h3>
         <div class="callout callout-warning">

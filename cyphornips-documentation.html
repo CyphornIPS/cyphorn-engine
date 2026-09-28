@@ -284,6 +284,26 @@
     }
     .sidebar-backdrop.open { display: block; }
 
+    /* How much of the manual is left.
+     *
+     * Forty-five sections behind a fixed sidebar means the page scrollbar
+     * measures the sidebar as often as the text, so it does not answer the
+     * question. This does, in one line under the header. It is scaled with a
+     * transform rather than sized with width, so updating it on scroll never
+     * triggers layout. */
+    .read-progress {
+      position: fixed;
+      top: var(--header-height);
+      inset-inline: 0;
+      height: 2px;
+      z-index: 120;
+      background: linear-gradient(to right, var(--accent-blue), var(--accent-purple, #a855f7));
+      transform: scaleX(0);
+      transform-origin: left center;
+      pointer-events: none;
+    }
+    html[lang="ar"] .read-progress { transform-origin: right center; }
+
     /* Sidebar */
     aside.sidebar {
       width: var(--sidebar-width);
@@ -412,31 +432,89 @@ html[lang="ar"] td, html[lang="ar"] th { line-height: 1.75; }
 
     .sidebar-nav { list-style: none; }
 
+    /* Sidebar links.
+     *
+     * Every offset here is logical (inline-start, not left). The previous
+     * version shifted padding-left on hover and drew the active bar with
+     * border-left: under html[lang="ar"] the sidebar is on the right and the
+     * items are right-aligned, so the indicator sat on the far side of the
+     * label it was marking and hover pushed the text away from the edge it
+     * reads from. There is no second stylesheet for Arabic; the properties
+     * follow the direction on their own.
+     *
+     * Hover no longer changes padding either. Moving padding reflows the
+     * line, so a reader dragging down a list of forty-five entries watched
+     * each one twitch as the pointer crossed it. The indent is now a
+     * transform, which the compositor handles and which costs no layout. */
     .sidebar-nav li a {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
       padding: 7px 12px;
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85rem;
-      border-radius: 6px;
-      transition: all 0.15s ease;
+      border-radius: 7px;
+      transition: background-color .15s ease, color .15s ease, transform .15s ease;
+    }
+
+    /* The indicator is a pseudo-element pinned to the inline start, so it
+       costs no layout and mirrors itself. It is scaled to nothing until the
+       link is hovered or current, which is what makes it slide rather than
+       appear. */
+    .sidebar-nav li a::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 3px;
+      top: 50%;
+      width: 3px;
+      height: 16px;
+      border-radius: 2px;
+      background: var(--accent-blue);
+      transform: translateY(-50%) scaleY(0);
+      transform-origin: center;
+      transition: transform .16s ease;
     }
 
     .sidebar-nav li a:hover {
       background: var(--bg-tertiary);
       color: var(--text-primary);
-      padding-left: 16px;
+      transform: translateX(3px);
+    }
+    html[lang="ar"] .sidebar-nav li a:hover { transform: translateX(-3px); }
+    .sidebar-nav li a:hover::before { transform: translateY(-50%) scaleY(.55); opacity: .5; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sidebar-nav li a,
+      .sidebar-nav li a::before { transition: none; }
+      .sidebar-nav li a:hover { transform: none; }
+      html[lang="ar"] .sidebar-nav li a:hover { transform: none; }
+    }
+
+    .sidebar-nav li a:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 1px;
     }
 
     .sidebar-nav li a.active {
-      background: color-mix(in srgb, var(--accent-blue) 12%, transparent);
+      background: linear-gradient(
+        to var(--nav-grad-dir, right),
+        color-mix(in srgb, var(--accent-blue) 17%, transparent),
+        color-mix(in srgb, var(--accent-blue) 5%, transparent));
       color: var(--accent-blue);
       font-weight: 600;
-      border-left: 3px solid var(--accent-blue);
-      border-radius: 0 6px 6px 0;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 1px 3px rgba(0,0,0,.18);
     }
+    html[lang="ar"] .sidebar-nav li a.active { --nav-grad-dir: left; }
+    .sidebar-nav li a.active::before { transform: translateY(-50%) scaleY(1); opacity: 1; }
+
+    /* A group whose every entry is filtered out by the search box keeps its
+       header otherwise, so the sidebar fills with folders pointing at
+       nothing. The search sets this attribute; the CSS does the hiding, so
+       there is one place that knows what "no matches" looks like. */
+    .sidebar-group[data-empty="true"] { display: none; }
 
     .sidebar-nav.sub-list { padding-left: 10px; margin-top: 2px; }
     .sidebar-nav.sub-list li a { font-size: 0.78rem; color: var(--text-muted); }
@@ -650,6 +728,7 @@ html[lang="ar"] td, html[lang="ar"] th { line-height: 1.75; }
     </div>
   </header>
 
+  <div class="read-progress" id="readProgress" aria-hidden="true"></div>
   <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
   <div class="app-container">
@@ -2217,6 +2296,104 @@ the interfaces saw          =  214880
       <!-- 22. LOGGING -->
       <section id="running" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;13&lt;/span&gt; التشغيل وإعادة التحميل الحيّة"><span class="num">13</span> Running &amp; Hot Reload</h2>
+        <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
+          <svg direction="ltr" viewBox="0 0 1040 520" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:1040px;display:block;margin:0 auto">
+            <title>fail_mode: what transit does when the engine stops</title>
+
+            <defs>
+              <linearGradient id="f1-g-box" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
+                <stop offset="1" stop-color="var(--bg-card,#131929)"/>
+              </linearGradient>
+              <linearGradient id="f1-g-key" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f1-g-good" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f1-g-bad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f1-g-warn" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
+                <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
+              </linearGradient>
+              <linearGradient id="f1-g-in" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
+              </linearGradient>
+              <filter id="f1-f-lift" x="-30%" y="-40%" width="160%" height="200%">
+                <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
+              </filter>
+              <marker id="f1-a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+                      markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
+              </marker>
+            </defs>
+            <style>
+              .n-t  { fill: var(--text-primary,#f8fafc); font-family: var(--font-sans,sans-serif);
+                      font-size: 12.5px; font-weight: 600; }
+              .n-s  { fill: var(--text-muted,#71839c); font-family: var(--font-sans,sans-serif); font-size: 10px; }
+              .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
+                      font-size: 10px; font-weight: 700; }
+              .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
+                      marker-end: url(#f1-a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+              .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f1-f-lift); }
+            </style>
+
+            <rect x="300" y="24" width="440" height="66" rx="9" class="n-b" fill="url(#f1-g-good)" stroke="var(--accent-green,#10b981)"/>
+            <path d="M309,25 h422" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="520" y="55" class="n-t" text-anchor="middle">engine RUNNING</text>
+            <text x="520" y="70" class="n-s" text-anchor="middle">forwarding off on inspected links; originals saved first</text>
+            <rect x="26" y="150" width="218" height="52" rx="9" class="n-b" fill="url(#f1-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M35,151 h200" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="135" y="174" class="n-t" text-anchor="middle">SIGTERM</text>
+            <text x="135" y="189" class="n-s" text-anchor="middle">a clean stop</text>
+            <rect x="274" y="150" width="218" height="52" rx="9" class="n-b" fill="url(#f1-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M283,151 h200" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="383" y="174" class="n-t" text-anchor="middle">SIGKILL</text>
+            <text x="383" y="189" class="n-s" text-anchor="middle">no handler runs</text>
+            <rect x="522" y="150" width="218" height="52" rx="9" class="n-b" fill="url(#f1-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M531,151 h200" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="631" y="174" class="n-t" text-anchor="middle">SIGSEGV</text>
+            <text x="631" y="189" class="n-s" text-anchor="middle">a crash</text>
+            <rect x="770" y="150" width="244" height="52" rx="9" class="n-b" fill="url(#f1-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M779,151 h226" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="892" y="174" class="n-t" text-anchor="middle">OOM kill</text>
+            <text x="892" y="189" class="n-s" text-anchor="middle">the kernel decides</text>
+            <path d="M520,90 V116" class="n-e"/>
+            <path d="M135,116 H892" stroke="var(--text-muted,#71839c)" stroke-width="1.4" fill="none" opacity=".85"/>
+            <path d="M135,116 V150" class="n-e"/>
+            <path d="M383,116 V150" class="n-e"/>
+            <path d="M631,116 V150" class="n-e"/>
+            <path d="M892,116 V150" class="n-e"/>
+            <polygon points="520,228 640,276 520,324 400,276" class="n-b" fill="url(#f1-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <text x="520" y="280.5" class="n-t" text-anchor="middle">fail_mode</text>
+            <path d="M135,216 H892" stroke="var(--text-muted,#71839c)" stroke-width="1.4" fill="none" opacity=".85"/>
+            <path d="M135,202 V216" class="n-e"/>
+            <path d="M383,202 V216" class="n-e"/>
+            <path d="M631,202 V216" class="n-e"/>
+            <path d="M892,202 V216" class="n-e"/>
+            <path d="M520,216 V228" class="n-e"/>
+            <rect x="26" y="372" width="452" height="76" rx="9" class="n-b" fill="url(#f1-g-bad)" stroke="var(--accent-red,#ef4444)"/>
+            <path d="M35,373 h434" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="252" y="408" class="n-t" text-anchor="middle">closed &#8212; the default</text>
+            <text x="252" y="423" class="n-s" text-anchor="middle">forwarding stays off: transit stops, loudly</text>
+            <path d="M400,276 H252 V372" class="n-e"/>
+            <text x="300" y="268" class="n-l" text-anchor="middle">closed</text>
+            <rect x="562" y="372" width="452" height="76" rx="9" class="n-b" fill="url(#f1-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <path d="M571,373 h434" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="788" y="408" class="n-t" text-anchor="middle">open</text>
+            <text x="788" y="423" class="n-s" text-anchor="middle">ExecStopPost restores forwarding from the state file</text>
+            <path d="M640,276 H788 V372" class="n-e"/>
+            <text x="740" y="268" class="n-l" text-anchor="middle">open</text>
+            <text x="520" y="486" class="n-l" text-anchor="middle">The outcome is the one the operator declared &#8212; not the one the manner of death happened to produce.</text>
+          </svg>
+          <figcaption style="margin-top:12px;color:var(--text-muted);font-size:0.86rem;text-align:center" data-ar="مهما كانت طريقة توقّف المحرّك، فنتيجة الحركة هي التي أعلنها المشغّل.">However the engine stops, the traffic outcome is the one the operator declared.</figcaption>
+        </figure>
         <p data-ar="شغّل سايفورن كعفريت systemd مُدار في الإنتاج؛ ويمكن تشغيله تفاعليًا من الطرفية أثناء الاختبار.">Run CyphornIPS as a managed systemd daemon in production; it can also run interactively from the shell during testing.</p>
 
         <h3 class="sub-heading" data-ar="خدمة systemd">Systemd service</h3>
@@ -2295,34 +2472,34 @@ sudo journalctl -u cyphornips -f</code></pre>
       <title>CyphornIPS data pipeline: ingress to verdict</title>
 
       <defs>
-        <linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f2-g-box" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
           <stop offset="1" stop-color="var(--bg-card,#131929)"/>
         </linearGradient>
-        <linearGradient id="g-key" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f2-g-key" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
           <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-good" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f2-g-good" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
           <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-bad" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f2-g-bad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
           <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-warn" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f2-g-warn" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
           <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
         </linearGradient>
-        <linearGradient id="g-in" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f2-g-in" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
           <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
         </linearGradient>
-        <filter id="f-lift" x="-30%" y="-40%" width="160%" height="200%">
+        <filter id="f2-f-lift" x="-30%" y="-40%" width="160%" height="200%">
           <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
         </filter>
-        <marker id="a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+        <marker id="f2-a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
                 markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
           <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
         </marker>
@@ -2334,27 +2511,27 @@ sudo journalctl -u cyphornips -f</code></pre>
         .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
                 font-size: 10px; font-weight: 700; }
         .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
-                marker-end: url(#a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
-        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f-lift); }
+                marker-end: url(#f2-a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f2-f-lift); }
       </style>
 
-      <rect x="357" y="14" width="286" height="52" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <rect x="357" y="14" width="286" height="52" rx="9" class="n-b" fill="url(#f2-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
       <path d="M366,15 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="500" y="38" class="n-t" text-anchor="middle">Ingress packet</text>
       <text x="500" y="53" class="n-s" text-anchor="middle">WAN / LAN</text>
-      <rect x="357" y="86" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="357" y="86" width="286" height="52" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M366,87 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="500" y="110" class="n-t" text-anchor="middle">eBPF TC ingress filter</text>
       <text x="500" y="125" class="n-s" text-anchor="middle">kernel path, before the stack</text>
-      <rect x="357" y="158" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="357" y="158" width="286" height="52" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M366,159 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="500" y="182" class="n-t" text-anchor="middle">L2 – L4 decoders</text>
       <text x="500" y="197" class="n-s" text-anchor="middle">Ethernet · IPv4 / IPv6 · TCP / UDP / ICMP</text>
-      <rect x="357" y="230" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="357" y="230" width="286" height="52" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M366,231 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="500" y="254" class="n-t" text-anchor="middle">Defragment & reassemble</text>
       <text x="500" y="269" class="n-s" text-anchor="middle">IP fragments · TCP overlap policy</text>
-      <rect x="357" y="302" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="357" y="302" width="286" height="52" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M366,303 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="500" y="326" class="n-t" text-anchor="middle">Conntrack & flow tracker</text>
       <text x="500" y="341" class="n-s" text-anchor="middle">per-flow state, both directions</text>
@@ -2363,44 +2540,44 @@ sudo journalctl -u cyphornips -f</code></pre>
       <path d="M500,210 V227" class="n-e"/>
       <path d="M500,282 V299" class="n-e"/>
       <path d="M500,354 V392" class="n-e"/>
-      <polygon points="500,391 600,418 500,445 400,418" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <polygon points="500,391 600,418 500,445 400,418" class="n-b" fill="url(#f2-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
       <text x="500" y="422.5" class="n-t" text-anchor="middle">Protocol DPI</text>
-      <rect x="18" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="18" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M27,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="108" y="517" class="n-t" text-anchor="middle">HTTP</text>
       <text x="108" y="533" class="n-s" text-anchor="middle">method · uri · host</text>
       <text x="108" y="545.5" class="n-s" text-anchor="middle">headers · body</text>
       <text x="108" y="558" class="n-s" text-anchor="middle">normalised URI</text>
       <path d="M500,445 V476 H108 V495" class="n-e"/>
-      <rect x="214" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="214" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M223,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="304" y="517" class="n-t" text-anchor="middle">TLS / QUIC</text>
       <text x="304" y="533" class="n-s" text-anchor="middle">sni · alpn</text>
       <text x="304" y="545.5" class="n-s" text-anchor="middle">JA3 fingerprint</text>
       <text x="304" y="558" class="n-s" text-anchor="middle">certificate fields</text>
       <path d="M500,445 V476 H304 V495" class="n-e"/>
-      <rect x="410" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="410" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M419,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="500" y="517" class="n-t" text-anchor="middle">DNS</text>
       <text x="500" y="533" class="n-s" text-anchor="middle">qname · qtype</text>
       <text x="500" y="545.5" class="n-s" text-anchor="middle">answers</text>
       <text x="500" y="558" class="n-s" text-anchor="middle">response matching</text>
       <path d="M500,445 V476 H500 V495" class="n-e"/>
-      <rect x="606" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="606" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M615,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="696" y="517" class="n-t" text-anchor="middle">FTP</text>
       <text x="696" y="533" class="n-s" text-anchor="middle">commands · filename</text>
       <text x="696" y="545.5" class="n-s" text-anchor="middle">data channel</text>
       <text x="696" y="558" class="n-s" text-anchor="middle">transfer offsets</text>
       <path d="M500,445 V476 H696 V495" class="n-e"/>
-      <rect x="802" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="802" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#f2-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M811,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="892" y="517" class="n-t" text-anchor="middle">SMTP</text>
       <text x="892" y="533" class="n-s" text-anchor="middle">helo · mail_from</text>
       <text x="892" y="545.5" class="n-s" text-anchor="middle">rcpt_to · headers</text>
       <text x="892" y="558" class="n-s" text-anchor="middle">MIME parts</text>
       <path d="M500,445 V476 H892 V495" class="n-e"/>
-      <rect x="18" y="626" width="180" height="76" rx="9" class="n-b" fill="url(#g-key)" stroke="var(--accent-purple,#a855f7)"/>
+      <rect x="18" y="626" width="180" height="76" rx="9" class="n-b" fill="url(#f2-g-key)" stroke="var(--accent-purple,#a855f7)"/>
       <path d="M27,627 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="108" y="645" class="n-t" text-anchor="middle">File extraction</text>
       <text x="108" y="661" class="n-s" text-anchor="middle">MD5 · SHA-1 · SHA-256</text>
@@ -2413,7 +2590,7 @@ sudo journalctl -u cyphornips -f</code></pre>
       <path d="M500,584 V740" class="n-e"/>
       <path d="M892,584 V740" class="n-e"/>
       <path d="M108,740 H892" stroke="var(--text-muted,#71839c)" stroke-width="1.4" opacity=".85" fill="none" stroke-linecap="round"/>
-      <rect x="357" y="770" width="286" height="52" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <rect x="357" y="770" width="286" height="52" rx="9" class="n-b" fill="url(#f2-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
       <path d="M366,771 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="500" y="794" class="n-t" text-anchor="middle">Detection engine</text>
       <text x="500" y="809" class="n-s" text-anchor="middle">rules · datasets · flowbits · thresholds</text>
@@ -2529,34 +2706,34 @@ sudo ip link set lan0 up promisc on
       <title>Action precedence: which verdict wins when several rules match</title>
 
       <defs>
-        <linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f3-g-box" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
           <stop offset="1" stop-color="var(--bg-card,#131929)"/>
         </linearGradient>
-        <linearGradient id="g-key" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f3-g-key" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
           <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-good" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f3-g-good" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
           <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-bad" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f3-g-bad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
           <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-warn" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f3-g-warn" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
           <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
         </linearGradient>
-        <linearGradient id="g-in" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f3-g-in" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
           <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
         </linearGradient>
-        <filter id="f-lift" x="-30%" y="-40%" width="160%" height="200%">
+        <filter id="f3-f-lift" x="-30%" y="-40%" width="160%" height="200%">
           <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
         </filter>
-        <marker id="a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+        <marker id="f3-a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
                 markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
           <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
         </marker>
@@ -2568,18 +2745,18 @@ sudo ip link set lan0 up promisc on
         .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
                 font-size: 10px; font-weight: 700; }
         .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
-                marker-end: url(#a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
-        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f-lift); }
+                marker-end: url(#f3-a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f3-f-lift); }
       </style>
 
-      <rect x="16" y="44" width="164" height="46" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <rect x="16" y="44" width="164" height="46" rx="9" class="n-b" fill="url(#f3-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
       <path d="M25,45 h146" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="98" y="71.5" class="n-t" text-anchor="middle">Several matches</text>
-      <polygon points="280,41 364,67 280,93 196,67" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <polygon points="280,41 364,67 280,93 196,67" class="n-b" fill="url(#f3-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
       <text x="280" y="71.5" class="n-t" text-anchor="middle">PASS?</text>
-      <polygon points="520,41 604,67 520,93 436,67" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <polygon points="520,41 604,67 520,93 436,67" class="n-b" fill="url(#f3-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
       <text x="520" y="71.5" class="n-t" text-anchor="middle">DROP / REJECT?</text>
-      <polygon points="760,41 844,67 760,93 676,67" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <polygon points="760,41 844,67 760,93 676,67" class="n-b" fill="url(#f3-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
       <text x="760" y="71.5" class="n-t" text-anchor="middle">ALERT?</text>
       <path d="M180,67 H194" class="n-e"/>
       <path d="M366,67 H434" class="n-e"/>
@@ -2588,22 +2765,22 @@ sudo ip link set lan0 up promisc on
       <text x="640" y="61" class="n-l" text-anchor="middle">No</text>
       <path d="M280,93 V176" class="n-e"/>
       <text x="294" y="134.5" class="n-l" text-anchor="middle">Yes</text>
-      <rect x="182" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#g-good)" stroke="var(--accent-green,#10b981)"/>
+      <rect x="182" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#f3-g-good)" stroke="var(--accent-green,#10b981)"/>
       <path d="M191,179 h178" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="280" y="205.5" class="n-t" text-anchor="middle">PASS — forward</text>
       <path d="M520,93 V176" class="n-e"/>
       <text x="534" y="134.5" class="n-l" text-anchor="middle">Yes</text>
-      <rect x="422" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#g-bad)" stroke="var(--accent-red,#ef4444)"/>
+      <rect x="422" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#f3-g-bad)" stroke="var(--accent-red,#ef4444)"/>
       <path d="M431,179 h178" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="520" y="205.5" class="n-t" text-anchor="middle">BLOCK</text>
       <path d="M760,93 V176" class="n-e"/>
       <text x="774" y="134.5" class="n-l" text-anchor="middle">Yes</text>
-      <rect x="662" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <rect x="662" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#f3-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
       <path d="M671,179 h178" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="760" y="205.5" class="n-t" text-anchor="middle">ALERT + forward</text>
       <path d="M846,67 H864" class="n-e"/>
       <text x="855" y="61" class="n-l" text-anchor="middle">No</text>
-      <rect x="866" y="44" width="86" height="46" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="866" y="44" width="86" height="46" rx="9" class="n-b" fill="url(#f3-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M875,45 h68" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="909" y="71.5" class="n-t" text-anchor="middle">No match</text>
     </svg>
@@ -2629,6 +2806,222 @@ sudo ip link set lan0 up promisc on
       <!-- 19. DOMAIN POLICY -->
       <section id="performance" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;19&lt;/span&gt; الأداء وتسريع النواة"><span class="num">19</span> Performance &amp; Kernel Acceleration</h2>
+        <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
+          <svg direction="ltr" viewBox="0 0 1040 520" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:1040px;display:block;margin:0 auto">
+            <title>The coverage equation: every frame the interface reported is accounted for</title>
+
+            <defs>
+              <linearGradient id="f5-g-box" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
+                <stop offset="1" stop-color="var(--bg-card,#131929)"/>
+              </linearGradient>
+              <linearGradient id="f5-g-key" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f5-g-good" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f5-g-bad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f5-g-warn" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
+                <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
+              </linearGradient>
+              <linearGradient id="f5-g-in" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
+              </linearGradient>
+              <filter id="f5-f-lift" x="-30%" y="-40%" width="160%" height="200%">
+                <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
+              </filter>
+              <marker id="f5-a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+                      markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
+              </marker>
+            </defs>
+            <style>
+              .n-t  { fill: var(--text-primary,#f8fafc); font-family: var(--font-sans,sans-serif);
+                      font-size: 12.5px; font-weight: 600; }
+              .n-s  { fill: var(--text-muted,#71839c); font-family: var(--font-sans,sans-serif); font-size: 10px; }
+              .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
+                      font-size: 10px; font-weight: 700; }
+              .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
+                      marker-end: url(#f5-a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+              .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f5-f-lift); }
+            </style>
+
+            <rect x="400" y="20" width="240" height="58" rx="9" class="n-b" fill="url(#f5-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+            <path d="M409,21 h222" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="520" y="47" class="n-t" text-anchor="middle">nic_received</text>
+            <text x="520" y="62" class="n-s" text-anchor="middle">every frame the NIC reported</text>
+            <path d="M520,78 V104" class="n-e"/>
+            <path d="M112.5,104 H927.5" stroke="var(--text-muted,#71839c)" stroke-width="1.4" fill="none" opacity=".85"/>
+            <path d="M112.5,104 V136" class="n-e"/>
+            <rect x="40" y="136" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-bad)" stroke="var(--accent-red,#ef4444)"/>
+            <path d="M49,137 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="112.5" y="167" class="n-t" text-anchor="middle">prefilter_dropped</text>
+            <text x="112.5" y="182" class="n-s" text-anchor="middle">eBPF dropped it</text>
+            <path d="M275.5,104 V136" class="n-e"/>
+            <rect x="203" y="136" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <path d="M212,137 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="275.5" y="167" class="n-t" text-anchor="middle">kernel_dropped</text>
+            <text x="275.5" y="182" class="n-s" text-anchor="middle">ring was full</text>
+            <path d="M438.5,104 V136" class="n-e"/>
+            <rect x="366" y="136" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <path d="M375,137 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="438.5" y="167" class="n-t" text-anchor="middle">capture_dropped</text>
+            <text x="438.5" y="182" class="n-s" text-anchor="middle">engine was slow</text>
+            <path d="M601.5,104 V136" class="n-e"/>
+            <rect x="529" y="136" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-key)" stroke="var(--accent-purple,#a855f7)"/>
+            <path d="M538,137 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="601.5" y="167" class="n-t" text-anchor="middle">engine_received</text>
+            <text x="601.5" y="182" class="n-s" text-anchor="middle">inspected</text>
+            <path d="M764.5,104 V136" class="n-e"/>
+            <rect x="692" y="136" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M701,137 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="764.5" y="167" class="n-t" text-anchor="middle">skipped_egress</text>
+            <text x="764.5" y="182" class="n-s" text-anchor="middle">already seen</text>
+            <path d="M927.5,104 V136" class="n-e"/>
+            <rect x="855" y="136" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M864,137 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="927.5" y="167" class="n-t" text-anchor="middle">in_flight</text>
+            <text x="927.5" y="182" class="n-s" text-anchor="middle">not resolved yet</text>
+            <text x="520" y="226" class="n-l" text-anchor="middle">appliance invariant &#8212; the six sum back to nic_received</text>
+            <path d="M601.5,202 V250" class="n-e"/>
+            <text x="601.5" y="242" class="n-l" text-anchor="middle">every packet the engine saw ends in exactly one of these</text>
+            <path d="M601.5,250 V272" stroke="var(--text-muted,#71839c)" stroke-width="1.4" fill="none" opacity=".85"/>
+            <path d="M112.5,272 H927.5" stroke="var(--text-muted,#71839c)" stroke-width="1.4" fill="none" opacity=".85"/>
+            <path d="M112.5,272 V306" class="n-e"/>
+            <rect x="40" y="306" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-good)" stroke="var(--accent-green,#10b981)"/>
+            <path d="M49,307 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="112.5" y="337" class="n-t" text-anchor="middle">inspected</text>
+            <text x="112.5" y="352" class="n-s" text-anchor="middle">allowed</text>
+            <path d="M275.5,272 V306" class="n-e"/>
+            <rect x="203" y="306" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-bad)" stroke="var(--accent-red,#ef4444)"/>
+            <path d="M212,307 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="275.5" y="337" class="n-t" text-anchor="middle">inspected</text>
+            <text x="275.5" y="352" class="n-s" text-anchor="middle">dropped</text>
+            <path d="M438.5,272 V306" class="n-e"/>
+            <rect x="366" y="306" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-bad)" stroke="var(--accent-red,#ef4444)"/>
+            <path d="M375,307 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="438.5" y="337" class="n-t" text-anchor="middle">inspected</text>
+            <text x="438.5" y="352" class="n-s" text-anchor="middle">rejected</text>
+            <path d="M601.5,272 V306" class="n-e"/>
+            <rect x="529" y="306" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-bad)" stroke="var(--accent-red,#ef4444)"/>
+            <path d="M538,307 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="601.5" y="337" class="n-t" text-anchor="middle">preinspect.</text>
+            <text x="601.5" y="352" class="n-s" text-anchor="middle">dropped</text>
+            <path d="M764.5,272 V306" class="n-e"/>
+            <rect x="692" y="306" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M701,307 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="764.5" y="337" class="n-t" text-anchor="middle">bypassed</text>
+            <text x="764.5" y="352" class="n-s" text-anchor="middle">by policy</text>
+            <path d="M927.5,272 V306" class="n-e"/>
+            <rect x="855" y="306" width="145" height="66" rx="9" class="n-b" fill="url(#f5-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <path d="M864,307 h127" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="927.5" y="337" class="n-t" text-anchor="middle">uninspected</text>
+            <text x="927.5" y="352" class="n-s" text-anchor="middle">forwarded</text>
+            <rect x="120" y="428" width="380" height="62" rx="9" class="n-b" fill="url(#f5-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <path d="M129,429 h362" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="310" y="457" class="n-t" text-anchor="middle">appliance: |delta| &#8804; tolerance</text>
+            <text x="310" y="472" class="n-s" text-anchor="middle">counters are sampled microseconds apart</text>
+            <rect x="580" y="428" width="380" height="62" rx="9" class="n-b" fill="url(#f5-g-good)" stroke="var(--accent-green,#10b981)"/>
+            <path d="M589,429 h362" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="770" y="457" class="n-t" text-anchor="middle">engine: delta must be 0</text>
+            <text x="770" y="472" class="n-s" text-anchor="middle">the engine counts its own packets</text>
+          </svg>
+          <figcaption style="margin-top:12px;color:var(--text-muted);font-size:0.86rem;text-align:center" data-ar="كل إطار أبلغت عنه البطاقة، محسوبًا. ثابت الجهاز يسمح بهامش أخذ العيّنات؛ وثابت المحرّك لا يسمح بشيء.">Every frame the interface reported, accounted for. The appliance invariant allows a sampling tolerance; the engine invariant does not.</figcaption>
+        </figure>
+        <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
+          <svg direction="ltr" viewBox="0 0 1040 430" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:1040px;display:block;margin:0 auto">
+            <title>Kernel fanout: both directions of a conversation reach the same worker</title>
+
+            <defs>
+              <linearGradient id="f4-g-box" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
+                <stop offset="1" stop-color="var(--bg-card,#131929)"/>
+              </linearGradient>
+              <linearGradient id="f4-g-key" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f4-g-good" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f4-g-bad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f4-g-warn" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
+                <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
+              </linearGradient>
+              <linearGradient id="f4-g-in" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
+              </linearGradient>
+              <filter id="f4-f-lift" x="-30%" y="-40%" width="160%" height="200%">
+                <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
+              </filter>
+              <marker id="f4-a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+                      markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
+              </marker>
+            </defs>
+            <style>
+              .n-t  { fill: var(--text-primary,#f8fafc); font-family: var(--font-sans,sans-serif);
+                      font-size: 12.5px; font-weight: 600; }
+              .n-s  { fill: var(--text-muted,#71839c); font-family: var(--font-sans,sans-serif); font-size: 10px; }
+              .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
+                      font-size: 10px; font-weight: 700; }
+              .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
+                      marker-end: url(#f4-a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+              .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f4-f-lift); }
+            </style>
+
+            <rect x="26" y="60" width="226" height="60" rx="9" class="n-b" fill="url(#f4-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+            <path d="M35,61 h208" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="139" y="88" class="n-t" text-anchor="middle">A:51000 &#8594; B:443</text>
+            <text x="139" y="103" class="n-s" text-anchor="middle">the request</text>
+            <rect x="26" y="150" width="226" height="60" rx="9" class="n-b" fill="url(#f4-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+            <path d="M35,151 h208" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="139" y="178" class="n-t" text-anchor="middle">B:443 &#8594; A:51000</text>
+            <text x="139" y="193" class="n-s" text-anchor="middle">the reply</text>
+            <rect x="316" y="92" width="200" height="86" rx="9" class="n-b" fill="url(#f4-g-key)" stroke="var(--accent-purple,#a855f7)"/>
+            <path d="M325,93 h182" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="416" y="133" class="n-t" text-anchor="middle">order the endpoints</text>
+            <text x="416" y="148" class="n-s" text-anchor="middle">lo = min(a,b), hi = max(a,b)</text>
+            <path d="M252,90 H284 V135 H316" class="n-e"/>
+            <path d="M252,180 H284 V135 H316" class="n-e"/>
+            <rect x="576" y="92" width="150" height="86" rx="9" class="n-b" fill="url(#f4-g-key)" stroke="var(--accent-purple,#a855f7)"/>
+            <path d="M585,93 h132" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="651" y="133" class="n-t" text-anchor="middle">mix()</text>
+            <text x="651" y="148" class="n-s" text-anchor="middle">one hash, both ways</text>
+            <path d="M516,135 H576" class="n-e"/>
+            <rect x="786" y="92" width="228" height="86" rx="9" class="n-b" fill="url(#f4-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M795,93 h210" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="900" y="133" class="n-t" text-anchor="middle">% worker_count</text>
+            <text x="900" y="148" class="n-s" text-anchor="middle">the kernel takes it modulo</text>
+            <path d="M726,135 H786" class="n-e"/>
+            <rect x="786" y="232" width="228" height="56" rx="9" class="n-b" fill="url(#f4-g-good)" stroke="var(--accent-green,#10b981)"/>
+            <path d="M795,233 h210" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="900" y="258" class="n-t" text-anchor="middle">worker 1</text>
+            <text x="900" y="273" class="n-s" text-anchor="middle">both packets land here</text>
+            <path d="M900,178 V232" class="n-e"/>
+            <text x="520" y="332" class="n-l" text-anchor="middle">Reassembling half a stream twice is worse than not inspecting it, so this is a correctness requirement, not a tuning choice.</text>
+            <rect x="26" y="300" width="480" height="76" rx="9" class="n-b" fill="url(#f4-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <path d="M35,301 h462" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="266" y="336" class="n-t" text-anchor="middle">cannot read L3/L4 &#8594; worker 0</text>
+            <text x="266" y="351" class="n-s" text-anchor="middle">a malformed or unknown frame is steered, never dropped</text>
+            <path d="M139,210 V300" class="n-e"/>
+          </svg>
+          <figcaption style="margin-top:12px;color:var(--text-muted);font-size:0.86rem;text-align:center" data-ar="تُرتَّب النهايتان قبل التجزئة، فيتطابق تجزئ الطلب وردّه ويصلان إلى العامل نفسه.">The kernel orders the two endpoints before hashing, so a request and its reply hash alike and reach the same worker.</figcaption>
+        </figure>
         <p data-ar="الإنتاجية التي تتجاوز الغيغابت بزمن استجابة بالميكروثانية تأتي من أمرين معًا: دفع الحركة المعروفة السوء إلى حجب eBPF داخل النواة قبل أن تكلّف مساحة المستخدم أي معالجة، وإبقاء كل ما ليس تمرير حزم — التسجيل وبحث conntrack وإعادة التحميل — خارج حلقة الالتقاط الساخنة الوحيدة تمامًا.">Gigabit-plus throughput with microsecond latency comes from two things working together: pushing already-known-bad traffic out to an in-kernel eBPF drop before it costs any user-space CPU time, and keeping everything that isn't packet forwarding — logging, conntrack lookups, reloads — off the single hot capture loop entirely.</p>
 
         <h3 class="sub-heading" data-ar="خرائط الحجب داخل النواة">In-kernel drop maps</h3>
@@ -4456,6 +4849,110 @@ alert tls any any -&gt; any any (msg:"CERT possible interception"; tls.cert_self
 
       <section id="file-inspection" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;34&lt;/span&gt; استخراج الملفات وبصماتها واستخبارات التهديد"><span class="num">34</span> File Extraction, Hashing &amp; Threat Intelligence</h2>
+        <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
+          <svg direction="ltr" viewBox="0 0 1040 480" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:1040px;display:block;margin:0 auto">
+            <title>File extraction, hashing and threat-intelligence lookup</title>
+
+            <defs>
+              <linearGradient id="f6-g-box" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
+                <stop offset="1" stop-color="var(--bg-card,#131929)"/>
+              </linearGradient>
+              <linearGradient id="f6-g-key" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f6-g-good" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f6-g-bad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
+                <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
+              </linearGradient>
+              <linearGradient id="f6-g-warn" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
+                <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
+              </linearGradient>
+              <linearGradient id="f6-g-in" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
+                <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
+              </linearGradient>
+              <filter id="f6-f-lift" x="-30%" y="-40%" width="160%" height="200%">
+                <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
+              </filter>
+              <marker id="f6-a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+                      markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
+              </marker>
+            </defs>
+            <style>
+              .n-t  { fill: var(--text-primary,#f8fafc); font-family: var(--font-sans,sans-serif);
+                      font-size: 12.5px; font-weight: 600; }
+              .n-s  { fill: var(--text-muted,#71839c); font-family: var(--font-sans,sans-serif); font-size: 10px; }
+              .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
+                      font-size: 10px; font-weight: 700; }
+              .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
+                      marker-end: url(#f6-a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+              .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f6-f-lift); }
+            </style>
+
+            <rect x="26" y="40" width="210" height="66" rx="9" class="n-b" fill="url(#f6-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+            <path d="M35,41 h192" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="131" y="71" class="n-t" text-anchor="middle">HTTP body</text>
+            <text x="131" y="86" class="n-s" text-anchor="middle">request or response</text>
+            <rect x="26" y="130" width="210" height="66" rx="9" class="n-b" fill="url(#f6-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+            <path d="M35,131 h192" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="131" y="161" class="n-t" text-anchor="middle">FTP-DATA</text>
+            <text x="131" y="176" class="n-s" text-anchor="middle">the transfer channel</text>
+            <rect x="300" y="82" width="210" height="72" rx="9" class="n-b" fill="url(#f6-g-key)" stroke="var(--accent-purple,#a855f7)"/>
+            <path d="M309,83 h192" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="405" y="116" class="n-t" text-anchor="middle">extracted in memory</text>
+            <text x="405" y="131" class="n-s" text-anchor="middle">nothing is written to disk</text>
+            <path d="M236,73 H268 V118 H300" class="n-e"/>
+            <path d="M236,163 H268 V118 H300" class="n-e"/>
+            <rect x="574" y="82" width="210" height="72" rx="9" class="n-b" fill="url(#f6-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M583,83 h192" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="679" y="116" class="n-t" text-anchor="middle">magic bytes</text>
+            <text x="679" y="131" class="n-s" text-anchor="middle">and the declared extension</text>
+            <path d="M510,118 H574" class="n-e"/>
+            <rect x="848" y="24" width="166" height="52" rx="9" class="n-b" fill="url(#f6-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M857,25 h148" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="931" y="54.5" class="n-t" text-anchor="middle">MD5</text>
+            <rect x="848" y="92" width="166" height="52" rx="9" class="n-b" fill="url(#f6-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M857,93 h148" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="931" y="122.5" class="n-t" text-anchor="middle">SHA-1</text>
+            <rect x="848" y="160" width="166" height="52" rx="9" class="n-b" fill="url(#f6-g-box)" stroke="var(--border-color,#232d42)"/>
+            <path d="M857,161 h148" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="931" y="190.5" class="n-t" text-anchor="middle">SHA-256</text>
+            <path d="M816,50 V186" stroke="var(--text-muted,#71839c)" stroke-width="1.4" fill="none" opacity=".85"/>
+            <path d="M784,118 H816" class="n-e"/>
+            <path d="M816,50 H848" class="n-e"/>
+            <path d="M816,118 H848" class="n-e"/>
+            <path d="M816,186 H848" class="n-e"/>
+            <rect x="574" y="266" width="440" height="72" rx="9" class="n-b" fill="url(#f6-g-key)" stroke="var(--accent-purple,#a855f7)"/>
+            <path d="M583,267 h422" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="794" y="300" class="n-t" text-anchor="middle">file-intelligence dataset</text>
+            <text x="794" y="315" class="n-s" text-anchor="middle">normalised hashes, binary search</text>
+            <path d="M931,212 V266" class="n-e"/>
+            <polygon points="400,256 495,302 400,348 305,302" class="n-b" fill="url(#f6-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+            <text x="400" y="306.5" class="n-t" text-anchor="middle">known bad?</text>
+            <path d="M574,302 H495" class="n-e"/>
+            <rect x="60" y="382" width="230" height="62" rx="9" class="n-b" fill="url(#f6-g-bad)" stroke="var(--accent-red,#ef4444)"/>
+            <path d="M69,383 h212" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="175" y="411" class="n-t" text-anchor="middle">alert and drop</text>
+            <text x="175" y="426" class="n-s" text-anchor="middle">the flow is enforced on</text>
+            <rect x="340" y="382" width="230" height="62" rx="9" class="n-b" fill="url(#f6-g-good)" stroke="var(--accent-green,#10b981)"/>
+            <path d="M349,383 h212" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+            <text x="455" y="411" class="n-t" text-anchor="middle">allow</text>
+            <text x="455" y="426" class="n-s" text-anchor="middle">and keep hashing</text>
+            <path d="M305,302 H175 V382" class="n-e"/>
+            <text x="213" y="294" class="n-l" text-anchor="middle">yes</text>
+            <path d="M400,348 V382" class="n-e"/>
+            <text x="424" y="368" class="n-l" text-anchor="middle">no</text>
+          </svg>
+          <figcaption style="margin-top:12px;color:var(--text-muted);font-size:0.86rem;text-align:center" data-ar="يُعاد بناء الملف في الذاكرة، ويُصنَّف، وتُحسب له ثلاث بصمات، ثم يُطابَق بمجموعة الاستخبارات. ولا شيء يُكتب على القرص.">A file is reconstructed in memory, classified, hashed three ways, and matched against the intelligence set. Nothing touches the disk.</figcaption>
+        </figure>
         <p data-ar="سايفورن يعيد تجميع الملفات ويحسب بصماتها ويصنّفها ويستطيع أرشفتها وهي تعبر الجسر، ويفحص الملفات المكتملة على حدة مقابل تغذية تهديد سريعة ببصمات مطابِقة تمامًا.">CyphornIPS reassembles, hashes, classifies, and can archive files as they cross the bridge, and separately checks completed files against a fast exact-hash threat feed.</p>
 
         <h3 class="sub-heading" data-ar="ما الذي يستخرج الملفات فعلًا">What actually extracts files</h3>
@@ -4761,34 +5258,34 @@ drop  outbound US ANY</code></pre>
       <title>Signed update pipeline: Ed25519 verifies the manifest, SHA-256 binds each artifact</title>
 
       <defs>
-        <linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f7-g-box" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
           <stop offset="1" stop-color="var(--bg-card,#131929)"/>
         </linearGradient>
-        <linearGradient id="g-key" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f7-g-key" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
           <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-good" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f7-g-good" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
           <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-bad" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f7-g-bad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
           <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
         </linearGradient>
-        <linearGradient id="g-warn" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f7-g-warn" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
           <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
         </linearGradient>
-        <linearGradient id="g-in" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="f7-g-in" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
           <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
         </linearGradient>
-        <filter id="f-lift" x="-30%" y="-40%" width="160%" height="200%">
+        <filter id="f7-f-lift" x="-30%" y="-40%" width="160%" height="200%">
           <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
         </filter>
-        <marker id="a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+        <marker id="f7-a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
                 markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
           <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
         </marker>
@@ -4800,58 +5297,58 @@ drop  outbound US ANY</code></pre>
         .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
                 font-size: 10px; font-weight: 700; }
         .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
-                marker-end: url(#a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
-        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f-lift); }
+                marker-end: url(#f7-a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f7-f-lift); }
       </style>
 
-      <rect x="59" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <rect x="59" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
       <path d="M68,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="153" y="46.5" class="n-t" text-anchor="middle">Provider</text>
-      <rect x="277" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="277" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M286,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="371" y="46.5" class="n-t" text-anchor="middle">Manifest</text>
-      <rect x="495" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-key)" stroke="var(--accent-purple,#a855f7)"/>
+      <rect x="495" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-key)" stroke="var(--accent-purple,#a855f7)"/>
       <path d="M504,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="589" y="40" class="n-t" text-anchor="middle">Ed25519</text>
       <text x="589" y="55" class="n-s" text-anchor="middle">manifest signature</text>
-      <rect x="713" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="713" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M722,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="807" y="46.5" class="n-t" text-anchor="middle">Version Gate</text>
       <path d="M247,42 H274" class="n-e"/>
       <path d="M465,42 H492" class="n-e"/>
       <path d="M683,42 H710" class="n-e"/>
-      <rect x="59" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="59" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M68,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="153" y="164.5" class="n-t" text-anchor="middle">Staging</text>
-      <rect x="277" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-key)" stroke="var(--accent-purple,#a855f7)"/>
+      <rect x="277" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-key)" stroke="var(--accent-purple,#a855f7)"/>
       <path d="M286,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="371" y="158" class="n-t" text-anchor="middle">SHA-256</text>
       <text x="371" y="173" class="n-s" text-anchor="middle">artifact digest</text>
-      <rect x="495" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="495" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M504,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="589" y="164.5" class="n-t" text-anchor="middle">Sandbox Validation</text>
-      <rect x="713" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="713" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M722,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="807" y="164.5" class="n-t" text-anchor="middle">Backup</text>
       <path d="M713,160 H686" class="n-e"/>
       <path d="M495,160 H468" class="n-e"/>
       <path d="M277,160 H250" class="n-e"/>
       <path d="M901,42 H927 V160 H901" class="n-e"/>
-      <rect x="277" y="252" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="277" y="252" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M286,253 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="371" y="282.5" class="n-t" text-anchor="middle">Atomic Install</text>
-      <rect x="495" y="252" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <rect x="495" y="252" width="188" height="52" rx="9" class="n-b" fill="url(#f7-g-box)" stroke="var(--border-color,#232d42)"/>
       <path d="M504,253 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="589" y="282.5" class="n-t" text-anchor="middle">Hot Reload</text>
       <path d="M465,278 H492" class="n-e"/>
       <path d="M59,160 H33 V278 H277" class="n-e"/>
       <path d="M589,304 V321" class="n-e"/>
-      <polygon points="589,320 664,348 589,376 514,348" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <polygon points="589,320 664,348 589,376 514,348" class="n-b" fill="url(#f7-g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
       <text x="589" y="352.5" class="n-t" text-anchor="middle">Success?</text>
-      <rect x="126" y="420" width="220" height="46" rx="9" class="n-b" fill="url(#g-bad)" stroke="var(--accent-red,#ef4444)"/>
+      <rect x="126" y="420" width="220" height="46" rx="9" class="n-b" fill="url(#f7-g-bad)" stroke="var(--accent-red,#ef4444)"/>
       <path d="M135,421 h202" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="236" y="447.5" class="n-t" text-anchor="middle">Rollback</text>
-      <rect x="614" y="420" width="220" height="46" rx="9" class="n-b" fill="url(#g-good)" stroke="var(--accent-green,#10b981)"/>
+      <rect x="614" y="420" width="220" height="46" rx="9" class="n-b" fill="url(#f7-g-good)" stroke="var(--accent-green,#10b981)"/>
       <path d="M623,421 h202" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
       <text x="724" y="447.5" class="n-t" text-anchor="middle">New Generation Live</text>
       <path d="M514,348 H236 V417" class="n-e"/>
@@ -5439,12 +5936,40 @@ cyphornctl logs engine -n 200</code></pre>
     resultNote.style.cssText = 'display:none;margin:0 0 20px;padding:12px 16px;border:1px solid var(--border-color);border-radius:8px;background:var(--bg-card);color:var(--text-secondary);font-size:0.92rem;';
     if (mainEl) mainEl.insertBefore(resultNote, mainEl.firstChild);
 
+    /* Both languages are searchable whichever one is displayed.
+     *
+     * A section's Arabic text lives in data-ar attributes and its English in
+     * data-en; innerText only ever holds the one currently rendered. So a
+     * reader with the page in Arabic could not find a section by the English
+     * term printed in it -- and the assistant-facing point of this manual is
+     * that a term should be findable however it was typed. The haystack is
+     * built once per section and cached, because reading innerText off
+     * forty-five sections on every keystroke forces a layout each time. */
+    const haystacks = new WeakMap();
+    function haystack(sec) {
+      let s = haystacks.get(sec);
+      if (s === undefined) {
+        const parts = [sec.innerText];
+        sec.querySelectorAll('[data-ar]').forEach(n => {
+          const ar = n.getAttribute('data-ar');
+          const en = n.getAttribute('data-en');
+          if (ar) parts.push(ar);
+          if (en) parts.push(en);
+        });
+        /* Tags inside the attribute values would otherwise match: a search
+           for "code" must not hit every <code> element in the manual. */
+        s = parts.join(' ').replace(/<[^>]*>/g, ' ').toLowerCase();
+        haystacks.set(sec, s);
+      }
+      return s;
+    }
+
     function runSearch(raw) {
       const query = (raw || '').toLowerCase().trim();
       let shown = 0;
 
       sections.forEach(sec => {
-        const hit = !query || sec.innerText.toLowerCase().includes(query);
+        const hit = !query || haystack(sec).includes(query);
         sec.style.display = hit ? '' : 'none';
         if (hit) shown++;
 
@@ -5452,6 +5977,35 @@ cyphornctl logs engine -n 200</code></pre>
           const li = a.closest('li');
           if (li) li.style.display = hit ? '' : 'none';
         });
+      });
+
+      /* A filtered sidebar used to keep the headers of groups whose every
+         entry had just been hidden, so a search for one term left a column
+         of folders pointing at nothing -- and if the one group that did
+         match happened to be collapsed, the sidebar looked empty while the
+         page showed results. Both are handled here: a group with no visible
+         entry is removed, and a group with one is opened for as long as the
+         filter is on, then put back the way the reader left it. */
+      document.querySelectorAll('.sidebar-group').forEach(group => {
+        const folder = group.querySelector('.tree-folder');
+        const any = [].slice.call(group.querySelectorAll('.sidebar-nav li'))
+                      .some(li => li.style.display !== 'none');
+        group.setAttribute('data-empty', query && !any ? 'true' : 'false');
+        if (!folder) return;
+        /* aria-expanded is set directly rather than through the folder's own
+           click handler, because that handler persists the state: a search
+           that opened a group would have rewritten what the reader had
+           deliberately collapsed, and the next visit would show it open. A
+           filter is temporary and leaves no trace. */
+        if (query && any) {
+          if (folder.getAttribute('aria-expanded') === 'false') {
+            group.setAttribute('data-was-collapsed', '1');
+            folder.setAttribute('aria-expanded', 'true');
+          }
+        } else if (!query && group.hasAttribute('data-was-collapsed')) {
+          group.removeAttribute('data-was-collapsed');
+          folder.setAttribute('aria-expanded', 'false');
+        }
       });
 
       if (!query) {
@@ -5483,18 +6037,100 @@ cyphornctl logs engine -n 200</code></pre>
       }
     });
 
-    // Scroll-spy for active sidebar link
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (pageYOffset >= sectionTop) current = section.getAttribute('id');
-      });
-      document.querySelectorAll('.sidebar-nav a').forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
-      });
+    /* ---- scroll-spy -----------------------------------------------------
+     *
+     * Three things the first version got wrong, all of which only show up on
+     * a manual this long.
+     *
+     * It re-queried all forty-five links and cleared the class off every one
+     * of them on every scroll event. The list never changes, so it is now
+     * looked up once and indexed by href, and only the two links that
+     * actually change are touched.
+     *
+     * It ran synchronously in the scroll handler. Work done there lands
+     * inside the frame the browser is trying to paint; it is now deferred to
+     * requestAnimationFrame and coalesced, so a burst of scroll events costs
+     * one update rather than forty.
+     *
+     * And it marked a link the reader could not see. With forty-five entries
+     * the sidebar scrolls independently of the page, so the current section
+     * was routinely highlighted below the fold -- and if its group happened
+     * to be collapsed, it was not rendered at all. The group is now opened
+     * and the entry brought into view, but only when it is genuinely outside
+     * the sidebar's viewport, and never while the reader is scrolling the
+     * sidebar themselves: stealing the scroll position from someone who is
+     * looking for something else is worse than not tracking at all. */
+    /* `sidebar` in the drawer block above is scoped to its own IIFE. */
+    const docAside = document.getElementById('docSidebar');
+    /* A thin line across the top of the header. The manual is long enough
+       that "how much is left" is a real question, and a scrollbar shared
+       with a fixed sidebar does not answer it. */
+    const progressBar = document.getElementById('readProgress');
+    const spyLinks = new Map();
+    document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(a => {
+      spyLinks.set(a.getAttribute('href').slice(1), a);
     });
+    const sectionList = [].slice.call(sections);
+    let activeId = null;
+    let spyQueued = false;
+    let sidebarTouchedAt = 0;
+
+    if (docAside) {
+      ['wheel', 'touchstart', 'pointerdown'].forEach(ev => {
+        docAside.addEventListener(ev, () => { sidebarTouchedAt = Date.now(); }, { passive: true });
+      });
+    }
+
+    function revealInSidebar(link) {
+      if (!docAside) return;
+      if (Date.now() - sidebarTouchedAt < 2500) return;
+      /* If the reader collapsed this group, leave it collapsed. Scroll-spy
+         is a convenience; the collapse was a decision, and re-opening it on
+         every scroll past the section would be impossible to keep shut. */
+      const group = link.closest('.sidebar-group');
+      const folder = group && group.querySelector('.tree-folder');
+      if (folder && folder.getAttribute('aria-expanded') === 'false') return;
+      /* getBoundingClientRect, not offsetTop: the entry sits inside a group
+         and a branch, so its offset parent is not the sidebar. */
+      const box = link.getBoundingClientRect();
+      const frame = docAside.getBoundingClientRect();
+      if (box.top >= frame.top + 8 && box.bottom <= frame.bottom - 8) return;
+      const delta = box.top - (frame.top + frame.height / 2 - box.height / 2);
+      docAside.scrollBy({ top: delta, behavior: 'smooth' });
+    }
+
+    function updateSpy() {
+      spyQueued = false;
+      let current = '';
+      for (let i = 0; i < sectionList.length; i++) {
+        const sec = sectionList[i];
+        if (sec.style.display === 'none') continue;   /* filtered out by search */
+        if (window.pageYOffset >= sec.offsetTop - 120) current = sec.id;
+      }
+      if (current === activeId) return;
+      const prev = activeId ? spyLinks.get(activeId) : null;
+      if (prev) prev.classList.remove('active');
+      activeId = current;
+      const next = current ? spyLinks.get(current) : null;
+      if (next) {
+        next.classList.add('active');
+        revealInSidebar(next);
+      }
+      if (progressBar) {
+        const doc = document.documentElement;
+        const span = doc.scrollHeight - window.innerHeight;
+        progressBar.style.transform = 'scaleX(' +
+          (span > 0 ? Math.min(1, Math.max(0, window.pageYOffset / span)) : 0) + ')';
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      if (spyQueued) return;
+      spyQueued = true;
+      requestAnimationFrame(updateSpy);
+    }, { passive: true });
+    window.addEventListener('resize', () => { activeId = null; updateSpy(); }, { passive: true });
+    updateSpy();
 
     /* ---- folder-tree sidebar ------------------------------------------
      * Collapse state is a per-reader convenience, so it lives in

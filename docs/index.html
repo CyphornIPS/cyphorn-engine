@@ -23,6 +23,13 @@
       --accent-purple: #a855f7;
       --code-bg: #070a10;
       --sidebar-width: 300px;
+      /* The reading column, and how much of a wide screen it is allowed to
+         use. It was a flat 1240px, so a 32-inch display showed exactly the
+         same page as a laptop with the rest of the glass left blank. It
+         steps up instead, and the prose inside it keeps its own measure so
+         growing the column widens the tables, code and diagrams rather than
+         stretching sentences to an unreadable length. */
+      --content-max: 1240px;
       --header-height: 64px;
       --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -147,8 +154,6 @@
        is not prose. */
     html[lang="ar"] body { direction: rtl; text-align: right; }
     html[lang="ar"] .sidebar { right: 0; left: auto; border-left: 1px solid var(--border-color); border-right: none; }
-    html[lang="ar"] main,
-    html[lang="ar"] footer.doc-footer { margin-right: var(--sidebar-width); margin-left: 0; }
     html[lang="ar"] .sidebar-sub { margin: 4px 14px 6px 0; padding-right: 10px; padding-left: 0;
                                    border-right: 1px solid var(--border-color); border-left: none; }
     html[lang="ar"] ul, html[lang="ar"] ol { padding-right: 22px; padding-left: 0; }
@@ -163,10 +168,6 @@
       display: inline-block; direction: ltr; text-align: left;
     }
 
-    @media (max-width: 900px) {
-      html[lang="ar"] main,
-      html[lang="ar"] footer.doc-footer { margin-right: 0; }
-    }
 
     .sidebar-sub {
       list-style: none;
@@ -268,9 +269,13 @@
     :root:not([data-theme="light"]) .icon-moon { display: none; }
     :root:not([data-theme="light"]) .icon-sun { display: block; }
 
+    @media (min-width: 1700px) { :root { --content-max: 1480px; } }
+    @media (min-width: 2100px) { :root { --content-max: 1720px; --sidebar-width: 340px; } }
+    @media (min-width: 3000px) { :root { --content-max: 2000px; --sidebar-width: 360px; } }
+
     /* Layout */
     .app-container {
-      display: flex;
+      display: block;
       margin-top: var(--header-height);
       min-height: calc(100vh - var(--header-height));
     }
@@ -520,12 +525,31 @@ html[lang="ar"] td, html[lang="ar"] th { line-height: 1.75; }
     .sidebar-nav.sub-list li a { font-size: 0.78rem; color: var(--text-muted); }
 
     /* Main Content Area */
+    /* margin-inline-start, not margin-left: the Arabic build used to restate
+       this rule with the sides swapped, which is two places to keep in step
+       and one of them was always going to drift.
+
+       The max() clears the sidebar on a normal screen and centres the column
+       once the screen is wide enough that half the leftover exceeds the
+       sidebar -- so the spare glass on a very wide display is split evenly
+       instead of being stranded on one side. */
     main.content {
-      margin-left: var(--sidebar-width);
-      flex: 1;
+      margin-inline-start: max(var(--sidebar-width), calc((100% - var(--content-max)) / 2));
+      margin-inline-end: auto;
       padding: 40px 56px 120px 56px;
-      max-width: 1240px;
+      max-width: var(--content-max);
       min-width: 0;
+    }
+
+    /* Prose keeps a measure even when the column does not. A line of text
+       1,900px long is worse to read than one 900px long, but a table with
+       nine columns is better. */
+    main.content > section > p,
+    main.content > section > ul,
+    main.content > section > ol,
+    main.content > p {
+      max-width: min(100%, 105ch);
+      margin-inline-end: auto;
     }
 
     /* Typography */
@@ -674,7 +698,9 @@ html[lang="ar"] td, html[lang="ar"] th { line-height: 1.75; }
     footer.doc-footer {
       border-top: 1px solid var(--border-color);
       padding: 32px 56px;
-      margin-left: var(--sidebar-width);
+      margin-inline-start: max(var(--sidebar-width), calc((100% - var(--content-max)) / 2));
+      margin-inline-end: auto;
+      max-width: var(--content-max);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -687,10 +713,17 @@ html[lang="ar"] td, html[lang="ar"] th { line-height: 1.75; }
 
     @media (max-width: 1024px) {
       .menu-toggle { display: flex; }
+      /* The drawer hides by sliding out through the edge it is anchored to.
+         Under html[lang="ar"] the sidebar is anchored to the RIGHT, so
+         translateX(-100%) did not hide it -- it slid the panel one width
+         leftwards, on top of the text, where it reads as a blank column over
+         the content. It has to leave through its own side. */
       aside.sidebar { transform: translateX(-100%); transition: transform 0.2s ease; box-shadow: 8px 0 24px rgba(0,0,0,0.3); }
       aside.sidebar.open { transform: translateX(0); }
-      main.content { margin-left: 0; padding: 26px 20px; }
-      footer.doc-footer { margin-left: 0; padding: 24px 20px; }
+      html[lang="ar"] aside.sidebar { transform: translateX(100%); box-shadow: -8px 0 24px rgba(0,0,0,0.3); }
+      html[lang="ar"] aside.sidebar.open { transform: translateX(0); }
+      main.content { margin-inline-start: 0; padding: 26px 20px; }
+      footer.doc-footer { margin-inline-start: 0; padding: 24px 20px; }
       .nav-search { display: none; }
       .brand-text span { display: none; }
     }

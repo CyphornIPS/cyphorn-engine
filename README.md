@@ -155,6 +155,67 @@ When it does not balance, health says `FAILED` and `cyphornctl status` prints th
 | **Fail mode** | `closed` or `open`, applied even after SIGKILL or power loss |
 | **Self-diagnosis** | `cyphornctl diagnose` works *while the engine is down*, and every finding carries the command that fixes it |
 
+### 🔻 What the engine inspects vs. what the shipped rules cover
+
+> [!IMPORTANT]
+> **"Does CyphornIPS parse this protocol?"** and **"do the shipped rules inspect
+> it?"** are two different questions. Read the table above as the first one.
+
+The engine parses eleven protocols and exposes their fields as rule keywords.
+The rules that ship with it are **Emerging Threats Open** — written to run on
+several engines, so they lean on generic `content` matching rather than on one
+engine's own keywords. Some of what CyphornIPS parses well is therefore not
+something the shipped rules make use of:
+
+| Protocol | Engine parses | Rule keywords | Shipped rules |
+|---|---|---|---|
+| **HTTP** | ✅ | 39 — method, uri, host, headers, bodies | **3,348** |
+| **DNS** | ✅ | `dns`, `dns.query` | **3,331** |
+| **TLS** | ✅ | 18 — sni, certificate fields and verdicts | **2,167** |
+| **JA3** | ✅ | `ja3.hash` | **227** |
+| **IKE** | ✅ | `ike` | 244 |
+| **QUIC** | ✅ Initial ClientHello | `quic` | 24 |
+| **ICMP** | ✅ | `icmp` | 2 |
+| **SMTP** | ✅ fully — 645 lines | 10 — `smtp`, `email.*` | **3** ← widest gap |
+| **FTP** | ✅ | `ftp` | **0** |
+| **SSH** | identification only | `ssh` | **0** |
+
+Across 11,901 shipped rules: **7,039** uses of `http.*` keywords, **3,327** of
+`dns.query`, **2,418** of `tls.*` — and **ten** of `email.*`.
+
+**Worked example — SMTP.** The parser is complete and wired into the inspection
+path: `helo`, `mail_from`, `rcpt_to`, headers, MIME parts, URL count. The twelve
+shipped rules that mention SMTP are all generic `content` matches; none uses
+`email.*`. The gap is in the rule set, not the engine, and you close it yourself:
+
+```bash
+sudo tee /etc/cyphornips/rules/local/email.rules >/dev/null <<'EOF'
+alert smtp any any -> any any (msg:"CYPHORN Invoice lure with archive link"; email.subject; content:"invoice"; nocase; email.url; content:".zip"; nocase; classtype:social-engineering; sid:9100001; rev:1;)
+alert smtp any any -> any any (msg:"CYPHORN Display-name brand mismatch"; email.from; content:"paypal"; nocase; classtype:phishing; sid:9100002; rev:1;)
+alert smtp any any -> any any (msg:"CYPHORN Executable attachment over SMTP"; file.name; content:".exe"; nocase; classtype:suspicious-filename-detect; sid:9100003; rev:1;)
+EOF
+
+cyphornctl reload rules
+cyphornctl status | grep -i rules    # the count must go UP by 3
+cyphornctl logs rules -n 20          # any rule refused, and why
+```
+
+> [!WARNING]
+> **One rule, one line.** CyphornIPS reads a rule file line by line and does
+> **not** join lines ending in `\`. A rule split across lines the way Suricata
+> documentation often shows it is refused with `options are not closed by ')'`.
+>
+> And a rule that does not parse **does not stop the reload** — it is refused
+> and the rest continue. If the rule count does not go up by as many rules as
+> you added, one of them was not loaded; `cyphornctl logs rules` names it and
+> says why.
+
+**In practice:** web, DNS and TLS are densely covered out of the box, which is
+where most attack traffic is. Email and file transfer need rules you write. The
+threat-intelligence feeds below work independently of all of this — domain,
+certificate, file-hash and JA3 blocking does not go through the ET rules, so it
+covers mail too when a message carries a link to a listed host.
+
 ### 🔻 Threat intelligence
 
 Rebuilt **daily** by `cyphornips-feeds.timer` from public sources. Orders of

@@ -699,53 +699,54 @@ html[lang="ar"] td, html[lang="ar"] th { line-height: 1.75; }
       <div class="sidebar-group">
         <button type="button" class="tree-folder" aria-expanded="true"><span class="tree-caret" aria-hidden="true"></span><span class="tree-icon" aria-hidden="true">🧩</span><span class="tree-label" data-ar="كتابة القواعد">Writing Rules</span></button>
         <ul class="sidebar-nav">
-          <li><a href="#rule-language" data-ar="&lt;span class=&quot;num&quot;&gt;23&lt;/span&gt; أساسيات لغة القواعد">Rule Language Basics</a></li>
-          <li><a href="#ip-cidr-rules" data-ar="&lt;span class=&quot;num&quot;&gt;24&lt;/span&gt; قواعد العناوين والنطاقات والموقع الجغرافي">IP, CIDR &amp; GeoIP Rules</a></li>
-          <li><a href="#transport-rules" data-ar="&lt;span class=&quot;num&quot;&gt;25&lt;/span&gt; قواعد TCP وUDP وICMP">TCP, UDP &amp; ICMP Rules</a></li>
-          <li><a href="#payload-rules" data-ar="&lt;span class=&quot;num&quot;&gt;26&lt;/span&gt; مطابقة الحمولة والقوائم وFlowbits">Payload Matching, Datasets &amp; Flowbits</a></li>
-          <li><a href="#pcre-rules" data-ar="&lt;span class=&quot;num&quot;&gt;27&lt;/span&gt; التعابير النمطية (pcre)">Regular expressions (pcre)</a></li>
-          <li><a href="#rule-cost" data-ar="&lt;span class=&quot;num&quot;&gt;28&lt;/span&gt; ما تكلّفه القواعد">What rules cost</a></li>
-          <li><a href="#rule-ref" data-ar="&lt;span class=&quot;num&quot;&gt;29&lt;/span&gt; مرجع كلمات القواعد">Rule Keyword Reference</a></li>
+          <li><a href="#engine-vs-rules" data-ar="&lt;span class=&quot;num&quot;&gt;23&lt;/span&gt; المحرّك مقابل القواعد المشحونة">Engine vs. Shipped Rules</a></li>
+          <li><a href="#rule-language" data-ar="&lt;span class=&quot;num&quot;&gt;24&lt;/span&gt; أساسيات لغة القواعد">Rule Language Basics</a></li>
+          <li><a href="#ip-cidr-rules" data-ar="&lt;span class=&quot;num&quot;&gt;25&lt;/span&gt; قواعد العناوين والنطاقات والموقع الجغرافي">IP, CIDR &amp; GeoIP Rules</a></li>
+          <li><a href="#transport-rules" data-ar="&lt;span class=&quot;num&quot;&gt;26&lt;/span&gt; قواعد TCP وUDP وICMP">TCP, UDP &amp; ICMP Rules</a></li>
+          <li><a href="#payload-rules" data-ar="&lt;span class=&quot;num&quot;&gt;27&lt;/span&gt; مطابقة الحمولة والقوائم وFlowbits">Payload Matching, Datasets &amp; Flowbits</a></li>
+          <li><a href="#pcre-rules" data-ar="&lt;span class=&quot;num&quot;&gt;28&lt;/span&gt; التعابير النمطية (pcre)">Regular expressions (pcre)</a></li>
+          <li><a href="#rule-cost" data-ar="&lt;span class=&quot;num&quot;&gt;29&lt;/span&gt; ما تكلّفه القواعد">What rules cost</a></li>
+          <li><a href="#rule-ref" data-ar="&lt;span class=&quot;num&quot;&gt;30&lt;/span&gt; مرجع كلمات القواعد">Rule Keyword Reference</a></li>
         </ul>
       </div>
       <div class="sidebar-group">
         <button type="button" class="tree-folder" aria-expanded="true"><span class="tree-caret" aria-hidden="true"></span><span class="tree-icon" aria-hidden="true">🔬</span><span class="tree-label" data-ar="الفحص حسب البروتوكول">Protocol Inspection</span></button>
         <ul class="sidebar-nav">
-          <li><a href="#http-inspection" data-ar="&lt;span class=&quot;num&quot;&gt;30&lt;/span&gt; فحص HTTP">HTTP Inspection</a></li>
-          <li><a href="#tls-inspection" data-ar="&lt;span class=&quot;num&quot;&gt;31&lt;/span&gt; TLS وJA3 وQUIC">TLS, JA3 &amp; QUIC</a></li>
-          <li><a href="#cert-hygiene" data-ar="&lt;span class=&quot;num&quot;&gt;32&lt;/span&gt; فحص صحّة الشهادات">Certificate hygiene</a></li>
-          <li><a href="#file-inspection" data-ar="&lt;span class=&quot;num&quot;&gt;33&lt;/span&gt; استخراج الملفات وبصماتها واستخبارات التهديد">File Extraction, Hashing &amp; Threat Intelligence</a></li>
+          <li><a href="#http-inspection" data-ar="&lt;span class=&quot;num&quot;&gt;31&lt;/span&gt; فحص HTTP">HTTP Inspection</a></li>
+          <li><a href="#tls-inspection" data-ar="&lt;span class=&quot;num&quot;&gt;32&lt;/span&gt; TLS وJA3 وQUIC">TLS, JA3 &amp; QUIC</a></li>
+          <li><a href="#cert-hygiene" data-ar="&lt;span class=&quot;num&quot;&gt;33&lt;/span&gt; فحص صحّة الشهادات">Certificate hygiene</a></li>
+          <li><a href="#file-inspection" data-ar="&lt;span class=&quot;num&quot;&gt;34&lt;/span&gt; استخراج الملفات وبصماتها واستخبارات التهديد">File Extraction, Hashing &amp; Threat Intelligence</a></li>
         </ul>
       </div>
       <div class="sidebar-group">
         <button type="button" class="tree-folder" aria-expanded="true"><span class="tree-caret" aria-hidden="true"></span><span class="tree-icon" aria-hidden="true">🛡️</span><span class="tree-label" data-ar="السياسات">Policy</span></button>
         <ul class="sidebar-nav">
-          <li><a href="#domain-policy" data-ar="&lt;span class=&quot;num&quot;&gt;34&lt;/span&gt; سياسة النطاقات و«لماذا حُجبت؟»">Domain Policy &amp; "Why Was I Blocked?"</a></li>
-          <li><a href="#country-policy" data-ar="&lt;span class=&quot;num&quot;&gt;35&lt;/span&gt; سياسة الدول (السياج الجغرافي)">Country Policy (Geo-Fencing)</a></li>
+          <li><a href="#domain-policy" data-ar="&lt;span class=&quot;num&quot;&gt;35&lt;/span&gt; سياسة النطاقات و«لماذا حُجبت؟»">Domain Policy &amp; "Why Was I Blocked?"</a></li>
+          <li><a href="#country-policy" data-ar="&lt;span class=&quot;num&quot;&gt;36&lt;/span&gt; سياسة الدول (السياج الجغرافي)">Country Policy (Geo-Fencing)</a></li>
         </ul>
       </div>
       <div class="sidebar-group">
         <button type="button" class="tree-folder" aria-expanded="true"><span class="tree-caret" aria-hidden="true"></span><span class="tree-icon" aria-hidden="true">🔐</span><span class="tree-label" data-ar="التحديث والأمان">Updates & Security</span></button>
         <ul class="sidebar-nav">
-          <li><a href="#update-engine" data-ar="&lt;span class=&quot;num&quot;&gt;36&lt;/span&gt; التحديثات والتوقيع وملكية القواعد">Updates, Signing &amp; Rule Ownership</a></li>
-          <li><a href="#security" data-ar="&lt;span class=&quot;num&quot;&gt;37&lt;/span&gt; التحصين الأمني">Security Hardening</a></li>
+          <li><a href="#update-engine" data-ar="&lt;span class=&quot;num&quot;&gt;37&lt;/span&gt; التحديثات والتوقيع وملكية القواعد">Updates, Signing &amp; Rule Ownership</a></li>
+          <li><a href="#security" data-ar="&lt;span class=&quot;num&quot;&gt;38&lt;/span&gt; التحصين الأمني">Security Hardening</a></li>
         </ul>
       </div>
       <div class="sidebar-group">
         <button type="button" class="tree-folder" aria-expanded="true"><span class="tree-caret" aria-hidden="true"></span><span class="tree-icon" aria-hidden="true">🧪</span><span class="tree-label" data-ar="التحقّق">Verification</span></button>
         <ul class="sidebar-nav">
-          <li><a href="#testing" data-ar="&lt;span class=&quot;num&quot;&gt;38&lt;/span&gt; الاختبار والتحقّق">Testing &amp; Validation</a></li>
+          <li><a href="#testing" data-ar="&lt;span class=&quot;num&quot;&gt;39&lt;/span&gt; الاختبار والتحقّق">Testing &amp; Validation</a></li>
         </ul>
       </div>
       <div class="sidebar-group">
         <button type="button" class="tree-folder" aria-expanded="true"><span class="tree-caret" aria-hidden="true"></span><span class="tree-icon" aria-hidden="true">📚</span><span class="tree-label" data-ar="المرجع">Reference</span></button>
         <ul class="sidebar-nav">
-          <li><a href="#faq" data-ar="&lt;span class=&quot;num&quot;&gt;39&lt;/span&gt; أسئلة متكرّرة">Frequently Asked Questions</a></li>
-          <li><a href="#glossary" data-ar="&lt;span class=&quot;num&quot;&gt;40&lt;/span&gt; مسرد المصطلحات">Glossary</a></li>
-          <li><a href="#platform-deployment" data-ar="&lt;span class=&quot;num&quot;&gt;41&lt;/span&gt; المنصّة والنشر">Platform &amp; Deployment</a></li>
-          <li><a href="#limitations" data-ar="&lt;span class=&quot;num&quot;&gt;42&lt;/span&gt; الحدود وإخلاء المسؤولية">Limitations &amp; Disclaimer</a></li>
-          <li><a href="#licence" data-ar="&lt;span class=&quot;num&quot;&gt;43&lt;/span&gt; الترخيص والاستخدام المسموح">Licence &amp; permitted use</a></li>
-          <li><a href="#contact" data-ar="&lt;span class=&quot;num&quot;&gt;44&lt;/span&gt; التواصل والدعم">Contact &amp; Support</a></li>
+          <li><a href="#faq" data-ar="&lt;span class=&quot;num&quot;&gt;40&lt;/span&gt; أسئلة متكرّرة">Frequently Asked Questions</a></li>
+          <li><a href="#glossary" data-ar="&lt;span class=&quot;num&quot;&gt;41&lt;/span&gt; مسرد المصطلحات">Glossary</a></li>
+          <li><a href="#platform-deployment" data-ar="&lt;span class=&quot;num&quot;&gt;42&lt;/span&gt; المنصّة والنشر">Platform &amp; Deployment</a></li>
+          <li><a href="#limitations" data-ar="&lt;span class=&quot;num&quot;&gt;43&lt;/span&gt; الحدود وإخلاء المسؤولية">Limitations &amp; Disclaimer</a></li>
+          <li><a href="#licence" data-ar="&lt;span class=&quot;num&quot;&gt;44&lt;/span&gt; الترخيص والاستخدام المسموح">Licence &amp; permitted use</a></li>
+          <li><a href="#contact" data-ar="&lt;span class=&quot;num&quot;&gt;45&lt;/span&gt; التواصل والدعم">Contact &amp; Support</a></li>
         </ul>
       </div>
     </aside>
@@ -2290,81 +2291,134 @@ sudo journalctl -u cyphornips -f</code></pre>
       <section id="concepts" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;15&lt;/span&gt; كيف يفكّر سايفورن"><span class="num">15</span> How CyphornIPS Thinks</h2>
         <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
-  <svg direction="ltr" viewBox="0 0 940 760" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
-    <title>CyphornIPS data pipeline: ingress to verdict</title>
-  
-    <style>
-      .nd-box  { fill: var(--bg-card, #131929); stroke: var(--border-color, #232d42); stroke-width: 1.2; }
-      .nd-dec  { fill: var(--bg-tertiary, #171e2e); stroke: var(--accent-amber, #f59e0b); stroke-width: 1.4; }
-      .nd-in   { stroke: var(--accent-cyan, #06b6d4); }
-      .nd-good { stroke: var(--accent-green, #10b981); }
-      .nd-bad  { stroke: var(--accent-red, #ef4444); }
-      .nd-warn { stroke: var(--accent-amber, #f59e0b); }
-      .nd-key  { stroke: var(--accent-purple, #a855f7); }
-      .nd-t    { fill: var(--text-primary, #f8fafc); font-family: var(--font-sans, sans-serif); font-size: 12.5px; }
-      .nd-s    { fill: var(--text-muted, #71839c); font-family: var(--font-sans, sans-serif); font-size: 10.5px; }
-      .nd-l    { fill: var(--text-secondary, #a8b6c8); font-family: var(--font-sans, sans-serif); font-size: 10px; font-weight: 600; }
-      .nd-line { stroke: var(--border-color, #232d42); stroke-width: 1.3; fill: none; }
-    </style>
-    <defs>
-      <marker id="nd-a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L8,4 L0,8 z" fill="var(--border-color, #232d42)"/>
-      </marker>
-    </defs>
-  
-    <rect x="345" y="20" width="250" height="44" rx="7" class="nd-box"/>
-    <text x="470" y="40" class="nd-t" text-anchor="middle">Ingress Packet</text>
-    <text x="470" y="55" class="nd-s" text-anchor="middle">WAN / LAN</text>
-    <rect x="345" y="92" width="250" height="44" rx="7" class="nd-box"/>
-    <text x="470" y="112" class="nd-t" text-anchor="middle">eBPF TC Ingress Filter</text>
-    <text x="470" y="127" class="nd-s" text-anchor="middle">kernel path</text>
-    <rect x="345" y="164" width="250" height="44" rx="7" class="nd-box"/>
-    <text x="470" y="190.5" class="nd-t" text-anchor="middle">L2 - L4 Decoders</text>
-    <rect x="345" y="226" width="250" height="44" rx="7" class="nd-box"/>
-    <text x="470" y="252.5" class="nd-t" text-anchor="middle">Conntrack &amp; Flow Tracker</text>
-    <line x1="470" y1="64" x2="470" y2="90" class="nd-line " marker-end="url(#nd-a)"/>
-    <line x1="470" y1="136" x2="470" y2="162" class="nd-line " marker-end="url(#nd-a)"/>
-    <line x1="470" y1="208" x2="470" y2="224" class="nd-line " marker-end="url(#nd-a)"/>
-    <line x1="470" y1="270" x2="470" y2="298" class="nd-line " marker-end="url(#nd-a)"/>
-    <polygon points="470,297 555,320 470,343 385,320" class="nd-dec"/>
-    <text x="470" y="324.5" class="nd-t" text-anchor="middle">Protocol DPI</text>
-    <rect x="62" y="392" width="152" height="38" rx="7" class="nd-box"/>
-    <text x="138" y="415.5" class="nd-t" text-anchor="middle">HTTP</text>
-    <path d="M470,343 V372 H138 V390" class="nd-line" marker-end="url(#nd-a)"/>
-    <rect x="228" y="392" width="152" height="38" rx="7" class="nd-box"/>
-    <text x="304" y="415.5" class="nd-t" text-anchor="middle">TLS / QUIC</text>
-    <path d="M470,343 V372 H304 V390" class="nd-line" marker-end="url(#nd-a)"/>
-    <rect x="394" y="392" width="152" height="38" rx="7" class="nd-box"/>
-    <text x="470" y="415.5" class="nd-t" text-anchor="middle">DNS</text>
-    <path d="M470,343 V372 H470 V390" class="nd-line" marker-end="url(#nd-a)"/>
-    <rect x="560" y="392" width="152" height="38" rx="7" class="nd-box"/>
-    <text x="636" y="415.5" class="nd-t" text-anchor="middle">FTP</text>
-    <path d="M470,343 V372 H636 V390" class="nd-line" marker-end="url(#nd-a)"/>
-    <rect x="726" y="392" width="152" height="38" rx="7" class="nd-box"/>
-    <text x="802" y="415.5" class="nd-t" text-anchor="middle">SMTP / MIME</text>
-    <path d="M470,343 V372 H802 V390" class="nd-line" marker-end="url(#nd-a)"/>
-    <rect x="62" y="462" width="152" height="38" rx="7" class="nd-box"/>
-    <text x="138" y="485.5" class="nd-t" text-anchor="middle">File Extraction</text>
-    <rect x="62" y="518" width="152" height="38" rx="7" class="nd-box"/>
-    <text x="138" y="541.5" class="nd-t" text-anchor="middle">File Hashes</text>
-    <path d="M138,430 V448 H138 V460" class="nd-line" marker-end="url(#nd-a)"/>
-    <path d="M636,430 V448 H138 V460" class="nd-line" marker-end="url(#nd-a)"/>
-    <line x1="138" y1="500" x2="138" y2="516" class="nd-line " marker-end="url(#nd-a)"/>
-    <rect x="345" y="580" width="250" height="44" rx="7" class="nd-box"/>
-    <text x="470" y="606.5" class="nd-t" text-anchor="middle">Detection Engine</text>
-    <path d="M138,430 V558 H470 V578" class="nd-line" marker-end="url(#nd-a)"/>
-    <path d="M304,430 V558 H470 V578" class="nd-line" marker-end="url(#nd-a)"/>
-    <path d="M470,430 V558 H470 V578" class="nd-line" marker-end="url(#nd-a)"/>
-    <path d="M636,430 V558 H470 V578" class="nd-line" marker-end="url(#nd-a)"/>
-    <path d="M802,430 V558 H470 V578" class="nd-line" marker-end="url(#nd-a)"/>
-    <path d="M138,556 V558 H430 V578" class="nd-line" marker-end="url(#nd-a)"/>
-    <rect x="345" y="644" width="250" height="38" rx="7" class="nd-box"/>
-    <text x="470" y="667.5" class="nd-t" text-anchor="middle">Rules / Datasets / Flowbits</text>
-    <line x1="470" y1="624" x2="470" y2="642" class="nd-line " marker-end="url(#nd-a)"/>
-    <rect x="345" y="700" width="250" height="38" rx="7" class="nd-box"/>
-    <text x="470" y="723.5" class="nd-t" text-anchor="middle">Domain / Country Policy</text>
-    <line x1="470" y1="682" x2="470" y2="698" class="nd-line " marker-end="url(#nd-a)"/>
-  </svg>
+  <svg direction="ltr" viewBox="0 0 1000 880" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:1000px;display:block;margin:0 auto">
+      <title>CyphornIPS data pipeline: ingress to verdict</title>
+
+      <defs>
+        <linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
+          <stop offset="1" stop-color="var(--bg-card,#131929)"/>
+        </linearGradient>
+        <linearGradient id="g-key" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
+          <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-good" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
+          <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-bad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
+          <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-warn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
+          <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
+        </linearGradient>
+        <linearGradient id="g-in" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
+          <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
+        </linearGradient>
+        <filter id="f-lift" x="-30%" y="-40%" width="160%" height="200%">
+          <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
+        </filter>
+        <marker id="a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+                markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
+        </marker>
+      </defs>
+      <style>
+        .n-t  { fill: var(--text-primary,#f8fafc); font-family: var(--font-sans,sans-serif);
+                font-size: 12.5px; font-weight: 600; }
+        .n-s  { fill: var(--text-muted,#71839c); font-family: var(--font-sans,sans-serif); font-size: 10px; }
+        .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
+                font-size: 10px; font-weight: 700; }
+        .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
+                marker-end: url(#a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f-lift); }
+      </style>
+
+      <rect x="357" y="14" width="286" height="52" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <path d="M366,15 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="500" y="38" class="n-t" text-anchor="middle">Ingress packet</text>
+      <text x="500" y="53" class="n-s" text-anchor="middle">WAN / LAN</text>
+      <rect x="357" y="86" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M366,87 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="500" y="110" class="n-t" text-anchor="middle">eBPF TC ingress filter</text>
+      <text x="500" y="125" class="n-s" text-anchor="middle">kernel path, before the stack</text>
+      <rect x="357" y="158" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M366,159 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="500" y="182" class="n-t" text-anchor="middle">L2 – L4 decoders</text>
+      <text x="500" y="197" class="n-s" text-anchor="middle">Ethernet · IPv4 / IPv6 · TCP / UDP / ICMP</text>
+      <rect x="357" y="230" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M366,231 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="500" y="254" class="n-t" text-anchor="middle">Defragment & reassemble</text>
+      <text x="500" y="269" class="n-s" text-anchor="middle">IP fragments · TCP overlap policy</text>
+      <rect x="357" y="302" width="286" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M366,303 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="500" y="326" class="n-t" text-anchor="middle">Conntrack & flow tracker</text>
+      <text x="500" y="341" class="n-s" text-anchor="middle">per-flow state, both directions</text>
+      <path d="M500,66 V83" class="n-e"/>
+      <path d="M500,138 V155" class="n-e"/>
+      <path d="M500,210 V227" class="n-e"/>
+      <path d="M500,282 V299" class="n-e"/>
+      <path d="M500,354 V392" class="n-e"/>
+      <polygon points="500,391 600,418 500,445 400,418" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <text x="500" y="422.5" class="n-t" text-anchor="middle">Protocol DPI</text>
+      <rect x="18" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M27,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="108" y="517" class="n-t" text-anchor="middle">HTTP</text>
+      <text x="108" y="533" class="n-s" text-anchor="middle">method · uri · host</text>
+      <text x="108" y="545.5" class="n-s" text-anchor="middle">headers · body</text>
+      <text x="108" y="558" class="n-s" text-anchor="middle">normalised URI</text>
+      <path d="M500,445 V476 H108 V495" class="n-e"/>
+      <rect x="214" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M223,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="304" y="517" class="n-t" text-anchor="middle">TLS / QUIC</text>
+      <text x="304" y="533" class="n-s" text-anchor="middle">sni · alpn</text>
+      <text x="304" y="545.5" class="n-s" text-anchor="middle">JA3 fingerprint</text>
+      <text x="304" y="558" class="n-s" text-anchor="middle">certificate fields</text>
+      <path d="M500,445 V476 H304 V495" class="n-e"/>
+      <rect x="410" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M419,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="500" y="517" class="n-t" text-anchor="middle">DNS</text>
+      <text x="500" y="533" class="n-s" text-anchor="middle">qname · qtype</text>
+      <text x="500" y="545.5" class="n-s" text-anchor="middle">answers</text>
+      <text x="500" y="558" class="n-s" text-anchor="middle">response matching</text>
+      <path d="M500,445 V476 H500 V495" class="n-e"/>
+      <rect x="606" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M615,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="696" y="517" class="n-t" text-anchor="middle">FTP</text>
+      <text x="696" y="533" class="n-s" text-anchor="middle">commands · filename</text>
+      <text x="696" y="545.5" class="n-s" text-anchor="middle">data channel</text>
+      <text x="696" y="558" class="n-s" text-anchor="middle">transfer offsets</text>
+      <path d="M500,445 V476 H696 V495" class="n-e"/>
+      <rect x="802" y="498" width="180" height="86" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M811,499 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="892" y="517" class="n-t" text-anchor="middle">SMTP</text>
+      <text x="892" y="533" class="n-s" text-anchor="middle">helo · mail_from</text>
+      <text x="892" y="545.5" class="n-s" text-anchor="middle">rcpt_to · headers</text>
+      <text x="892" y="558" class="n-s" text-anchor="middle">MIME parts</text>
+      <path d="M500,445 V476 H892 V495" class="n-e"/>
+      <rect x="18" y="626" width="180" height="76" rx="9" class="n-b" fill="url(#g-key)" stroke="var(--accent-purple,#a855f7)"/>
+      <path d="M27,627 h162" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="108" y="645" class="n-t" text-anchor="middle">File extraction</text>
+      <text x="108" y="661" class="n-s" text-anchor="middle">MD5 · SHA-1 · SHA-256</text>
+      <text x="108" y="673.5" class="n-s" text-anchor="middle">SHA3-384 · magic bytes</text>
+      <text x="108" y="686" class="n-s" text-anchor="middle">in memory, HTTP and FTP</text>
+      <path d="M108,584 V623" class="n-e"/>
+      <path d="M696,584 V602 H108 V623" class="n-e"/>
+      <path d="M108,702 V740" class="n-e"/>
+      <path d="M304,584 V740" class="n-e"/>
+      <path d="M500,584 V740" class="n-e"/>
+      <path d="M892,584 V740" class="n-e"/>
+      <path d="M108,740 H892" stroke="var(--text-muted,#71839c)" stroke-width="1.4" opacity=".85" fill="none" stroke-linecap="round"/>
+      <rect x="357" y="770" width="286" height="52" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <path d="M366,771 h268" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="500" y="794" class="n-t" text-anchor="middle">Detection engine</text>
+      <text x="500" y="809" class="n-s" text-anchor="middle">rules · datasets · flowbits · thresholds</text>
+      <path d="M500,740 V767" class="n-e"/>
+    </svg>
           <figcaption data-ar="المعمارية ومسار البيانات — كل حزمة تسلك هذا الطريق، من الدخول إلى الحكم." style="margin-top:12px;color:var(--text-muted);font-size:12.5px;text-align:center">Architecture &amp; data pipeline — every packet takes this path, ingress to verdict.</figcaption>
         </figure>
         <p data-ar="قبل الخوض في الإعدادات، يفيد امتلاك النموذج الذهني. أربع أفكار تشرح كل ما تبقّى في هذه الوثيقة تقريبًا:">Before diving into configuration, it helps to have the mental model. Four ideas explain almost everything else in this document:</p>
@@ -2471,58 +2525,88 @@ sudo ip link set lan0 up promisc on
       <section id="rule-actions" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;18&lt;/span&gt; أسبقية الإجراءات"><span class="num">18</span> Action Precedence</h2>
         <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
-  <svg direction="ltr" viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
-    <title>Action precedence: which verdict wins when several rules match</title>
-  
-    <style>
-      .nd-box  { fill: var(--bg-card, #131929); stroke: var(--border-color, #232d42); stroke-width: 1.2; }
-      .nd-dec  { fill: var(--bg-tertiary, #171e2e); stroke: var(--accent-amber, #f59e0b); stroke-width: 1.4; }
-      .nd-in   { stroke: var(--accent-cyan, #06b6d4); }
-      .nd-good { stroke: var(--accent-green, #10b981); }
-      .nd-bad  { stroke: var(--accent-red, #ef4444); }
-      .nd-warn { stroke: var(--accent-amber, #f59e0b); }
-      .nd-key  { stroke: var(--accent-purple, #a855f7); }
-      .nd-t    { fill: var(--text-primary, #f8fafc); font-family: var(--font-sans, sans-serif); font-size: 12.5px; }
-      .nd-s    { fill: var(--text-muted, #71839c); font-family: var(--font-sans, sans-serif); font-size: 10.5px; }
-      .nd-l    { fill: var(--text-secondary, #a8b6c8); font-family: var(--font-sans, sans-serif); font-size: 10px; font-weight: 600; }
-      .nd-line { stroke: var(--border-color, #232d42); stroke-width: 1.3; fill: none; }
-    </style>
-    <defs>
-      <marker id="nd-a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L8,4 L0,8 z" fill="var(--border-color, #232d42)"/>
-      </marker>
-    </defs>
-  
-    <rect x="14" y="38" width="150" height="40" rx="7" class="nd-box"/>
-    <text x="89" y="62.5" class="nd-t" text-anchor="middle">Multiple matches</text>
-    <polygon points="235,35 315,58 235,81 155,58" class="nd-dec"/>
-    <text x="235" y="62.5" class="nd-t" text-anchor="middle">PASS?</text>
-    <polygon points="455,35 535,58 455,81 375,58" class="nd-dec"/>
-    <text x="455" y="62.5" class="nd-t" text-anchor="middle">DROP / REJECT?</text>
-    <polygon points="675,35 755,58 675,81 595,58" class="nd-dec"/>
-    <text x="675" y="62.5" class="nd-t" text-anchor="middle">ALERT?</text>
-    <line x1="164" y1="58" x2="155" y2="58" class="nd-line " marker-end="url(#nd-a)"/>
-    <line x1="315" y1="58" x2="375" y2="58" class="nd-line " marker-end="url(#nd-a)"/>
-    <text x="345" y="50" class="nd-l" text-anchor="middle">No</text>
-    <line x1="535" y1="58" x2="595" y2="58" class="nd-line " marker-end="url(#nd-a)"/>
-    <text x="565" y="50" class="nd-l" text-anchor="middle">No</text>
-    <line x1="235" y1="81" x2="235" y2="158" class="nd-line " marker-end="url(#nd-a)"/>
-    <text x="251" y="125" class="nd-l" text-anchor="middle">Yes</text>
-    <rect x="140" y="160" width="190" height="40" rx="7" class="nd-box nd-good"/>
-    <text x="235" y="184.5" class="nd-t" text-anchor="middle">PASS &mdash; Forward</text>
-    <line x1="455" y1="81" x2="455" y2="158" class="nd-line " marker-end="url(#nd-a)"/>
-    <text x="471" y="125" class="nd-l" text-anchor="middle">Yes</text>
-    <rect x="360" y="160" width="190" height="40" rx="7" class="nd-box nd-bad"/>
-    <text x="455" y="184.5" class="nd-t" text-anchor="middle">BLOCK</text>
-    <line x1="675" y1="81" x2="675" y2="158" class="nd-line " marker-end="url(#nd-a)"/>
-    <text x="691" y="125" class="nd-l" text-anchor="middle">Yes</text>
-    <rect x="580" y="160" width="190" height="40" rx="7" class="nd-box nd-warn"/>
-    <text x="675" y="184.5" class="nd-t" text-anchor="middle">ALERT + Forward</text>
-    <line x1="755" y1="58" x2="830" y2="58" class="nd-line " marker-end="url(#nd-a)"/>
-    <text x="792.5" y="50" class="nd-l" text-anchor="middle">No</text>
-    <rect x="830" y="38" width="96" height="40" rx="7" class="nd-box"/>
-    <text x="878" y="62.5" class="nd-t" text-anchor="middle">No match</text>
-  </svg>
+  <svg direction="ltr" viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:960px;display:block;margin:0 auto">
+      <title>Action precedence: which verdict wins when several rules match</title>
+
+      <defs>
+        <linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
+          <stop offset="1" stop-color="var(--bg-card,#131929)"/>
+        </linearGradient>
+        <linearGradient id="g-key" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
+          <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-good" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
+          <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-bad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
+          <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-warn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
+          <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
+        </linearGradient>
+        <linearGradient id="g-in" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
+          <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
+        </linearGradient>
+        <filter id="f-lift" x="-30%" y="-40%" width="160%" height="200%">
+          <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
+        </filter>
+        <marker id="a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+                markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
+        </marker>
+      </defs>
+      <style>
+        .n-t  { fill: var(--text-primary,#f8fafc); font-family: var(--font-sans,sans-serif);
+                font-size: 12.5px; font-weight: 600; }
+        .n-s  { fill: var(--text-muted,#71839c); font-family: var(--font-sans,sans-serif); font-size: 10px; }
+        .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
+                font-size: 10px; font-weight: 700; }
+        .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
+                marker-end: url(#a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f-lift); }
+      </style>
+
+      <rect x="16" y="44" width="164" height="46" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <path d="M25,45 h146" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="98" y="71.5" class="n-t" text-anchor="middle">Several matches</text>
+      <polygon points="280,41 364,67 280,93 196,67" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <text x="280" y="71.5" class="n-t" text-anchor="middle">PASS?</text>
+      <polygon points="520,41 604,67 520,93 436,67" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <text x="520" y="71.5" class="n-t" text-anchor="middle">DROP / REJECT?</text>
+      <polygon points="760,41 844,67 760,93 676,67" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <text x="760" y="71.5" class="n-t" text-anchor="middle">ALERT?</text>
+      <path d="M180,67 H194" class="n-e"/>
+      <path d="M366,67 H434" class="n-e"/>
+      <text x="400" y="61" class="n-l" text-anchor="middle">No</text>
+      <path d="M606,67 H674" class="n-e"/>
+      <text x="640" y="61" class="n-l" text-anchor="middle">No</text>
+      <path d="M280,93 V176" class="n-e"/>
+      <text x="294" y="134.5" class="n-l" text-anchor="middle">Yes</text>
+      <rect x="182" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#g-good)" stroke="var(--accent-green,#10b981)"/>
+      <path d="M191,179 h178" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="280" y="205.5" class="n-t" text-anchor="middle">PASS — forward</text>
+      <path d="M520,93 V176" class="n-e"/>
+      <text x="534" y="134.5" class="n-l" text-anchor="middle">Yes</text>
+      <rect x="422" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#g-bad)" stroke="var(--accent-red,#ef4444)"/>
+      <path d="M431,179 h178" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="520" y="205.5" class="n-t" text-anchor="middle">BLOCK</text>
+      <path d="M760,93 V176" class="n-e"/>
+      <text x="774" y="134.5" class="n-l" text-anchor="middle">Yes</text>
+      <rect x="662" y="178" width="196" height="46" rx="9" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <path d="M671,179 h178" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="760" y="205.5" class="n-t" text-anchor="middle">ALERT + forward</text>
+      <path d="M846,67 H864" class="n-e"/>
+      <text x="855" y="61" class="n-l" text-anchor="middle">No</text>
+      <rect x="866" y="44" width="86" height="46" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M875,45 h68" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="909" y="71.5" class="n-t" text-anchor="middle">No match</text>
+    </svg>
           <figcaption data-ar="أسبقية الإجراء — أي حكم يغلب حين تُطابق عدّة قواعد الحزمة نفسها." style="margin-top:12px;color:var(--text-muted);font-size:12.5px;text-align:center">Action precedence — which verdict wins when several rules match the same packet.</figcaption>
         </figure>
         <p data-ar="حين تطابق عدة قواعد أو سياسات الحزمة نفسها، يحسم سايفورن التعارض بالطريقة نفسها في كل مرة:">When several rules or policies match the same packet, CyphornIPS resolves the conflict the same way every time:</p>
@@ -3934,8 +4018,72 @@ Enforcement initialized on 4 link(s)</code></pre>
         <p data-ar="سايفورن يفحص على عدة خيوط منذ النسخة 1.8.0. العدد يُشتقّ من الجهاز افتراضياً — نواة لكل عامل ناقص واحدة — ويُضبط بـ&lt;code&gt;worker_count&lt;/code&gt;. والنواة هي التي توزّع الحركة، ببرنامج eBPF يُبقي كلا اتجاهَي المحادثة على العامل نفسه، وهو شرط صحّة لا ضبط أداء. &lt;strong&gt;مقيس على جهاز بأربع أنوية تحت إغراق بـ4096 تدفّقاً: عامل واحد فحص 65٪ من الحركة المعروضة، وثلاثة عوامل فحصوا 100٪.&lt;/strong&gt; وحتى 1.7.x كان الفحص على خيط واحد، فكانت الإنتاجية تتبع سرعة النواة الواحدة لا عددها — وذلك لم يعد صحيحاً.">CyphornIPS has inspected on several threads since 1.8.0. The count is derived from the machine by default — one per core, less one — and set with <code>worker_count</code>. The kernel does the distributing, through an eBPF program that keeps both directions of a conversation on the same worker, which is a correctness requirement rather than a tuning choice. <strong>Measured on a four-core appliance under a 4096-flow flood: one worker inspected 65% of the traffic offered, three inspected 100%.</strong> Through 1.7.x inspection ran on one thread, so throughput followed single-core speed rather than core count. That is no longer true.</p>
       </section>
 
+      <section id="engine-vs-rules" class="doc-section">
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;23&lt;/span&gt; ما يفحصه المحرّك مقابل ما تغطّيه القواعد المشحونة"><span class="num">23</span> What the engine inspects vs. what the shipped rules cover</h2>
+
+        <div class="callout callout-warning">
+          <div class="callout-title" data-ar="سؤالان مختلفان">Two different questions</div>
+          <p data-ar="&lt;strong&gt;هل يفهم سايفورن هذا البروتوكول؟&lt;/strong&gt; و&lt;strong&gt;هل تأتي معه قواعد جاهزة تفحصه؟&lt;/strong&gt; جوابهما ليس واحدًا، والخلط بينهما يجعلك تظنّ أنك محميّ من شيء لا قاعدة له."><strong>Does CyphornIPS understand this protocol?</strong> and <strong>do the shipped rules inspect it?</strong> are not the same question. Confusing them leaves you believing you are covered against something no rule looks for.</p>
+        </div>
+
+        <p data-ar="المحرّك يحلّل أحد عشر بروتوكولًا ويعرض حقولها ككلمات مفتاحية للقواعد. أمّا مجموعة القواعد المشحونة فمن &lt;strong&gt;Emerging Threats Open&lt;/strong&gt;، وهي مكتوبة لتعمل على عدّة محرّكات — فتستعمل &lt;code&gt;content&lt;/code&gt; العامّ أكثر ممّا تستعمل كلمات خاصّة بمحرّك واحد. وهذا يعني أن بعض ما يفحصه سايفورن جيّدًا لا تستغلّه القواعد الجاهزة.">The engine parses eleven protocols and exposes their fields as rule keywords. The shipped rule set is <strong>Emerging Threats Open</strong>, written to run on several engines &mdash; so it leans on generic <code>content</code> matching rather than on one engine's own keywords. The consequence: some of what CyphornIPS parses well is not something the shipped rules exploit.</p>
+
+        <h3 class="sub-heading" data-ar="الأرقام، مقيسة على جهاز يعمل">The numbers, measured on a running appliance</h3>
+        <div class="table-container">
+          <table>
+            <thead><tr><th data-ar="البروتوكول">Protocol</th><th data-ar="المحرّك يحلّله">Engine parses</th><th data-ar="كلمات قواعد">Rule keywords</th><th data-ar="قواعد مشحونة">Shipped rules</th></tr></thead>
+            <tbody>
+              <tr><td><strong>HTTP</strong></td><td>✅</td><td data-ar="‏39 كلمة — الطريقة والمسار والمضيف والترويسات والجسم">39 &mdash; method, uri, host, headers, bodies</td><td><strong>3,348</strong></td></tr>
+              <tr><td><strong>DNS</strong></td><td>✅</td><td><code>dns</code> · <code>dns.query</code></td><td><strong>3,331</strong></td></tr>
+              <tr><td><strong>TLS</strong></td><td>✅</td><td data-ar="‏18 كلمة — SNI والشهادة وأحكامها">18 &mdash; sni, certificate fields and verdicts</td><td><strong>2,167</strong></td></tr>
+              <tr><td><strong>JA3</strong></td><td>✅</td><td><code>ja3.hash</code></td><td><strong>227</strong></td></tr>
+              <tr><td><strong>IKE</strong></td><td>✅</td><td><code>ike</code></td><td>244</td></tr>
+              <tr><td><strong>QUIC</strong></td><td data-ar="✅ الـClientHello في حزمة Initial">✅ Initial ClientHello</td><td><code>quic</code></td><td>24</td></tr>
+              <tr><td><strong>ICMP</strong></td><td>✅</td><td><code>icmp</code></td><td>2</td></tr>
+              <tr><td><strong>SMTP</strong></td><td data-ar="✅ بالكامل — 645 سطرًا">✅ fully &mdash; 645 lines</td><td data-ar="‏10 كلمات — &lt;code&gt;smtp&lt;/code&gt; و&lt;code&gt;email.*&lt;/code&gt;">10 &mdash; <code>smtp</code>, <code>email.*</code></td><td data-ar="&lt;strong&gt;3&lt;/strong&gt; — الفجوة الأكبر"><strong>3</strong> &mdash; the widest gap</td></tr>
+              <tr><td><strong>FTP</strong></td><td>✅</td><td><code>ftp</code></td><td><strong>0</strong></td></tr>
+              <tr><td><strong>SSH</strong></td><td data-ar="التعرّف فقط">identification only</td><td><code>ssh</code></td><td><strong>0</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p data-ar="من 11,901 قاعدة مشحونة: &lt;strong&gt;7,039&lt;/strong&gt; استعمالًا لكلمات &lt;code&gt;http.*&lt;/code&gt;، و&lt;strong&gt;3,327&lt;/strong&gt; لـ&lt;code&gt;dns.query&lt;/code&gt;، و&lt;strong&gt;2,418&lt;/strong&gt; لـ&lt;code&gt;tls.*&lt;/code&gt; — و&lt;strong&gt;عشرة فقط&lt;/strong&gt; لـ&lt;code&gt;email.*&lt;/code&gt;.">Across 11,901 shipped rules: <strong>7,039</strong> uses of <code>http.*</code> keywords, <strong>3,327</strong> of <code>dns.query</code>, <strong>2,418</strong> of <code>tls.*</code> &mdash; and <strong>ten</strong> of <code>email.*</code>.</p>
+
+        <h3 class="sub-heading" data-ar="مثال: SMTP">Worked example: SMTP</h3>
+        <p data-ar="محلّل SMTP كامل ومربوط بمسار الفحص، ويستخرج &lt;code&gt;helo&lt;/code&gt; و&lt;code&gt;mail_from&lt;/code&gt; و&lt;code&gt;rcpt_to&lt;/code&gt; والترويسات وأجزاء MIME وعدد الروابط. والقواعد المشحونة التي تذكر SMTP اثنتا عشرة، كلها مكتوبة بـ&lt;code&gt;content&lt;/code&gt; عامّ — ولا واحدة منها تستعمل &lt;code&gt;email.*&lt;/code&gt;. فالفجوة في مجموعة القواعد لا في المحرّك، وتسدّها أنت:">The SMTP parser is complete and wired into the inspection path: it extracts <code>helo</code>, <code>mail_from</code>, <code>rcpt_to</code>, headers, MIME parts and a URL count. The shipped rules that mention SMTP are twelve, all written with generic <code>content</code> &mdash; none uses <code>email.*</code>. The gap is in the rule set, not the engine, and you close it yourself:</p>
+        <div class="code-container">
+          <div class="code-header"><span>/etc/cyphornips/rules/local/email.rules</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><code># An invoice lure carrying an archive link
+alert smtp any any -&gt; any any (msg:"CYPHORN Invoice lure with archive link"; email.subject; content:"invoice"; nocase; email.url; content:".zip"; nocase; classtype:social-engineering; sid:9100001; rev:1;)
+
+# A sender claiming a brand it is not sending from
+alert smtp any any -&gt; any any (msg:"CYPHORN Display-name brand mismatch"; email.from; content:"paypal"; nocase; classtype:phishing; sid:9100002; rev:1;)
+
+# An executable attachment, by name
+alert smtp any any -&gt; any any (msg:"CYPHORN Executable attachment over SMTP"; file.name; content:".exe"; nocase; classtype:suspicious-filename-detect; sid:9100003; rev:1;)</code></pre>
+        </div>
+        <div class="code-container">
+          <div class="code-header"><span>bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><code>cyphornctl reload rules
+cyphornctl status | grep -i rules      # the count must go UP by 3
+cyphornctl logs rules -n 20            # any rule refused, and the reason</code></pre>
+        </div>
+        <div class="callout callout-danger">
+          <div class="callout-title" data-ar="قاعدة واحدة في سطر واحد">One rule, one line</div>
+          <p data-ar="يقرأ سايفورن ملف القواعد سطرًا سطرًا، و&lt;strong&gt;لا&lt;/strong&gt; يصل الأسطر المنتهية بـ&lt;code&gt;\&lt;/code&gt;. فالقاعدة المقسّمة على عدّة أسطر — كما تعرضها وثائق Suricata غالبًا — تُرفَض بالسبب &lt;code&gt;options are not closed by ')'&lt;/code&gt;.">CyphornIPS reads a rule file line by line and does <strong>not</strong> join lines ending in <code>\</code>. A rule split across lines the way Suricata documentation often shows it is refused with <code>options are not closed by ')'</code>.</p>
+          <p data-ar="والقاعدة التي لا تُحلَّل لا توقف التحميل — تُرفَض ويستمرّ الباقي. فإن لم يرتفع العدد بقدر ما أضفت، فإحداها لم تُحمَّل، و&lt;code&gt;cyphornctl logs rules&lt;/code&gt; يسمّيها ويقول لماذا.">And a rule that does not parse does not stop the reload &mdash; it is refused and the rest continue. If the count does not go up by as many rules as you added, one of them was not loaded; <code>cyphornctl logs rules</code> names it and says why.</p>
+        </div>
+
+        <h3 class="sub-heading" data-ar="ماذا يعني هذا عمليًّا">What this means in practice</h3>
+        <ul>
+          <li data-ar="&lt;strong&gt;الويب وDNS وTLS مغطّاة تغطية كثيفة&lt;/strong&gt; بالقواعد الجاهزة — وهي حيث يقع أكثر الهجوم."><strong>Web, DNS and TLS are densely covered</strong> by the shipped rules &mdash; which is where most attack traffic is.</li>
+          <li data-ar="&lt;strong&gt;البريد ونقل الملفات يحتاجان قواعدك أنت.&lt;/strong&gt; المحرّك يعطيك الحقول؛ والقواعد الجاهزة لا تستعملها."><strong>Email and file transfer need rules you write.</strong> The engine gives you the fields; the shipped set does not use them.</li>
+          <li data-ar="&lt;strong&gt;تغذيات الاستخبارات تعمل بمعزل عن ذلك.&lt;/strong&gt; حجب النطاقات والشهادات وبصمات الملفات وJA3 لا يمرّ عبر قواعد ET، فهو يغطّي البريد أيضًا حين يحمل رابطًا إلى مضيف مُدرَج."><strong>Threat intelligence works independently of this.</strong> Domain, certificate, file-hash and JA3 blocking does not go through the ET rules, so it covers mail too when a message carries a link to a listed host.</li>
+          <li data-ar="&lt;code&gt;cyphornctl status&lt;/code&gt; يطبع عدد القواعد المحمّلة على &lt;em&gt;جهازك&lt;/em&gt;، وهو العدد الوحيد الذي يعنيك."><code>cyphornctl status</code> prints the rule count loaded on <em>your</em> appliance, which is the only count that matters to you.</li>
+        </ul>
+      </section>
+
       <section id="rule-language" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;23&lt;/span&gt; أساسيات لغة القواعد"><span class="num">23</span> Rule Language Basics</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;24&lt;/span&gt; أساسيات لغة القواعد"><span class="num">24</span> Rule Language Basics</h2>
         <p data-ar="لغة القواعد متوافقة مع Snort/Suricata، وموسَّعة بالمخازن اللاصقة وبحث القوائم وflowbits. وكل قاعدة ترويسة (إجراء، بروتوكول، عناوين، اتجاه) تتبعها خيارات بين قوسين:">The rule language is Snort/Suricata-compatible, extended with sticky buffers, dataset lookups, and flowbits. Every rule is a header (action, protocol, addresses, direction) followed by parenthesized options:</p>
 
         <div class="code-container">
@@ -3964,7 +4112,7 @@ Enforcement initialized on 4 link(s)</code></pre>
 
       <!-- 12. IP & CIDR RULES -->
       <section id="ip-cidr-rules" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;24&lt;/span&gt; قواعد العناوين والنطاقات والموقع الجغرافي"><span class="num">24</span> IP, CIDR &amp; GeoIP Rules</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;25&lt;/span&gt; قواعد العناوين والنطاقات والموقع الجغرافي"><span class="num">25</span> IP, CIDR &amp; GeoIP Rules</h2>
         <p data-ar="ترشيح الطبقة الثالثة يغطّي IPv4 وIPv6: نطاقات CIDR، واستثناء العناوين (&lt;code&gt;!&lt;/code&gt;)، ومدَيات TTL، وTOS/DiffServ، والتشظية، وتحديد الدولة.">Layer 3 filtering covers IPv4 and IPv6: CIDR subnets, address exclusions (<code>!</code>), TTL ranges, TOS/DiffServ, fragmentation, and country resolution.</p>
 
         <h3 class="sub-heading" data-ar="المطابقة الجغرافية (&lt;code&gt;geoip:&lt;/code&gt;)">GeoIP matching (<code>geoip:</code>)</h3>
@@ -3984,7 +4132,7 @@ alert ip 192.168.1.0/24 any -> any any ( msg:"ALERT Outbound Connection to Forei
 
       <!-- 13. TRANSPORT RULES -->
       <section id="transport-rules" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;25&lt;/span&gt; قواعد TCP وUDP وICMP"><span class="num">25</span> TCP, UDP &amp; ICMP Rules</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;26&lt;/span&gt; قواعد TCP وUDP وICMP"><span class="num">26</span> TCP, UDP &amp; ICMP Rules</h2>
         <p data-ar="فحص كامل للطبقة الرابعة: أعلام TCP، وأرقام التسلسل والإقرار، وتحجيم النافذة، وMSS، ومنافذ UDP، وأنواع ورموز ICMP/ICMPv6.">Full Layer 4 inspection: TCP flags, sequence/ack numbers, window scaling, MSS, UDP ports, and ICMP/ICMPv6 types and codes.</p>
 
         <h3 class="sub-heading" data-ar="أعلام TCP (&lt;code&gt;flags:&lt;/code&gt;)">TCP flags (<code>flags:</code>)</h3>
@@ -4001,7 +4149,7 @@ drop tcp any any -> 192.168.1.0/24 any ( msg:"SCAN NULL Scan Attempt"; flags:0; 
 
       <!-- 14. PAYLOAD, DATASETS & FLOWBITS -->
       <section id="payload-rules" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;26&lt;/span&gt; مطابقة الحمولة والقوائم وFlowbits"><span class="num">26</span> Payload Matching, Datasets &amp; Flowbits</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;27&lt;/span&gt; مطابقة الحمولة والقوائم وFlowbits"><span class="num">27</span> Payload Matching, Datasets &amp; Flowbits</h2>
         <p data-ar="أبعد من مطابقة المحتوى البسيطة، تسمح كلمتان لقاعدة واحدة بالتوسّع إلى استخبارات تهديد واقعية وكشف هجمات متعدّدة المراحل.">Beyond simple content matching, two keywords let a single rule scale to real-world threat intel and multi-stage attack detection.</p>
 
         <h3 class="sub-heading" id="dataset-rules" data-ar="القوائم — قاعدة واحدة وتغذية تهديد كاملة (&lt;code&gt;dataset:&lt;/code&gt;)">Datasets — one rule, a whole threat feed (<code>dataset:</code>)</h3>
@@ -4073,7 +4221,7 @@ drop http any any -> 192.168.1.0/24 80 ( msg:"EXPLOIT Admin Post-Auth Remote Com
 
       <!-- 15. HTTP INSPECTION -->
       <section id="pcre-rules" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;27&lt;/span&gt; التعابير النمطية (pcre)"><span class="num">27</span> Regular expressions (pcre)</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;28&lt;/span&gt; التعابير النمطية (pcre)"><span class="num">28</span> Regular expressions (pcre)</h2>
         <p data-ar="سايفورن يدعم pcre عبر PCRE2 مع JIT. التعبير خطوة في سلسلة الحمولة لا فحص بجانبها، فـ R تعني «عند أو بعد موضع مطابقة المحتوى السابق»، و within بعد pcre تُحسب من حيث انتهى التعبير.">CyphornIPS supports <code>pcre</code> through PCRE2 with JIT. The expression is a step in the payload chain rather than a check beside it, so <code>R</code> means "at or after where the previous content matched", and a <code>within</code> after a pcre counts from where the regex ended.</p>
 
         <h3 class="sub-heading" data-ar="الرايات">Flags</h3>
@@ -4102,7 +4250,7 @@ drop http any any -> 192.168.1.0/24 80 ( msg:"EXPLOIT Admin Post-Auth Remote Com
       </section>
 
       <section id="rule-cost" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;28&lt;/span&gt; ما تكلّفه القواعد"><span class="num">28</span> What rules cost</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;29&lt;/span&gt; ما تكلّفه القواعد"><span class="num">29</span> What rules cost</h2>
         <p data-ar="الكلفة ليست عدد القواعد. هي ما تطابقه القواعد.">The cost is not how many rules you load. It is what they match on.</p>
 
         <div class="table-container">
@@ -4140,7 +4288,7 @@ cyphornctl reload rules</code></pre>
       </section>
 
       <section id="rule-ref" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;29&lt;/span&gt; مرجع كلمات القواعد"><span class="num">29</span> Rule Keyword Reference</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;30&lt;/span&gt; مرجع كلمات القواعد"><span class="num">30</span> Rule Keyword Reference</h2>
         <div class="table-container">
           <table>
             <thead><tr><th>Keyword / buffer</th><th>Category</th><th>Example</th><th>Effect</th></tr></thead>
@@ -4186,7 +4334,7 @@ cyphornctl reload rules</code></pre>
 
       <!-- 31. GLOSSARY -->
       <section id="http-inspection" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;30&lt;/span&gt; فحص HTTP"><span class="num">30</span> HTTP Inspection</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;31&lt;/span&gt; فحص HTTP"><span class="num">31</span> HTTP Inspection</h2>
         <p data-ar="سايفورن يفكّ ترميز HTTP/1.0 وHTTP/1.1 إلى &lt;strong&gt;مخازن لاصقة&lt;/strong&gt; موحّدة الصيغة. وما إن توجّه قاعدةً إلى أحدها حتى تبحث كل مطابقة &lt;code&gt;content&lt;/code&gt; بعدها داخله وحده.">CyphornIPS decodes HTTP/1.0 and HTTP/1.1 into normalized <strong>sticky buffers</strong>. Once you point a rule at one, every following <code>content</code> match searches only inside it.</p>
 
         <div class="table-container">
@@ -4212,7 +4360,7 @@ cyphornctl reload rules</code></pre>
 
       <!-- 16. FILE INSPECTION & INTELLIGENCE -->
       <section id="tls-inspection" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;31&lt;/span&gt; TLS وJA3 وQUIC"><span class="num">31</span> TLS, JA3 &amp; QUIC</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;32&lt;/span&gt; TLS وJA3 وQUIC"><span class="num">32</span> TLS, JA3 &amp; QUIC</h2>
         <p data-ar="سايفورن يقرأ ما بقي غير مشفّر في مصافحة TLS أو QUIC — اسم الخادم، والشهادة، وبصمة حزمة التعمية لدى العميل — دون أن يفكّ تشفير الجلسة نفسها إطلاقًا.">CyphornIPS reads what's still unencrypted in a TLS or QUIC handshake — the server name, the certificate, and a fingerprint of the client's own crypto stack — without ever decrypting the session itself.</p>
 
         <h3 class="sub-heading" data-ar="مخازن TLS اللاصقة">TLS sticky buffers</h3>
@@ -4261,7 +4409,7 @@ drop tls any any -> any 443 ( msg:"THREAT Malicious TLS Client JA3 Fingerprint i
 
       <!-- 18. ACTION PRECEDENCE -->
       <section id="cert-hygiene" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;32&lt;/span&gt; فحص صحّة الشهادات"><span class="num">32</span> Certificate hygiene</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;33&lt;/span&gt; فحص صحّة الشهادات"><span class="num">33</span> Certificate hygiene</h2>
         <p data-ar="سايفورن يقرأ شهادة X.509 كما وصلت ويقرّر ما الخطأ فيها. كل نتيجة أدناه خاصيّة للشهادة نفسها أو للمصافحة التي وصلت فيها — لا واحدة منها تذكر موقعًا أو جهة إصدار، فالقواعد نفسها تعمل على أي شبكة.">CyphornIPS reads the X.509 certificate as it arrives and decides what is wrong with it. Every finding below is a property of the certificate or of the handshake it arrived in — none names a host or an authority, so the same rules work on any network.</p>
 
         <div class="callout callout-warning">
@@ -4307,7 +4455,7 @@ alert tls any any -&gt; any any (msg:"CERT possible interception"; tls.cert_self
       </section>
 
       <section id="file-inspection" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;33&lt;/span&gt; استخراج الملفات وبصماتها واستخبارات التهديد"><span class="num">33</span> File Extraction, Hashing &amp; Threat Intelligence</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;34&lt;/span&gt; استخراج الملفات وبصماتها واستخبارات التهديد"><span class="num">34</span> File Extraction, Hashing &amp; Threat Intelligence</h2>
         <p data-ar="سايفورن يعيد تجميع الملفات ويحسب بصماتها ويصنّفها ويستطيع أرشفتها وهي تعبر الجسر، ويفحص الملفات المكتملة على حدة مقابل تغذية تهديد سريعة ببصمات مطابِقة تمامًا.">CyphornIPS reassembles, hashes, classifies, and can archive files as they cross the bridge, and separately checks completed files against a fast exact-hash threat feed.</p>
 
         <h3 class="sub-heading" data-ar="ما الذي يستخرج الملفات فعلًا">What actually extracts files</h3>
@@ -4458,7 +4606,7 @@ find "${CYPHORNIPS_FILE_STORE_DIR:-/var/log/cyphornips/files}" -maxdepth 1 -type
 
       <!-- 17. TLS, JA3 & QUIC -->
       <section id="domain-policy" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;34&lt;/span&gt; سياسة النطاقات و«لماذا حُجبت؟»"><span class="num">34</span> Domain Policy &amp; "Why Was I Blocked?"</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;35&lt;/span&gt; سياسة النطاقات و«لماذا حُجبت؟»"><span class="num">35</span> Domain Policy &amp; "Why Was I Blocked?"</h2>
         <p data-ar="محرّك سياسة النطاقات يصنّف الوصول إلى نطاقات الإنترنت وينفّذه — عبر استعلامات DNS وعبر SNI في TLS/QUIC — دون إعادة تصريف قواعد البصمات.">The Domain Policy engine classifies and enforces access to internet domains — over both DNS queries and TLS/QUIC SNI — without recompiling signature rules.</p>
 
         <h3 class="sub-heading" data-ar="توجيهان، ومفتاح تشغيل وإيقاف">Two directives, plus an on/off switch</h3>
@@ -4564,7 +4712,7 @@ policy social_networks 192.168.1.50 ALLOW 100</code></pre>
 
       <!-- 20. COUNTRY POLICY -->
       <section id="country-policy" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;35&lt;/span&gt; سياسة الدول (السياج الجغرافي)"><span class="num">35</span> Country Policy (Geo-Fencing)</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;36&lt;/span&gt; سياسة الدول (السياج الجغرافي)"><span class="num">36</span> Country Policy (Geo-Fencing)</h2>
         <p data-ar="سياسة الدول تحجب حسب &lt;em&gt;أين سُجّل عنوان الحزمة&lt;/em&gt; لا حسب اسم النطاق — فهي تعمل مباشرةً على ترويسات IPv4/IPv6 وحالة اتصال Netfilter، فتغطّي أيضًا حركةً لا تُحلّ عبر DNS إطلاقًا.">Country policy blocks by <em>where a packet's IP is registered</em>, not by domain name — it acts directly on IPv4/IPv6 headers and Netfilter connection state, so it also covers traffic that never resolves through DNS.</p>
 
 
@@ -4607,73 +4755,110 @@ drop  outbound US ANY</code></pre>
 
       <!-- 21. MONITORING & DASHBOARD -->
       <section id="update-engine" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;36&lt;/span&gt; التحديثات والتوقيع وملكية القواعد"><span class="num">36</span> Updates, Signing &amp; Rule Ownership</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;37&lt;/span&gt; التحديثات والتوقيع وملكية القواعد"><span class="num">37</span> Updates, Signing &amp; Rule Ownership</h2>
         <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
-  <svg direction="ltr" viewBox="0 0 940 400" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
-    <title>Signed update pipeline: Ed25519 manifest and SHA-256 artifact verification</title>
-  
-    <style>
-      .nd-box  { fill: var(--bg-card, #131929); stroke: var(--border-color, #232d42); stroke-width: 1.2; }
-      .nd-dec  { fill: var(--bg-tertiary, #171e2e); stroke: var(--accent-amber, #f59e0b); stroke-width: 1.4; }
-      .nd-in   { stroke: var(--accent-cyan, #06b6d4); }
-      .nd-good { stroke: var(--accent-green, #10b981); }
-      .nd-bad  { stroke: var(--accent-red, #ef4444); }
-      .nd-warn { stroke: var(--accent-amber, #f59e0b); }
-      .nd-key  { stroke: var(--accent-purple, #a855f7); }
-      .nd-t    { fill: var(--text-primary, #f8fafc); font-family: var(--font-sans, sans-serif); font-size: 12.5px; }
-      .nd-s    { fill: var(--text-muted, #71839c); font-family: var(--font-sans, sans-serif); font-size: 10.5px; }
-      .nd-l    { fill: var(--text-secondary, #a8b6c8); font-family: var(--font-sans, sans-serif); font-size: 10px; font-weight: 600; }
-      .nd-line { stroke: var(--border-color, #232d42); stroke-width: 1.3; fill: none; }
-    </style>
-    <defs>
-      <marker id="nd-a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L8,4 L0,8 z" fill="var(--border-color, #232d42)"/>
-      </marker>
-    </defs>
-  
-    <rect x="28" y="18" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="128" y="46.5" class="nd-t" text-anchor="middle">Provider</text>
-    <rect x="256" y="18" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="356" y="46.5" class="nd-t" text-anchor="middle">Manifest</text>
-    <line x1="228" y1="42" x2="254" y2="42" class="nd-line " marker-end="url(#nd-a)"/>
-    <rect x="484" y="18" width="200" height="48" rx="7" class="nd-box nd-key"/>
-    <text x="584" y="40" class="nd-t" text-anchor="middle">Ed25519</text>
-    <text x="584" y="55" class="nd-s" text-anchor="middle">manifest signature</text>
-    <line x1="456" y1="42" x2="482" y2="42" class="nd-line " marker-end="url(#nd-a)"/>
-    <rect x="712" y="18" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="812" y="46.5" class="nd-t" text-anchor="middle">Version Gate</text>
-    <line x1="684" y1="42" x2="710" y2="42" class="nd-line " marker-end="url(#nd-a)"/>
-    <rect x="28" y="122" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="128" y="150.5" class="nd-t" text-anchor="middle">Staging</text>
-    <rect x="256" y="122" width="200" height="48" rx="7" class="nd-box nd-key"/>
-    <text x="356" y="144" class="nd-t" text-anchor="middle">SHA-256</text>
-    <text x="356" y="159" class="nd-s" text-anchor="middle">artifact digest</text>
-    <line x1="228" y1="146" x2="254" y2="146" class="nd-line " marker-end="url(#nd-a)"/>
-    <rect x="484" y="122" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="584" y="150.5" class="nd-t" text-anchor="middle">Sandbox Validation</text>
-    <line x1="456" y1="146" x2="482" y2="146" class="nd-line " marker-end="url(#nd-a)"/>
-    <rect x="712" y="122" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="812" y="150.5" class="nd-t" text-anchor="middle">Backup</text>
-    <line x1="684" y1="146" x2="710" y2="146" class="nd-line " marker-end="url(#nd-a)"/>
-    <path d="M912,42 H934 V146 H914" class="nd-line" marker-end="url(#nd-a)"/>
-    <rect x="136" y="226" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="236" y="254.5" class="nd-t" text-anchor="middle">Atomic Install</text>
-    <rect x="364" y="226" width="200" height="48" rx="7" class="nd-box"/>
-    <text x="464" y="254.5" class="nd-t" text-anchor="middle">Hot Reload</text>
-    <line x1="336" y1="250" x2="362" y2="250" class="nd-line " marker-end="url(#nd-a)"/>
-    <path d="M28,146 H6 V250 H134" class="nd-line" marker-end="url(#nd-a)"/>
-    <line x1="564" y1="250" x2="700" y2="250" class="nd-line " marker-end="url(#nd-a)"/>
-    <polygon points="768,227 828,250 768,273 708,250" class="nd-dec"/>
-    <text x="768" y="254.5" class="nd-t" text-anchor="middle">Success?</text>
-    <rect x="700" y="320" width="200" height="38" rx="7" class="nd-box nd-good"/>
-    <text x="800" y="343.5" class="nd-t" text-anchor="middle">New Generation Live</text>
-    <line x1="768" y1="273" x2="768" y2="318" class="nd-line " marker-end="url(#nd-a)"/>
-    <text x="790" y="300" class="nd-l" text-anchor="middle">Yes</text>
-    <rect x="430" y="320" width="200" height="38" rx="7" class="nd-box nd-bad"/>
-    <text x="530" y="343.5" class="nd-t" text-anchor="middle">Rollback</text>
-    <path d="M708,250 H530 V318" class="nd-line" marker-end="url(#nd-a)"/>
-    <text x="560" y="272" class="nd-l">No</text>
-  </svg>
+  <svg direction="ltr" viewBox="0 0 960 490" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:960px;display:block;margin:0 auto">
+      <title>Signed update pipeline: Ed25519 verifies the manifest, SHA-256 binds each artifact</title>
+
+      <defs>
+        <linearGradient id="g-box" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--bg-secondary,#101522)"/>
+          <stop offset="1" stop-color="var(--bg-card,#131929)"/>
+        </linearGradient>
+        <linearGradient id="g-key" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".22"/>
+          <stop offset="1" stop-color="var(--accent-purple,#a855f7)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-good" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-green,#10b981)" stop-opacity=".24"/>
+          <stop offset="1" stop-color="var(--accent-green,#10b981)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-bad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-red,#ef4444)" stop-opacity=".24"/>
+          <stop offset="1" stop-color="var(--accent-red,#ef4444)" stop-opacity=".06"/>
+        </linearGradient>
+        <linearGradient id="g-warn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".26"/>
+          <stop offset="1" stop-color="var(--accent-amber,#f59e0b)" stop-opacity=".07"/>
+        </linearGradient>
+        <linearGradient id="g-in" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".22"/>
+          <stop offset="1" stop-color="var(--accent-cyan,#06b6d4)" stop-opacity=".06"/>
+        </linearGradient>
+        <filter id="f-lift" x="-30%" y="-40%" width="160%" height="200%">
+          <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000" flood-opacity=".28"/>
+        </filter>
+        <marker id="a-end" viewBox="0 0 9 9" refX="8" refY="4.5"
+                markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+          <path d="M0.5,0.5 L8.5,4.5 L0.5,8.5 z" fill="var(--text-muted,#71839c)"/>
+        </marker>
+      </defs>
+      <style>
+        .n-t  { fill: var(--text-primary,#f8fafc); font-family: var(--font-sans,sans-serif);
+                font-size: 12.5px; font-weight: 600; }
+        .n-s  { fill: var(--text-muted,#71839c); font-family: var(--font-sans,sans-serif); font-size: 10px; }
+        .n-l  { fill: var(--text-secondary,#a8b6c8); font-family: var(--font-sans,sans-serif);
+                font-size: 10px; font-weight: 700; }
+        .n-e  { stroke: var(--text-muted,#71839c); stroke-width: 1.4; fill: none;
+                marker-end: url(#a-end); stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+        .n-b  { stroke: var(--border-color,#232d42); stroke-width: 1.1; filter: url(#f-lift); }
+      </style>
+
+      <rect x="59" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-in)" stroke="var(--accent-cyan,#06b6d4)"/>
+      <path d="M68,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="153" y="46.5" class="n-t" text-anchor="middle">Provider</text>
+      <rect x="277" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M286,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="371" y="46.5" class="n-t" text-anchor="middle">Manifest</text>
+      <rect x="495" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-key)" stroke="var(--accent-purple,#a855f7)"/>
+      <path d="M504,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="589" y="40" class="n-t" text-anchor="middle">Ed25519</text>
+      <text x="589" y="55" class="n-s" text-anchor="middle">manifest signature</text>
+      <rect x="713" y="16" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M722,17 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="807" y="46.5" class="n-t" text-anchor="middle">Version Gate</text>
+      <path d="M247,42 H274" class="n-e"/>
+      <path d="M465,42 H492" class="n-e"/>
+      <path d="M683,42 H710" class="n-e"/>
+      <rect x="59" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M68,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="153" y="164.5" class="n-t" text-anchor="middle">Staging</text>
+      <rect x="277" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-key)" stroke="var(--accent-purple,#a855f7)"/>
+      <path d="M286,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="371" y="158" class="n-t" text-anchor="middle">SHA-256</text>
+      <text x="371" y="173" class="n-s" text-anchor="middle">artifact digest</text>
+      <rect x="495" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M504,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="589" y="164.5" class="n-t" text-anchor="middle">Sandbox Validation</text>
+      <rect x="713" y="134" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M722,135 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="807" y="164.5" class="n-t" text-anchor="middle">Backup</text>
+      <path d="M713,160 H686" class="n-e"/>
+      <path d="M495,160 H468" class="n-e"/>
+      <path d="M277,160 H250" class="n-e"/>
+      <path d="M901,42 H927 V160 H901" class="n-e"/>
+      <rect x="277" y="252" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M286,253 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="371" y="282.5" class="n-t" text-anchor="middle">Atomic Install</text>
+      <rect x="495" y="252" width="188" height="52" rx="9" class="n-b" fill="url(#g-box)" stroke="var(--border-color,#232d42)"/>
+      <path d="M504,253 h170" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="589" y="282.5" class="n-t" text-anchor="middle">Hot Reload</text>
+      <path d="M465,278 H492" class="n-e"/>
+      <path d="M59,160 H33 V278 H277" class="n-e"/>
+      <path d="M589,304 V321" class="n-e"/>
+      <polygon points="589,320 664,348 589,376 514,348" class="n-b" fill="url(#g-warn)" stroke="var(--accent-amber,#f59e0b)"/>
+      <text x="589" y="352.5" class="n-t" text-anchor="middle">Success?</text>
+      <rect x="126" y="420" width="220" height="46" rx="9" class="n-b" fill="url(#g-bad)" stroke="var(--accent-red,#ef4444)"/>
+      <path d="M135,421 h202" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="236" y="447.5" class="n-t" text-anchor="middle">Rollback</text>
+      <rect x="614" y="420" width="220" height="46" rx="9" class="n-b" fill="url(#g-good)" stroke="var(--accent-green,#10b981)"/>
+      <path d="M623,421 h202" stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none"/>
+      <text x="724" y="447.5" class="n-t" text-anchor="middle">New Generation Live</text>
+      <path d="M514,348 H236 V417" class="n-e"/>
+      <text x="375" y="340" class="n-l" text-anchor="middle">No</text>
+      <path d="M664,348 H724 V417" class="n-e"/>
+      <text x="694" y="340" class="n-l" text-anchor="middle">Yes</text>
+    </svg>
           <figcaption data-ar="خطّ التحديث الموقّع — Ed25519 يتحقّق من البيان، وSHA-256 يربط كل أثر به." style="margin-top:12px;color:var(--text-muted);font-size:12.5px;text-align:center">The signed update pipeline — Ed25519 verifies the manifest, SHA-256 binds each artifact to it.</figcaption>
         </figure>
         <p data-ar="&lt;code&gt;cyphornctl update&lt;/code&gt; يتولّى تحديثات البصمات وتغذيات التهديد من طرفها إلى طرفها: التحقّق التعموي، والتحقّق على مراحل، والتثبيت الذرّي، والتراجع إن اختلّ شيء."><code>cyphornctl update</code> handles signature and threat-feed updates end to end: cryptographic verification, staged validation, atomic installation, and rollback if anything goes wrong.</p>
@@ -4705,7 +4890,7 @@ drop  outbound US ANY</code></pre>
 
       <!-- 11. RULE LANGUAGE BASICS -->
       <section id="security" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;37&lt;/span&gt; التحصين الأمني"><span class="num">37</span> Security Hardening</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;38&lt;/span&gt; التحصين الأمني"><span class="num">38</span> Security Hardening</h2>
         <p data-ar="الجهاز الذي يعمل داخل المسار ويحلّل حركة غير موثوقة يحتاج دفاعًا متعمّقًا خاصًّا به — تحصين المُصرِّف، وحدّ الصلاحيات، والتحقّق التعموي، وضمانات eBPF لسلامة الذاكرة.">An inline appliance that parses untrusted traffic needs defense in depth of its own — compiler hardening, capability bounding, cryptographic verification, and eBPF's memory safety guarantees.</p>
 
         <h3 class="sub-heading" data-ar="تحصين المُصرِّف">Compiler hardening</h3>
@@ -4760,7 +4945,7 @@ CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_BPF CAP_SYS_RESOURCE CAP_PER
 
       <!-- 26. PERFORMANCE -->
       <section id="testing" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;38&lt;/span&gt; الاختبار والتحقّق"><span class="num">38</span> Testing &amp; Verification</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;39&lt;/span&gt; الاختبار والتحقّق"><span class="num">39</span> Testing &amp; Verification</h2>
 
         <p data-ar="سايفورن يحمل &lt;strong&gt;99 بوّابة&lt;/strong&gt; — كل واحدة سكربت أو ثنائي يفحص خاصيّةً واحدة ويطبع كل تحقّق على سطر. &lt;strong&gt;97 تنجح، وتُبلّغ 2,568 فحصًا مفردًا.&lt;/strong&gt; الأرقام أدناه من التشغيل الذي أنتج هذا الإصدار، لا من ملخّص محفوظ.">CyphornIPS carries <strong>99 gates</strong> &mdash; each a script or a binary that checks one property and prints every check on its own line. <strong>97 pass, reporting 2,568 individual checks.</strong> The figures below come from the run that produced this release, not from a stored summary.</p>
 
@@ -4908,7 +5093,7 @@ cyphornctl status            # rules loaded, coverage invariant holds</code></pr
       </section>
 
       <section id="faq" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;39&lt;/span&gt; أسئلة متكرّرة"><span class="num">39</span> Frequently Asked Questions</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;40&lt;/span&gt; أسئلة متكرّرة"><span class="num">40</span> Frequently Asked Questions</h2>
 
         <h4 class="sub-sub-heading" data-ar="بماذا يختلف هذا عن جدار ناري ذي حالة أو iptables؟">How is this different from a stateful firewall / iptables?</h4>
         <p data-ar="الجدار الناري يرشّح على ترويسات الطبقتين الثالثة والرابعة (عنوان المصدر والوجهة والمنفذ والبروتوكول). أمّا سايفورن فيعيد تجميع تدفّقات TCP، ويفكّ ترميز بروتوكولات التطبيقات (HTTP وTLS وQUIC وFTP وDNS)، ويقيّم بصمات الحمولة باختيار القواعد المرشّحة بآلة Aho-Corasick واحدة على النمط السريع لكل قاعدة قبل تقييم أي قاعدة، وقد أُثبت تكافؤه مع مقيّم خطّي مرجعي على المجموعة كاملة، ويستخرج الملفات المنقولة ويحسب بصماتها، ويقيّم سياسة النطاقات والدول — كل ذلك في الزمن الحقيقي.">A firewall filters on Layer 3/4 headers (source/dest IP, port, protocol). CyphornIPS reassembles TCP streams, decodes application protocols (HTTP, TLS, QUIC, FTP, DNS), evaluates payload signatures by selecting candidate rules with a single Aho-Corasick automaton over every rule's fast pattern before any rule is evaluated, proven equivalent to a reference linear evaluator over the full corpus, extracts and hashes transferred files, and evaluates domain/country policy — all in real time.</p>
@@ -4937,7 +5122,7 @@ cyphornctl status            # rules loaded, coverage invariant holds</code></pr
 
       <!-- 29. COMMAND REFERENCE -->
       <section id="glossary" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;40&lt;/span&gt; مسرد المصطلحات"><span class="num">40</span> Glossary</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;41&lt;/span&gt; مسرد المصطلحات"><span class="num">41</span> Glossary</h2>
         <div class="table-container">
           <table>
             <thead><tr><th>Term</th><th>Definition</th></tr></thead>
@@ -4965,7 +5150,7 @@ cyphornctl status            # rules loaded, coverage invariant holds</code></pr
 
       <!-- 32. PLATFORM & DEPLOYMENT -->
       <section id="platform-deployment" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;41&lt;/span&gt; المنصّة والنشر"><span class="num">41</span> Platform &amp; Deployment</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;42&lt;/span&gt; المنصّة والنشر"><span class="num">42</span> Platform &amp; Deployment</h2>
         <p data-ar="مبنيّ ومحزَّم لـ&lt;strong&gt;دبيان 12 (Bookworm)&lt;/strong&gt; و&lt;strong&gt;أوبنتو 22.04/24.04 LTS&lt;/strong&gt;، معمارية x86_64.">Built and packaged for <strong>Debian 12 (Bookworm)</strong> and <strong>Ubuntu 22.04/24.04 LTS</strong>, x86_64.</p>
 
         <h3 class="sub-heading" data-ar="التثبيت من الحزمة">Package install</h3>
@@ -5027,7 +5212,7 @@ sudo systemctl kill -s HUP cyphornips</code></pre>
         </section>
       <!-- CONTACT & SUPPORT -->
       <section id="limitations" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;42&lt;/span&gt; الحدود وإخلاء المسؤولية"><span class="num">42</span> Limitations &amp; Disclaimer</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;43&lt;/span&gt; الحدود وإخلاء المسؤولية"><span class="num">43</span> Limitations &amp; Disclaimer</h2>
 
         <h3 class="sub-heading" data-ar="لا فكّ تشفير TLS (لا اعتراض وسيط)">No TLS decryption (MITM)</h3>
         <div class="callout callout-warning">
@@ -5080,7 +5265,7 @@ sudo systemctl kill -s HUP cyphornips</code></pre>
 
       <!-- 28. FAQ -->
       <section id="licence" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;43&lt;/span&gt; الترخيص والاستخدام المسموح"><span class="num">43</span> Licence &amp; permitted use</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;44&lt;/span&gt; الترخيص والاستخدام المسموح"><span class="num">44</span> Licence &amp; permitted use</h2>
 
         <p data-ar="سايفورن &lt;strong&gt;برمجية ملكية خاصّة&lt;/strong&gt;، لا مفتوحة المصدر. يُوزَّع مُترجَمًا فقط — لا شيفرة مصدرية ضمن هذا الترخيص. والنصّ الكامل الملزِم في &lt;code&gt;LICENSE&lt;/code&gt; ومع الحزمة في &lt;code&gt;/usr/share/doc/cyphornips/copyright&lt;/code&gt;؛ وما يلي ملخّص لا يحلّ محلّه."><strong>CyphornIPS is proprietary software</strong>, not open source. It is distributed compiled only — no source is licensed by it. The binding text is <code>LICENSE</code>, and travels with the package at <code>/usr/share/doc/cyphornips/copyright</code>. What follows is a summary and does not replace it.</p>
 
@@ -5113,7 +5298,7 @@ sudo systemctl kill -s HUP cyphornips</code></pre>
       </section>
 
       <section id="contact" class="doc-section">
-        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;44&lt;/span&gt; التواصل والدعم"><span class="num">44</span> Contact &amp; Support</h2>
+        <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;45&lt;/span&gt; التواصل والدعم"><span class="num">45</span> Contact &amp; Support</h2>
         <p data-ar="سؤال، أو تقرير خطأ، أو شيء في هذه الوثيقة لا يطابق ما يفعله جهازك — اكتب إلينا:">A question, a bug report, or something on this page that does not match what your appliance does — write to us:</p>
 
         <div class="code-container">

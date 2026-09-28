@@ -298,7 +298,58 @@
       z-index: 100;
     }
 
-    /* ---- folder-tree sidebar -------------------------------------------------
+    /* ---- Arabic typography and mirroring --------------------------------------
+   Two things make Arabic look wrong rather than merely translated.
+
+   letter-spacing. Arabic is cursive: its letters join, and their shape depends
+   on whether they join on each side. Adding tracking pulls those joins apart,
+   so a word stops being a word and becomes a row of disconnected glyphs. Every
+   letter-spacing in this page was written for Latin small-caps headings and is
+   cancelled here.
+
+   text-transform: uppercase. Arabic has no case. The declaration does nothing
+   to the glyphs and everything to the reader's trust in the page, because it
+   is evidence that nobody looked at it in Arabic.
+
+   The tree caret is a CSS triangle built from an inline-start border, so it
+   already points the correct way under rtl -- but rotating it by +90deg opens
+   it upward there instead of downward. Under rtl it rotates the other way. */
+html[lang="ar"] .callout-title,
+html[lang="ar"] th,
+html[lang="ar"] .tree-folder,
+html[lang="ar"] .section-heading,
+html[lang="ar"] .sub-heading,
+html[lang="ar"] .sidebar-title,
+html[lang="ar"] .tree-label {
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+/* An identifier, a path or a command is never translated and never reversed.
+   Left as it is written, inside a right-to-left sentence. */
+html[lang="ar"] code,
+html[lang="ar"] pre,
+html[lang="ar"] kbd,
+html[lang="ar"] samp { direction: ltr; unicode-bidi: isolate; text-align: start; }
+html[lang="ar"] pre { text-align: left; }
+
+/* Technical diagrams read left to right whatever the page does. */
+html[lang="ar"] svg { direction: ltr; }
+html[lang="ar"] figcaption { direction: rtl; }
+
+html[lang="ar"] .tree-folder[aria-expanded="true"] > .tree-caret,
+html[lang="ar"] .tree-caret-btn[aria-expanded="true"] > .tree-caret { transform: rotate(-90deg); }
+html[lang="ar"] .tree-caret { transform-origin: 70% 50%; }
+
+html[lang="ar"] .tree-folder,
+html[lang="ar"] .tree-row { text-align: right; }
+
+/* Arabic needs a little more line height than Latin at the same size: the
+   marks above and below the baseline collide otherwise. */
+html[lang="ar"] body { line-height: 1.85; }
+html[lang="ar"] td, html[lang="ar"] th { line-height: 1.75; }
+
+/* ---- folder-tree sidebar -------------------------------------------------
    The navigation reads as a tree of folders rather than six flat lists: a
    caret you can collapse, an icon per section, and an indent guide so a nested
    entry is visibly inside its parent. Written in plain CSS and a few lines of
@@ -2239,7 +2290,7 @@ sudo journalctl -u cyphornips -f</code></pre>
       <section id="concepts" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;15&lt;/span&gt; كيف يفكّر سايفورن"><span class="num">15</span> How CyphornIPS Thinks</h2>
         <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
-  <svg viewBox="0 0 940 760" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
+  <svg direction="ltr" viewBox="0 0 940 760" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
     <title>CyphornIPS data pipeline: ingress to verdict</title>
   
     <style>
@@ -2420,7 +2471,7 @@ sudo ip link set lan0 up promisc on
       <section id="rule-actions" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;18&lt;/span&gt; أسبقية الإجراءات"><span class="num">18</span> Action Precedence</h2>
         <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
-  <svg viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
+  <svg direction="ltr" viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
     <title>Action precedence: which verdict wins when several rules match</title>
   
     <style>
@@ -2471,7 +2522,6 @@ sudo ip link set lan0 up promisc on
     <text x="792.5" y="50" class="nd-l" text-anchor="middle">No</text>
     <rect x="830" y="38" width="96" height="40" rx="7" class="nd-box"/>
     <text x="878" y="62.5" class="nd-t" text-anchor="middle">No match</text>
-    <text x="14" y="248" class="nd-s">First match in this order wins. A drop is enforced in the kernel path; an alert is recorded and the packet still goes.</text>
   </svg>
           <figcaption data-ar="أسبقية الإجراء — أي حكم يغلب حين تُطابق عدّة قواعد الحزمة نفسها." style="margin-top:12px;color:var(--text-muted);font-size:12.5px;text-align:center">Action precedence — which verdict wins when several rules match the same packet.</figcaption>
         </figure>
@@ -4559,7 +4609,7 @@ drop  outbound US ANY</code></pre>
       <section id="update-engine" class="doc-section">
         <h2 class="section-heading" data-ar="&lt;span class=&quot;num&quot;&gt;36&lt;/span&gt; التحديثات والتوقيع وملكية القواعد"><span class="num">36</span> Updates, Signing &amp; Rule Ownership</h2>
         <figure class="nd-fig" style="margin:22px 0;padding:18px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;overflow-x:auto">
-  <svg viewBox="0 0 940 400" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
+  <svg direction="ltr" viewBox="0 0 940 400" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:940px;display:block;margin:0 auto">
     <title>Signed update pipeline: Ed25519 manifest and SHA-256 artifact verification</title>
   
     <style>
@@ -4623,7 +4673,6 @@ drop  outbound US ANY</code></pre>
     <text x="530" y="343.5" class="nd-t" text-anchor="middle">Rollback</text>
     <path d="M708,250 H530 V318" class="nd-line" marker-end="url(#nd-a)"/>
     <text x="560" y="272" class="nd-l">No</text>
-    <text x="14" y="382" class="nd-s">The signature authenticates the manifest; the digest binds each artifact to it. A signed manifest with an unverified payload authenticates a promise, not a file.</text>
   </svg>
           <figcaption data-ar="خطّ التحديث الموقّع — Ed25519 يتحقّق من البيان، وSHA-256 يربط كل أثر به." style="margin-top:12px;color:var(--text-muted);font-size:12.5px;text-align:center">The signed update pipeline — Ed25519 verifies the manifest, SHA-256 binds each artifact to it.</figcaption>
         </figure>

@@ -51,8 +51,9 @@ it.
 | 🧵 **Enforcement on every link** | through earlier releases only the first port on each side could block; the rest were alert-only |
 
 ---
-> 📘 **Looking for the complete technical reference?**
-> [**CyphornIPS Full Documentation — English & Arabic**](https://cyphornips.github.io/cyphorn-engine/)
+> 📘 **Documentation**
+> · [**Full manual — English & Arabic**](https://cyphornips.github.io/cyphorn-engine/) — every configuration key, every command, every rule keyword
+> · [**Daily Operations**](OPERATIONS.md) — the short one: what a running appliance needs from you, day to day
 ---
 
 > [!IMPORTANT]

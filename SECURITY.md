@@ -8,9 +8,14 @@ upgrade.
 
 | Version | Supported | Notes |
 |---------|-----------|-------|
-| 1.7.x   | Yes       | Current |
+| 1.8.x   | Yes       | Current |
 | 1.5.x   | Yes       | Previous release; security fixes only |
 | < 1.5   | No        | Upgrade |
+
+There is no 1.7.x to report against. It was developed but never published;
+everything in it was folded into 1.8.0, and the CHANGELOG marks those entries
+as such. If a system claims to be running 1.7.x, that is worth reporting on
+its own.
 
 The engine prints the version it is actually running:
 
